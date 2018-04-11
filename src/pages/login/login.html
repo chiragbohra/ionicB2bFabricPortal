@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Fabric Company
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-navbar *navbar>
+  <ion-title>Login In</ion-title>
+</ion-navbar>
+
+<ion-content padding class="login">
+
+  <form>
+
+    <ion-item>
+      <ion-label floating>ID</ion-label>
+      <ion-input type="text" ngControl="username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input type="password" ngControl="password"></ion-input>
+      <br>
+    </ion-item>
+    <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a (click)="navigateToForgetPage()">forget password</a>
+    <br>
+    <br>
+    <br>
+    <button ion-button (click)="DashboardPage()">Login</button>
+
+
+  </form>
+</ion-content>
