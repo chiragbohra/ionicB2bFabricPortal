@@ -1,10 +1,12 @@
 import { BrowserModule } from "@angular/platform-browser";
-//import { HttpModule } from "@angular/http";
+import { HttpModule } from "@angular/http";
 import { ErrorHandler, NgModule } from "@angular/core";
 import { IonicApp, IonicErrorHandler, IonicModule } from "ionic-angular";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { StatusBar } from "@ionic-native/status-bar";
 import { MyApp } from "./app.component";
+import { ServicesProvider } from "../providers/services/services";
+import { HttpClientJsonpModule } from "@angular/common/http";
 
 //import { LoginPage } from "../pages/login/login";
 //import { ForgetPage } from "../pages/forget/forget";
@@ -35,10 +37,10 @@ import { AnalyticsPage } from "../pages/analytics/analytics";
     ShoppingCartPage,
     CustomerUpdatesPage,
     UserProfileManagementPage,
-    AnalyticsPage
+    HttpClientJsonpModule
     */
   ],
-  imports: [BrowserModule, IonicModule.forRoot(MyApp)],
+  imports: [BrowserModule, IonicModule.forRoot(MyApp),HttpModule],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp
@@ -59,7 +61,8 @@ import { AnalyticsPage } from "../pages/analytics/analytics";
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    //HttpModule
+    ServicesProvider,
+    HttpModule
   ]
 })
 export class AppModule {}

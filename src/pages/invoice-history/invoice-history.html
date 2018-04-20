@@ -1,0 +1,55 @@
+<ion-header>
+
+  <ion-toolbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Invoice History
+    </ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+
+  <ion-searchbar (ionInput)="getviewData($event)"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+      {{ item }}
+    </ion-item>
+  </ion-list>
+
+
+  <br>
+
+  <ion-list>
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>User Id</th>
+          <th>SKU No</th>
+          <th>OrdItem Id</th>
+          <th>Invoice Amt</th>
+
+        </tr>
+      </thead>
+
+      <tr *ngFor="let results of viewData">
+        <td>{{results.UserId}}</td>
+        <td>{{results.SKUNo}}</td>
+        <td>{{results.OrdItemId}}</td>
+        <td>{{results.InvoiceAmt}}</td>
+      </tr>
+    </table>
+
+  </ion-list>
+
+
+
+
+</ion-content>

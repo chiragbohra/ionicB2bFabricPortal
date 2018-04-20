@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 //import { DashboardPage } from "../dashboard/dashboard";
-
+import { ViewController } from "ionic-angular";
 import { ForgetPage } from "../forget/forget";
+import { ServicesProvider } from "../../providers/services/services";
 
 @IonicPage()
 @Component({
@@ -10,16 +11,48 @@ import { ForgetPage } from "../forget/forget";
   templateUrl: "login.html"
 })
 export class LoginPage {
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  username: any;
+  password: any;
+  formSubmit: any;
+  viewData: any
 
-  ionViewDidLoad() {
-    console.log("ionViewDidLoad LoginPage");
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public viewCtrl: ViewController,
+    public sentRequest: ServicesProvider
+  ) {
+    this.toGetUsernamePasswordData(); //method call here to get data
+  }
+
+  logForm() {
+    console.log(this.username);
+    console.log(this.password);
   }
 
   DashboardPage() {
     this.navCtrl.setRoot("DashboardPage");
+
+    let review = {                       // review array  
+      useranme: this.username,
+      password: this.password
+    };
+    console.log(review);
+    this.sentRequest.createReview(review); //review is array
   }
+
   navigateToForgetPage(): void {
     this.navCtrl.push("ForgetPage");
+  }
+
+  toGetUsernamePasswordData() {    //method  to get data from server
+    this.sentRequest.toGetUsernamePassword().then(getorderdata => {   // getorderdata it is variable
+      this.viewData = getorderdata;
+      console.log(JSON.stringify(getorderdata))
+    });
+  }
+
+  ionViewDidLoad() {
+    console.log("ionViewDidLoad LoginPage");
   }
 }
