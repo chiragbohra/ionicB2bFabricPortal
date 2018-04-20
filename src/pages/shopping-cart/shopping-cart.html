@@ -1,15 +1,54 @@
-<ion-toolbar>
-  <button ion-button menuToggle>
-    <ion-icon name="menu"></ion-icon>
-  </button>
-  <ion-title>
-    Shopping Cart
-  </ion-title>
-  <ion-buttons end>
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Shopping Cart
+    </ion-title>
+  </ion-navbar>
+</ion-header>
 
-  </ion-buttons>
-</ion-toolbar>
 
 <ion-content padding>
+  <ion-list>
+    <ion-card *ngFor="let results of productInCart">
+      <ion-card-header>Order Details</ion-card-header>
+      <ion-row>
+        <ion-col>
+          <img src="assets/imgs/FabricPage-600x330.png">
+        </ion-col>
+        <ion-col></ion-col>
+        <ion-col>
+          SKUNo : {{results.SKUNo}}
+          <br/>
+          <br/> Design : {{results.CustDesign}}
+          <br/>
+          <br/> Shade : {{results.CustShade}}
+          <br/>
+          <br/>Width :{{results.Width}}
+          <br/>
+          <br/>Fresh Meters : {{results.FreshMtrs}}
+        </ion-col>
+        <ion-col></ion-col>
+        <ion-col>
+          <h4 class="fontStyle">&#8377;{{price}}</h4>
+          <br/>
+          <ion-label>Quantity Required</ion-label>
+          <input type="number" placeholder="quantity" [(ngModel)]="quantity" required>
+        </ion-col>
+      </ion-row>
+      <div text-center>
+        <button ion-button (click)="remove()">Remove
+          <ion-icon name="close"></ion-icon>
+        </button>
+        <button ion-button (click)="order(results)" icon-left>Continue
+          <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+        </button>
+      </div>
+    </ion-card>
 
+
+
+  </ion-list>
 </ion-content>

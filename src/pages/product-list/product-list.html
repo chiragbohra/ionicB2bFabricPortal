@@ -1,30 +1,102 @@
-<ion-toolbar>
-  <button ion-button menuToggle>
-    <ion-icon name="menu"></ion-icon>
-  </button>
-  <ion-title>
-    Product List
-  </ion-title>
-  <ion-buttons end>
-
-  </ion-buttons>
-</ion-toolbar>
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Product List
+    </ion-title>
+  </ion-navbar>
+</ion-header>
 
 <ion-content padding>
+  <ion-grid fixed>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-list>
 
-  <ion-list>
-    <ion-item>
-      <ion-label>catogries</ion-label>
-      <ion-select [(ngModel)]="catogries">
-        <ion-option value="nes">NES</ion-option>
-        <ion-option value="n64">Nintendo64</ion-option>
-        <ion-option value="ps">PlayStation</ion-option>
-        <ion-option value="genesis">Sega Genesis</ion-option>
-        <ion-option value="saturn">Sega Saturn</ion-option>
-        <ion-option value="snes">SNES</ion-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
+      <!-- <ion-col>
+          <ion-item>
+            <ion-label>categories</ion-label>
+            <ion-select [(ngModel)]="categories">
+              <ion-option value="nes">BookName</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col> -->
+      <ion-item>
+        <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="setFilteredItems($event)" (ionClear)="onCancel()"></ion-searchbar>
+      </ion-item>
 
+      <!-- <ion-col>
+          <ion-item>
+            <button ion-button (click)="find()">FIND</button>
+          </ion-item>
+        </ion-col> -->
 
+    </ion-list>
+
+    <!-- <ion-row>
+      <ion-col>BOOKNAME</ion-col>
+      <ion-col>SKU No</ion-col>
+      <ion-col>STOCK</ion-col>
+    </ion-row>
+
+    <ion-label *ngFor="let results of productList| slice:0: t;">
+
+      <ion-row (click)="productDetails(results)">
+        <ion-col>{{results.BookName}}</ion-col>
+        <ion-col>{{results.SKUNo}}</ion-col>
+        <div *ngIf="results.stock == null; then zero else data"> </div>
+        <ng-template #zero>
+          <ion-col>{{results.RollMtrs}}</ion-col>
+        </ng-template>
+        <ng-template #data>
+          <ion-col>{{results.stock}}</ion-col>
+        </ng-template>
+      </ion-row>
+      <button ion-button (click)="addToCart(results)">ADD</button>
+
+    </ion-label> -->
+    <ion-list>
+
+      <table border="1">
+        <thead>
+          <tr class="paddingTable">
+            <th class="paddingTable">IMAGE</th>
+            <th class="paddingTable">BOOKNAME</th>
+            <th class="paddingTable">SKU No</th>
+            <th class="paddingTable">STOCK</th>
+            <th class="paddingTable">ADD TO CART</th>
+          </tr>
+        </thead>
+
+        <tr class="paddingTable" *ngFor="let results of productList| slice:0: t;">
+          <td>
+            <img class="reSize" src="assets/imgs/FabricPage-600x330.png">
+          </td>
+          <td (click)="productDetails(results)" class="paddingTable">{{results.BookName}}</td>
+          <td (click)="productDetails(results)" class="paddingTable">{{results.SKUNo }}</td>
+          <div *ngIf="results.stock == null; then zero else data"> </div>
+          <ng-template #zero>
+            <td (click)="productDetails(results)" class="paddingTable">{{results.RollMtrs}}</td>
+          </ng-template>
+          <ng-template #data>
+            <td (click)="productDetails(results)" class="paddingTable">{{results.stock}}</td>
+          </ng-template>
+          <td>
+            <button ion-button (click)="addToCart(results)" icon-left>ADD
+              <ion-icon name="ios-cart-outline"></ion-icon>
+            </button>
+          </td>
+        </tr>
+
+      </table>
+    </ion-list>
+
+    <!-- <button ion-button (click)="getProductList()">test</button> -->
+    <ion-infinite-scroll (ionInfinite)="method($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-grid>
 </ion-content>

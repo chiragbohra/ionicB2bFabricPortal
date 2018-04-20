@@ -2,8 +2,6 @@ import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 //import { DashboardPage } from "../dashboard/dashboard";
 
-import { ForgetPage } from "../forget/forget";
-
 @IonicPage()
 @Component({
   selector: "page-login",
@@ -17,7 +15,7 @@ export class LoginPage {
   }
 
   DashboardPage() {
-    this.navCtrl.setRoot("DashboardPage");
+    this.navCtrl.setRoot("UserProfileManagementPage");
   }
   navigateToForgetPage(): void {
     this.navCtrl.push("ForgetPage");

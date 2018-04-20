@@ -1,0 +1,71 @@
+<!--
+  Generated template for the ConfirmOrderPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Confirm Order</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <table border="1">
+    <thead>
+      <tr class="paddingTable">
+        <th class="paddingTable">RollNo</th>
+        <th class="paddingTable">Quantity</th>
+        <th class="paddingTable">Price</th>
+        <th class="paddingTable">Total</th>
+      </tr>
+    </thead>
+
+    <tr class="paddingTable">
+
+      <td class="paddingTable">{{RollNo}}</td>
+      <td class="paddingTable">{{Quantity}}</td>
+      <td class="paddingTable"> {{Price}}</td>
+      <td class="paddingTable"> {{total}}</td>
+    </tr>
+  </table>
+
+  <form class="nl-form" [formGroup]="conditionForm">
+    <ion-list radio-group formControlName="conditionFormAddress" [(ngModel)]="radio" no-lines>
+      <ion-card>
+        <ion-card-header>Select Address</ion-card-header>
+
+        <ion-item no-lines>
+          <ion-label class="ion-label2">GOVT COLLEGE ROAD</ion-label>
+          <ion-radio (click)="radioSelect()" value="GOVT COLLEGE ROAD"></ion-radio>
+        </ion-item>
+
+        <ion-item no-lines>
+          <ion-label class="ion-label2">CIVIL LINES</ion-label>
+          <ion-radio (click)="radioSelect()" value="CIVIL LINES"></ion-radio>
+        </ion-item>
+
+        <ion-item no-lines>
+          <ion-label>ADJOINING IDBI BANK</ion-label>
+          <ion-radio (click)="radioSelect()" value="ADJOINING IDBI BANK"></ion-radio>
+        </ion-item>
+        <div text-center>
+
+
+        </div>
+      </ion-card>
+    </ion-list>
+  </form>
+  <ion-label>Enter Discount Code</ion-label>
+  <div style="border:1px solid black">
+    <ion-input (ionChange)="textChange()" placeholder="code" [(ngModel)]="code"></ion-input>
+    <button *ngIf="showButton" ion-button (click)="discount()">Apply Code</button>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <button ion-button block (click)="confirmOrder()">Confirm Order</button>
+</ion-footer>
