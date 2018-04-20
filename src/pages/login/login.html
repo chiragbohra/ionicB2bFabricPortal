@@ -8,15 +8,15 @@
 
 <ion-content padding class="login">
   <ion-title class="titleFont">FABRIC COMPANY</ion-title>
-  <form>
+  <form action="/login" method="post" (ngSubmit)="logForm()">
 
     <ion-item>
       <ion-label floating>ID</ion-label>
-      <ion-input type="text" ngControl="username"></ion-input>
+      <ion-input type="text" ngControl="username" name="username" [(ngModel)]="username"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Password</ion-label>
-      <ion-input type="password" ngControl="password"></ion-input>
+      <ion-input type="password" ngControl="password" name="password" [(ngModel)]="password"></ion-input>
       <br>
     </ion-item>
     <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

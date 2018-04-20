@@ -37,6 +37,24 @@ export class ServicesProvider {
     });
   }
 
+  // for -PostApi UserAuthentication
+  createReview(review) {
+    // review-array stores username and password
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    return new Promise(resolve => {
+      this.http
+        .post(
+          "http://localhost:5000/userAuthentication",
+          JSON.stringify(review),
+          { headers: headers }
+        )
+        .subscribe(res => {
+          console.log(res.json());
+        });
+    });
+  }
+
   getCartDetails() {
     return new Promise(resolve => {
       this.http
@@ -44,6 +62,35 @@ export class ServicesProvider {
         .map(res => res.json().recordsets[0])
         .subscribe(cartDetails => {
           resolve(cartDetails);
+          //for orderHistory page
+          //to get data we changes (this.data to data)
+        });
+    });
+  }
+
+  orderHistory() {
+    return new Promise(resolve => {
+      this.http
+        .get("http://localhost:5000/orderHistory")
+        .map(res => res.json().recordset)
+        .subscribe(data => {
+          console.log(data);
+          // this.data = data;
+          resolve(data);
+        });
+    });
+  }
+
+  //for invoiceHistory page
+  invoiceHistory() {
+    return new Promise(resolve => {
+      this.http
+        .get("http://localhost:5000/invoiceHistory")
+        .map(res => res.json().recordsets[0])
+        .subscribe(data => {
+          console.log(data);
+          // this.data = data;
+          resolve(data); //to get data we changes (this.data to data)
         });
     });
   }
@@ -51,15 +98,25 @@ export class ServicesProvider {
   postOrder(cartData) {
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
+    this.http
+      .post("http://192.168.0.29:5000/addToCart", JSON.stringify(cartData), {
+        headers: headers
+      })
+      .subscribe(URL => {
+        console.log(URL);
+      });
+  }
+
+  //for loginPage using
+  toGetUsernamePassword() {
     return new Promise(resolve => {
       this.http
-        .post("http://192.168.0.29:5000/addToCart", JSON.stringify(cartData), {
-          headers: headers
-        })
-        .map(res => res.json())
-        .subscribe(URL => {
-          console.log(URL);
-          resolve(URL);
+        .get("http://localhost:5000/usernamePassword")
+        .map(res => res.json().recordsets[0])
+        .subscribe(data => {
+          console.log(data);
+          // this.data = data;
+          resolve(data); //to get data we changes (this.data to data)
         });
     });
   }

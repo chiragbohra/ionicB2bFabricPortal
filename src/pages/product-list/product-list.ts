@@ -92,17 +92,17 @@ export class ProductListPage {
     console.log(cartData);
     this.getRequest.postOrder(cartData);
 
-    // this.nativeStorage
-    //   .setItem("productDetails", {
-    //     productDetails: this.productToCart
-    //   })
-    //   .then(
-    //     () => console.log("New value Stored!"),
-    //     error => console.error("Error storing item", error)
-    //   );
-    localStorage.setItem("productDetails", this.productToCart);
+    this.nativeStorage
+      .setItem("productDetails", {
+        productDetails: this.productToCart
+      })
+      .then(
+        () => console.log("New value Stored!"),
+        error => console.error("Error storing item", error)
+      );
+
+    //  localStorage.setItem("productDetails", this.productToCart);
   }
-  
 
   method(infiniteScroll) {
     setTimeout(() => {

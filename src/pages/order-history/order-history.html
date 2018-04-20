@@ -1,0 +1,43 @@
+<ion-header>
+
+  <ion-toolbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Order History
+    </ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Order No</th>
+          <th>Approved Date</th>
+          <th>Final Destination</th>
+          <th>Order Status</th>
+        </tr>
+      </thead>
+
+      <tr *ngFor="let results of viewData">
+        <td>{{results.id}}</td>
+        <td>{{results.OrderNo }}</td>
+        <td>{{results.ApprovedDate | date }}</td>
+        <td>{{results.FinalDestination}}</td>
+        <td>open/close</td>
+
+      </tr>
+    </table>
+  </ion-list>
+
+
+</ion-content>
