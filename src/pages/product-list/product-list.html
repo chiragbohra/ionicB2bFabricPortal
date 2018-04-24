@@ -8,17 +8,16 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-buttons start>
-      <button class="btn" ion-button icon-left (click)="ShoppingCartPage()">
+      <button ion-button icon-left (click)="ShoppingCartPage()">
         <ion-icon name="ios-cart-outline"></ion-icon>
         Cart
-
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-grid fixed>
+<ion-content padding class="paddingTable">
+  <ion-grid fixed  class="paddingTable">
     <ion-refresher (ionRefresh)="doRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
@@ -66,7 +65,7 @@
       <button ion-button (click)="addToCart(results)">ADD</button>
 
     </ion-label> -->
-    <ion-list>
+    <ion-list  class="paddingTable">
 
       <!-- <table border="1">
         <thead>
@@ -101,31 +100,33 @@
 
       </table> -->
 
-      <ion-card *ngFor="let results of productList| slice:0: t;">
-        <ion-row>
-          <ion-col (click)="productDetails(results)">
-            <img class="reSize" src="assets/imgs/FabricPage-600x330.png">
+      <ion-card  class="paddingTable" *ngFor="let results of productList| slice:0: t;">
+        <ion-row  class="paddingTable"> 
+          <ion-col  (click)="productDetails(results)">
+            <img class="reSize" src="assets/imgs/fabric.jpg">
+          </ion-col>
+          <ion-col class="paddingTable">
+            <td   class="paddingTable" (click)="productDetails(results)"> {{results.BookName}} </td>
           </ion-col>
           <ion-col>
-            <td (click)="productDetails(results)" class="paddingTable"> {{results.BookName}} </td>
-          </ion-col>
-          <ion-col>
-            <td (click)="productDetails(results)" class="paddingTable"> {{results.SKUNo}} </td>
+            <td (click)="productDetails(results)"> {{results.SKUNo}} </td>
           </ion-col>
           <ion-col>
             <div *ngIf="results.stock == null; then zero else data"> </div>
             <ng-template #zero>
-              <td (click)="productDetails(results)" class="paddingTable">{{results.RollMtrs}}</td>
+              <td (click)="productDetails(results)">{{results.RollMtrs}}</td>
             </ng-template>
             <ng-template #data>
-              <td (click)="productDetails(results)" class="paddingTable">{{results.stock}}</td>
+              <td (click)="productDetails(results)">{{results.stock}}</td>
             </ng-template>
           </ion-col>
           <ion-col>
-            <td class="paddingTable">
-              <button ion-button (click)="addToCart(results)" icon-left>ADD
-                <ion-icon name="ios-cart-outline"></ion-icon>
+            <td>
+
+              <button ion-button icon-left (click)="addToCart(results)">
+                <ion-icon name="ios-cart-outline"></ion-icon>Add To Cart
               </button>
+
             </td>
           </ion-col>
         </ion-row>

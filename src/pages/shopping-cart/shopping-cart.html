@@ -42,15 +42,17 @@
         </ion-col>
       </ion-row>
       <div text-right>
-        <button ion-button (click)="remove(results)">Remove
-          <ion-icon name="close"></ion-icon>
+        <button ion-button icon-left (click)="remove(results)">
+          <ion-icon name="close"></ion-icon>Remove
         </button>
       </div>
     </ion-card>
     <div text-center>
-      <button ion-button (click)="continue()" icon-left>Continue
-        <ion-icon name="ios-arrow-forward-outline"></ion-icon>
-      </button>
+      <ion-buttons start>
+        <button ion-button icon-left (click)="continue()">
+          <ion-icon name="ios-arrow-forward-outline"></ion-icon>Continue
+        </button>
+      </ion-buttons>
     </div>
   </ion-list>
 </ion-content>
