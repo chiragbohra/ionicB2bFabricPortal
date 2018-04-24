@@ -1,21 +1,43 @@
 <ion-header>
-
-  <ion-toolbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
+  <ion-navbar color="primary">
     <ion-title>
       Invoice History
     </ion-title>
 
-  </ion-toolbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons start>
+      <button class="btn" ion-button icon-left (click)="ShoppingCartPage()">
+        <ion-icon name="ios-cart-outline"></ion-icon>
+        Cart
 
+      </button>
+    </ion-buttons>
+  </ion-navbar>
 </ion-header>
 
+<ion-content class="invoice" padding>
 
-<ion-content padding>
+  <br/>
+  <ion-grid fixed>
+    <ion-row class="ionRow">
+      <ion-col>
+        <ion-row>{{50000}}</ion-row>
+        <ion-row>{{"Amount owing"}}</ion-row>
+      </ion-col>
+      <ion-col>
+        <ion-row>{{20000}}</ion-row>
+        {{"OverDue"}}
+      </ion-col>
+      <ion-col>
+        <ion-row>{{10000}}</ion-row>
+        {{"Order Generated"}}
+      </ion-col>
+    </ion-row>
 
-
+  </ion-grid>
+  <br>
   <ion-searchbar (ionInput)="getviewData($event)"></ion-searchbar>
   <ion-list>
     <ion-item *ngFor="let item of items">
@@ -26,26 +48,35 @@
 
   <br>
 
-  <ion-list>
+  <ion-list *ngFor="let results of viewData">
 
-    <table border="1">
+    <ion-card>
+      <ion-card-header color="primary">
+        <h1>Item ID: {{results.OrdItemId}}</h1>
+      </ion-card-header>
+      <ion-card-content>
+        <h2>Invoice Amount: {{results.InvoiceAmt}}</h2>
+
+        <h2>SKU No: {{results.SKUNo}}</h2>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- <table border="1">
       <thead>
-        <tr>
+        <tr class="tableHeader">
           <th>User Id</th>
-          <th>SKU No</th>
-          <th>OrdItem Id</th>
+          <th>Ord Item Id</th>
           <th>Invoice Amt</th>
 
         </tr>
       </thead>
 
-      <tr *ngFor="let results of viewData">
+      <tr class="tableBody" *ngFor="let results of viewData">
         <td>{{results.UserId}}</td>
-        <td>{{results.SKUNo}}</td>
         <td>{{results.OrdItemId}}</td>
         <td>{{results.InvoiceAmt}}</td>
       </tr>
-    </table>
+    </table> -->
 
   </ion-list>
 

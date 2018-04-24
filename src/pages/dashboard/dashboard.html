@@ -1,13 +1,25 @@
-<ion-toolbar>
-  <button ion-button menuToggle>
-    <ion-icon name="menu"></ion-icon>
-  </button>
-  <ion-title>
-    Dashboard
-  </ion-title>
-  <ion-buttons end>
+<ion-toolbar >
+     <ion-header>
+        <ion-navbar color="primary" >
+          <ion-title>
+          Dashboard
+          </ion-title>
+        
+            <button ion-button menuToggle>
+                <ion-icon name="menu"></ion-icon>
+              </button>
+          <ion-buttons start>
 
-  </ion-buttons>
+            
+     <button class="btn" ion-button icon-left (click)="ShoppingCartPage()">
+        <ion-icon name="ios-cart-outline"></ion-icon>
+        Cart
+
+      </button>
+      </ion-buttons>
+      </ion-navbar>
+      </ion-header>
+
 </ion-toolbar>
 
 <ion-content padding>

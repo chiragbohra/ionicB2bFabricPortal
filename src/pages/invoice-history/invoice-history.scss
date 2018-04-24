@@ -1,7 +1,31 @@
 page-invoice-history {
-    th,td{
-        padding: 50px;
-    };
+  //.invoice {
+  //background:rgb(223, 19, 36);
+  // }
+  .tableHeader {
+    color: black;
+    padding: 8em;
+    // background: hsl(56, 92%, 50%);
+    font-size: 2em;
+    text-align: center;
+  }
+  .tableBody {
+    //background: white;
+    font-size: 2em;
+    text-align: center;
+    padding: 1em;
+    color: black;
+  }
 
-    
+  //   td {
+  //     padding: 1em;
+  //     color: black;
+  //   }
+
+  //   .boxStyle {
+  //     height: 100px;
+  //     width: 100px;
+  //     text-align: center;
+  //     padding: 10px;
+  //   }
 }

@@ -58,6 +58,11 @@ export class InvoiceHistoryPage {
     }
   }
 
+  
+  ShoppingCartPage(){
+    this.navCtrl.push("ShoppingCartPage");
+  }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InvoiceHistoryPage');

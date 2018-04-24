@@ -38,6 +38,10 @@ export class ProductDetailsPage {
     this.FreshMtrs = product.FreshMtrs;
   }
 
+  ShoppingCartPage() {
+    this.navCtrl.push("ShoppingCartPage");
+  }
+
   ionViewDidLoad() {
     console.log("ionViewDidLoad ProductDetailsPage");
   }

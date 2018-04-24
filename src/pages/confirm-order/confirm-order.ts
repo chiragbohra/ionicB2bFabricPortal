@@ -68,6 +68,10 @@ export class ConfirmOrderPage {
     console.log("ionViewDidLoad ConfirmOrderPage");
   }
 
+  ShoppingCartPage() {
+    this.navCtrl.push("ShoppingCartPage");
+  }
+
   textChange() {}
 
   discount() {

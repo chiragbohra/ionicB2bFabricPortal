@@ -1,11 +1,19 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
+  <ion-navbar color="primary">
     <ion-title>
       Product List
     </ion-title>
+
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons start>
+      <button class="btn" ion-button icon-left (click)="ShoppingCartPage()">
+        <ion-icon name="ios-cart-outline"></ion-icon>
+        Cart
+
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -62,18 +70,18 @@
 
       <!-- <table border="1">
         <thead>
-          <tr class="paddingTable">
-            <th class="paddingTable">IMAGE</th>
-            <th class="paddingTable">BOOKNAME</th>
-            <th class="paddingTable">SKU No</th>
-            <th class="paddingTable">STOCK</th>
-            <th class="paddingTable">ADD TO CART</th>
+          <tr class="tableRow">
+            <th>IMAGE</th>
+            <th>BOOKNAME</th>
+            <th>SKU No</th>
+            <th class="stock">STOCK</th>
+            <th>ADD TO CART</th>
           </tr>
         </thead>
 
         <tr class="paddingTable" *ngFor="let results of productList| slice:0: t;">
-          <td>
-            <img class="reSize" src="assets/imgs/FabricPage-600x330.png">
+          <td padding=5px>
+            <img class="reSize" src="assets/imgs/fabric.jpg">
           </td>
           <td (click)="productDetails(results)" class="paddingTable">{{results.BookName}}</td>
           <td (click)="productDetails(results)" class="paddingTable">{{results.SKUNo }}</td>
@@ -84,8 +92,8 @@
           <ng-template #data>
             <td (click)="productDetails(results)" class="paddingTable">{{results.stock}}</td>
           </ng-template>
-          <td>
-            <button ion-button (click)="addToCart(results)" icon-left>ADD
+          <td style="padding:10px">
+            <button ion-button (click)="addToCart(results)" icon-left>Add To Cart&nbsp;
               <ion-icon name="ios-cart-outline"></ion-icon>
             </button>
           </td>
