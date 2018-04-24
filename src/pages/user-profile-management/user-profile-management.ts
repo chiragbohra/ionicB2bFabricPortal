@@ -31,14 +31,16 @@ export class UserProfileManagementPage {
     let userId = localStorage.getItem("userId");
     this.sentRequest.getUserInfo(userId).then(userInfo => {
       console.log(userInfo);
-      this.name = userInfo[0].CustName;
-      this.email = userInfo[0].CustEmail;
-      this.phone = userInfo[0].CustPhone;
-      this.address1 = userInfo[0].CustAdd1;
-      this.address2 = userInfo[0].CustAdd2;
-      this.address3 = userInfo[0].CustAdd3;
-      this.city = userInfo[0].CustCity;
-      this.pincode = userInfo[0].CustPinCd;
+      try {
+        this.name = userInfo[0].CustName;
+        this.email = userInfo[0].CustEmail;
+        this.phone = userInfo[0].CustPhone;
+        this.address1 = userInfo[0].CustAdd1;
+        this.address2 = userInfo[0].CustAdd2;
+        this.address3 = userInfo[0].CustAdd3;
+        this.city = userInfo[0].CustCity;
+        this.pincode = userInfo[0].CustPinCd;
+      } catch (e) {}
     });
   }
 

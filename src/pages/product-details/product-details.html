@@ -22,31 +22,32 @@
   <br/>
   <br/>
   <br/>
-  <ion-row>
-    <ion-col></ion-col>
-    <ion-col>
-      <img src="assets/imgs/fabric.jpg">
-    </ion-col>
-    <ion-col>
-      SKU No:- {{SKUNo}}
-      <br/>
-      <br/>Design :- {{CustDesign}}
-      <br/>
-      <br/> Color Name :- {{CustShade}}
-      <br/>
-      <br/> Width :- {{Width}}
-      <br/>
-      <br/> Usage :- {{FreshMtrs}}
-    </ion-col>
-    <ion-col>
-      <br>
-      <br> ₹ {{1000 }}
-      <br>
-      <br>
-      <button ion-button (click)="addToCart()" icon-left>Add To Cart &nbsp;
-        <ion-icon name="ios-cart-outline"></ion-icon>
-      </button>
-    </ion-col>
-  </ion-row>
-
+  <ion-card>
+    <ion-card-header> Product Detail</ion-card-header>
+    <ion-row>
+      <ion-col>
+        <img src="assets/imgs/FabricPage-600x330.png">
+      </ion-col>
+      <ion-col></ion-col>
+      <ion-col>
+        SKU No:- {{SKUNo}}
+        <br/>
+        <br/>Design :- {{CustDesign}}
+        <br/>
+        <br/>Color Name :- {{CustShade}}
+        <br/>
+        <br/>Width :- {{Width}}
+        <br/>
+        <br/>Usage :- {{FreshMtrs}}
+      </ion-col>
+      <ion-col></ion-col>
+      <ion-col>
+        <h4 class="fontStyle">₹ {{1000}}</h4>
+        <br/>
+        <button ion-button (click)="addToCart()" icon-left>Add To Cart &nbsp;
+          <ion-icon name="ios-cart-outline"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
 </ion-content>

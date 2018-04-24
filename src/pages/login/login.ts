@@ -42,16 +42,22 @@ export class LoginPage {
         this.viewData[i].UserId == this.userId &&
         this.viewData[i].PassWord == this.password
       ) {
-        this.navCtrl.setRoot("UserProfileManagementPage", this.userId);
+        this.navCtrl.setRoot("ProductListPage", this.userId);
         this.presentToast("success");
         localStorage.setItem("userId", this.userId);
         this.loginFailed = false;
-      } 
+        return;
+      } else {
+        this.loginFailed = true;
+      }
       // else if (this.viewData[i].UserName != this.username) {
       //   this.presentToast("invalidUsername");
       // } else if (this.viewData[i].UserName != this.username) {
       //   this.presentToast("invalidPassword");
       // }
+    }
+    if (this.loginFailed == true) {
+      this.presentToast("invalid");
     }
     //commented login part by using passportjs
     // let review = {
@@ -70,7 +76,7 @@ export class LoginPage {
   presentToast(action: any) {
     if (action == "invalid") {
       let toast = this.toastCtrl.create({
-        message: " Incorrect Username",
+        message: " Incorrect username or password. Please try again.",
         duration: 3000,
         position: "bottom"
       });
@@ -83,7 +89,7 @@ export class LoginPage {
     }
     if (action == "success") {
       let toast = this.toastCtrl.create({
-        message: "Login Successfull",
+        message: "Login successfull!",
         duration: 3000,
         position: "bottom"
       });

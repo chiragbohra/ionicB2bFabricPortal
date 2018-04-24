@@ -1,12 +1,16 @@
 page-product-details {
-  .productBox{
+  .productBox {
     text-align: center;
-    background: rgba(238, 96, 14, 0.671);
-    font-size: 2rem
+    font-size: 2rem;
   }
 
+  .fontStyle {
+    font-size: 3rem;
+    font-weight: bold;
+  }
 
-  .resize {
-    width: 50%;
+  img {
+    width: 100%;
+    padding-top: 20px;
   }
 }

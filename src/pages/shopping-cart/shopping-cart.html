@@ -16,41 +16,88 @@
   </ion-refresher>
   <ion-list>
     <ion-card *ngFor="let results of productInCart ;  let i = index">
-      <ion-card-header>Order Details</ion-card-header>
-      <ion-row>
-        <ion-col>
-          <img src="assets/imgs/fabric.jpg">
-        </ion-col>
-        <ion-col></ion-col>
-        <ion-col class="fontStyle2">
-          SKUNo : {{results.SKUNo}}
-          <br/>
-          <br/> Design : {{results.CustDesign}}
-          <br/>
-          <br/> Shade : {{results.CustShade}}
-          <br/>
-          <br/>Width :{{results.Width}}
-          <br/>
-          <br/>Fresh Meters : {{results.FreshMtrs}}
-        </ion-col>
-        <ion-col></ion-col>
-        <ion-col>
-          <h4 class="fontStyle">&#8377;{{price}}</h4>
-          <br/>
-          <ion-label>Quantity Required</ion-label>
-          <input type="number" placeholder="quantity" [(ngModel)]="quantity[i]" required>
-        </ion-col>
-      </ion-row>
       <div text-right>
-        <button ion-button (click)="remove(results)">Remove
+        <button ion-button clear (click)="remove(results)">
           <ion-icon name="close"></ion-icon>
         </button>
       </div>
+      <ion-card-header>
+        <h2>SKU No: {{results.SKUNo}}</h2>
+      </ion-card-header>
+      <ion-row>
+        <ion-col>
+          <img src="assets/imgs/FabricPage-600x330.png">
+        </ion-col>
+        <ion-col>
+          Design : {{results.CustDesign}}
+          <br/> Shade : {{results.CustShade}}
+          <br/> Width :{{results.Width}}
+          <br/> Fresh Meters : {{results.FreshMtrs}}
+        </ion-col>
+        <ion-col>
+          <h4 class="fontStyle">
+            Rate</h4>
+          <div>&#8377;{{price}}</div>
+        </ion-col>
+        <ion-col class="inputStyle">
+          <h4 class="fontStyle">Quantity</h4>
+          <div style="border:1px solid black ; height:40% ; width:80%">
+            <ion-input (ionChange)="textChange()" class="boxStyle" type="number" [(ngModel)]="quantity[i]"></ion-input>
+          </div>
+        </ion-col>
+        <ion-col>
+          <h4 class="fontStyle">Total
+          </h4>
+          <div>&#8377;{{price * quantity[i] || price}}</div>
+        </ion-col>
+      </ion-row>
+
     </ion-card>
-    <div text-center>
-      <button ion-button (click)="continue()" icon-left>Continue
-        <ion-icon name="ios-arrow-forward-outline"></ion-icon>
-      </button>
-    </div>
+
+    <form class="nl-form" [formGroup]="conditionForm">
+      <ion-list radio-group formControlName="conditionFormAddress" [(ngModel)]="radio" no-lines>
+        <ion-card>
+          <ion-card-header>Select Address</ion-card-header>
+
+          <ion-item no-lines>
+            <ion-label class="ion-label2">GOVT COLLEGE ROAD</ion-label>
+            <ion-radio (click)="radioSelect()" value="GOVT COLLEGE ROAD"></ion-radio>
+          </ion-item>
+
+          <ion-item no-lines>
+            <ion-label class="ion-label2">CIVIL LINES</ion-label>
+            <ion-radio (click)="radioSelect()" value="CIVIL LINES"></ion-radio>
+          </ion-item>
+
+          <ion-item no-lines>
+            <ion-label>ADJOINING IDBI BANK</ion-label>
+            <ion-radio (click)="radioSelect()" value="ADJOINING IDBI BANK"></ion-radio>
+          </ion-item>
+        </ion-card>
+      </ion-list>
+    </form>
+    <ion-card>
+      <ion-row *ngIf="showButton">
+        <ion-col text-center>
+          <input class="boxStyle2" (ionChange)="textChange()" placeholder="Discount Code" [(ngModel)]="code" required>
+          <button ion-button (click)="discount()">Apply</button>
+        </ion-col>
+        <ion-col>
+          &#8377;{{grandTotal}}
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="!showButton">
+        <ion-col>{{text}}</ion-col>
+        <ion-col>{{grandTotal}} - {{this.text2}}</ion-col>
+        <ion-col>{{afterDisc}}</ion-col>
+      </ion-row>
+    </ion-card>
+
+    <button ion-button block (click)="continue()" icon-left>Place Order &nbsp;
+      <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+    </button>
+
+    <!-- <button (click)="test()"> test</button> -->
+
   </ion-list>
 </ion-content>

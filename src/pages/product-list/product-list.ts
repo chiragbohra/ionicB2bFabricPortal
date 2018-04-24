@@ -1,5 +1,10 @@
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  ToastController
+} from "ionic-angular";
 import { ServicesProvider } from "../../providers/services/services";
 import { NativeStorage } from "@ionic-native/native-storage";
 
@@ -14,11 +19,13 @@ export class ProductListPage {
   cart: any = [];
   productToCart: any = [];
   t = 20; // Maintains Count of Cards Displayed
+  addedTocart: boolean = false;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public getRequest: ServicesProvider,
-    private nativeStorage: NativeStorage
+    private nativeStorage: NativeStorage,
+    private toastCtrl: ToastController
   ) {
     this.getProductList();
   }
@@ -70,11 +77,6 @@ export class ProductListPage {
     this.productToCart.push(results);
     console.log(this.productToCart);
 
-    this.navCtrl.push("ShoppingCartPage", {
-      productSelected: this.productToCart
-    });
-    console.log(results.Id);
-
     let cartData = {
       Id: results.Id,
       RollNo: results.RollNo,
@@ -88,7 +90,15 @@ export class ProductListPage {
       Status: "Open"
     };
     console.log(cartData);
-    // this.getRequest.postOrder(cartData);
+    this.getRequest.postOrder(cartData);
+
+    localStorage.setItem("productDetails", JSON.stringify(this.productToCart));
+    this.presentToast("addedToCart");
+
+    this.addedTocart = true;
+    // this.navCtrl.push("ShoppingCartPage", {
+    //   productSelected: this.productToCart
+    // });
 
     // this.nativeStorage
     //   .setItem("productDetails", {
@@ -98,8 +108,6 @@ export class ProductListPage {
     //     () => console.log("New value Stored!"),
     //     error => console.error("Error storing item", error)
     //   );
-
-    localStorage.setItem("productDetails", JSON.stringify(this.productToCart));
   }
 
   method(infiniteScroll) {
@@ -118,6 +126,26 @@ export class ProductListPage {
       console.log("Async operation has ended");
       infiniteScroll.complete();
     }, 500);
+  }
+
+  viewCart(results) {
+    this.navCtrl.push("ShoppingCartPage");
+  }
+
+  presentToast(action: any) {
+    if (action == "addedToCart") {
+      let toast = this.toastCtrl.create({
+        message: "Added To Cart",
+        duration: 3000,
+        position: "bottom"
+      });
+
+      toast.onDidDismiss(() => {
+        console.log("Dismissed toast");
+      });
+
+      toast.present();
+    }
   }
 
   doRefresh(refresher) {
