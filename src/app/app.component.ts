@@ -55,14 +55,14 @@ export class MyApp {
           component: "ProductListPage"
         },
         {
-          title: "Invoices",
-          icon: "ios-calculator-outline",
-          component: "InvoicesPage"
+          title: "Orders",
+          icon:  "ios-archive-outline",
+          component: "OrderHistoryPage"
         },
         {
-          title: "Accounts",
-          icon: "ios-albums-outline",
-          component: "AccountsPage"
+          title: "Invoices",
+          icon: "ios-calculator-outline",
+          component: "InvoiceHistoryPage"
         },
         {
           title: "Shopping Cart",
@@ -70,43 +70,14 @@ export class MyApp {
           component: "ShoppingCartPage"
         },
         {
-          title: "Customer Updates",
-          icon: "ios-alert-outline",
-          component: "CustomerUpdatesPage"
-        },
-        {
-          title: "User Profile Management",
+          title: "My Profile",
           icon: "ios-person-outline",
           component: "UserProfileManagementPage"
-        },
-        {
-          title: "Analytics",
-          icon: "ios-analytics-outline",
-          component: "AnalyticsPage"
         }
       ];
     }
 
-    // 2nd array for subMenu Orders Page
-
-    this.pages1 = [{
-      category: "Orders page",
-      icon: "ios-albums-outline",
-      component: "OrdersPage",
-      subs: [
-        {
-          subcategory: "Order History",
-          icon: "ios-archive-outline",
-          component: "OrderHistoryPage"
-        },
-        {
-          subcategory: "Invoice History",
-          icon: "ios-calculator-outline",
-          component: "InvoiceHistoryPage"
-        }
-      ]
-    }
-    ]
+   
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -147,10 +118,10 @@ export class MyApp {
   this.nav.setRoot(page.component);
   }
 
-  //for subMenu of OrdersPage
-    openPage1(page) {              
-     // Reset the content nav to have just this page
-     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
-  }
+  // //for subMenu of OrdersPage
+  //   openPage1(page) {              
+  //    // Reset the content nav to have just this page
+  //    // we wouldn't want the back button to show in this scenario
+  //   this.nav.setRoot(page.component);
+  // }
 }

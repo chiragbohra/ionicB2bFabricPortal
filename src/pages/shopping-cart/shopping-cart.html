@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -12,14 +12,17 @@
 
 <ion-content padding>
   <ion-list>
+    <br/>
     <ion-card *ngFor="let results of productInCart">
-      <ion-card-header>Order Details</ion-card-header>
+      <ion-card-header class="fontStyle">
+        Order Details
+      </ion-card-header>
       <ion-row>
         <ion-col>
-          <img src="assets/imgs/FabricPage-600x330.png">
+          <img src="assets/imgs/fabric.jpg">
         </ion-col>
         <ion-col></ion-col>
-        <ion-col>
+        <ion-col class="fontStyle2">
           SKUNo : {{results.SKUNo}}
           <br/>
           <br/> Design : {{results.CustDesign}}
@@ -38,13 +41,15 @@
           <input type="number" placeholder="quantity" [(ngModel)]="quantity" required>
         </ion-col>
       </ion-row>
-      <div text-center>
-        <button ion-button (click)="remove()">Remove
+      <div text-right>
+        <button ion-button (click)="remove()">Remove &nbsp;
           <ion-icon name="close"></ion-icon>
         </button>
-        <button ion-button (click)="order(results)" icon-left>Continue
+        <button ion-button (click)="order(results)" icon-left>Continue &nbsp;
           <ion-icon name="ios-arrow-forward-outline"></ion-icon>
         </button>
+        <br/>
+        <br/>
       </div>
     </ion-card>
 

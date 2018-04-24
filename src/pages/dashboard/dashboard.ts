@@ -22,6 +22,10 @@ export class DashboardPage {
   ) {
   }
 
+  ShoppingCartPage(){
+  this.navCtrl.push("ShoppingCartPage");
+}
+
   ionViewDidLoad() {
     console.log("ionViewDidLoad DashboardPage");
   }

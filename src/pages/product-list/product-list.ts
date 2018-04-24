@@ -2,12 +2,6 @@ import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { ServicesProvider } from "../../providers/services/services";
 import { NativeStorage } from "@ionic-native/native-storage";
-/**
- * Generated class for the ProductListPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -27,6 +21,10 @@ export class ProductListPage {
     private nativeStorage: NativeStorage
   ) {
     this.getProductList();
+  }
+
+  ShoppingCartPage() {
+    this.navCtrl.push("ShoppingCartPage");
   }
 
   ionViewDidLoad() {
@@ -90,7 +88,7 @@ export class ProductListPage {
       Status: "Open"
     };
     console.log(cartData);
-    this.getRequest.postOrder(cartData);
+    //  this.getRequest.postOrder(cartData);
 
     this.nativeStorage
       .setItem("productDetails", {

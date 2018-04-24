@@ -1,6 +1,19 @@
 page-order-history {
-th,td{
-    padding: 50px;
-}
+  //   .orderHistory {
+  //     padding-left: 5%;
+  //     padding-right: 5%;
+  //   }
+  .tableHeader {
+    color: rgb(117, 117, 117);
+    padding: 3em;
+    // margin: 5%;
+    font-size: 2em;
+    text-align: center;
+  }
 
+  td {
+    padding: 1em;
+    font-size: 2em;
+    text-align: center;
+  }
 }

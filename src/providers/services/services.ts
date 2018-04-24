@@ -18,7 +18,7 @@ export class ServicesProvider {
   getuserDetails() {
     return new Promise(resolve => {
       this.http
-        .get("http://192.168.0.29:5000/showProductList")
+        .get("http://localhost:5000/showProductList")
         .map(res => res.json().recordsets[0])
         .subscribe(productList => {
           resolve(productList);
@@ -29,7 +29,7 @@ export class ServicesProvider {
   getuserAddress() {
     return new Promise(resolve => {
       this.http
-        .get("http://192.168.0.29:5000/getUserAddress")
+        .get("http://localhost:5000/getUserAddress")
         .map(res => res.json().recordsets[0])
         .subscribe(productList => {
           resolve(productList);
@@ -58,7 +58,7 @@ export class ServicesProvider {
   getCartDetails() {
     return new Promise(resolve => {
       this.http
-        .get("http://192.168.0.29:5000/getCartDetails")
+        .get("http://localhost:5000/getCartDetails")
         .map(res => res.json().recordsets[0])
         .subscribe(cartDetails => {
           resolve(cartDetails);
@@ -99,7 +99,7 @@ export class ServicesProvider {
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
     this.http
-      .post("http://192.168.0.29:5000/addToCart", JSON.stringify(cartData), {
+      .post("http://localhost:5000/addToCart", JSON.stringify(cartData), {
         headers: headers
       })
       .subscribe(URL => {
@@ -127,7 +127,7 @@ export class ServicesProvider {
 
     // this.http.put("http://ec2-34-203-196-198.compute-1.amazonaws.com:8000/api/borrowerRequest", JSON.stringify(newValue), { headers: headers })
     this.http
-      .put("http://192.168.0.29:5000/updateCart", JSON.stringify(newValue), {
+      .put("http://localhost:5000/updateCart", JSON.stringify(newValue), {
         headers: headers
       })
       .subscribe(res => {
