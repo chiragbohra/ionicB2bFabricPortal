@@ -7,25 +7,27 @@
 </ion-header>
 
 <ion-content padding class="login">
-  <ion-title class="titleFont">FABRIC COMPANY</ion-title>
-  <form action="/login" method="post" (ngSubmit)="logForm()">
+  <ion-label class="fontStyle">FABRIC COMPANY</ion-label>
+  <br/>
+  <br/>
+  <br/>
+  <ion-item>
+    <ion-label floating>ID</ion-label>
+    <ion-input type="text" [(ngModel)]="userId"></ion-input>
+  </ion-item>
+  <br/>
+  <ion-item>
+    <ion-label floating>Password</ion-label>
+    <ion-input type="password" [(ngModel)]="password"></ion-input>
+  </ion-item>
+  <br/>
+  <br/>
+  <a (click)="navigateToForgetPage()">Forget Password</a>
+  <br/>
+  <br/>
+  <br/>
+  <button ion-button block (click)="login()">Login</button>
 
-    <ion-item>
-      <ion-label floating>ID</ion-label>
-      <ion-input type="text" ngControl="username" name="username" [(ngModel)]="username"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Password</ion-label>
-      <ion-input type="password" ngControl="password" name="password" [(ngModel)]="password"></ion-input>
-      <br>
-    </ion-item>
-    <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a (click)="navigateToForgetPage()">forget password</a>
-    <br>
-    <br>
-    <br>
-    <button ion-button (click)="DashboardPage()">Login</button>
 
 
-  </form>
 </ion-content>

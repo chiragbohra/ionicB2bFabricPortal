@@ -60,7 +60,7 @@
     </ion-label> -->
     <ion-list>
 
-      <table border="1">
+      <!-- <table border="1">
         <thead>
           <tr class="paddingTable">
             <th class="paddingTable">IMAGE</th>
@@ -91,7 +91,37 @@
           </td>
         </tr>
 
-      </table>
+      </table> -->
+
+      <ion-card *ngFor="let results of productList| slice:0: t;">
+        <ion-row>
+          <ion-col (click)="productDetails(results)">
+            <img class="reSize" src="assets/imgs/FabricPage-600x330.png">
+          </ion-col>
+          <ion-col>
+            <td (click)="productDetails(results)" class="paddingTable"> {{results.BookName}} </td>
+          </ion-col>
+          <ion-col>
+            <td (click)="productDetails(results)" class="paddingTable"> {{results.SKUNo}} </td>
+          </ion-col>
+          <ion-col>
+            <div *ngIf="results.stock == null; then zero else data"> </div>
+            <ng-template #zero>
+              <td (click)="productDetails(results)" class="paddingTable">{{results.RollMtrs}}</td>
+            </ng-template>
+            <ng-template #data>
+              <td (click)="productDetails(results)" class="paddingTable">{{results.stock}}</td>
+            </ng-template>
+          </ion-col>
+          <ion-col>
+            <td class="paddingTable">
+              <button ion-button (click)="addToCart(results)" icon-left>ADD
+                <ion-icon name="ios-cart-outline"></ion-icon>
+              </button>
+            </td>
+          </ion-col>
+        </ion-row>
+      </ion-card>
     </ion-list>
 
     <!-- <button ion-button (click)="getProductList()">test</button> -->

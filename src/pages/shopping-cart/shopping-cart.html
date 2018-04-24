@@ -11,8 +11,11 @@
 
 
 <ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-list>
-    <ion-card *ngFor="let results of productInCart">
+    <ion-card *ngFor="let results of productInCart ;  let i = index">
       <ion-card-header>Order Details</ion-card-header>
       <ion-row>
         <ion-col>
@@ -35,20 +38,19 @@
           <h4 class="fontStyle">&#8377;{{price}}</h4>
           <br/>
           <ion-label>Quantity Required</ion-label>
-          <input type="number" placeholder="quantity" [(ngModel)]="quantity" required>
+          <input type="number" placeholder="quantity" [(ngModel)]="quantity[i]" required>
         </ion-col>
       </ion-row>
-      <div text-center>
-        <button ion-button (click)="remove()">Remove
+      <div text-right>
+        <button ion-button (click)="remove(results)">Remove
           <ion-icon name="close"></ion-icon>
-        </button>
-        <button ion-button (click)="order(results)" icon-left>Continue
-          <ion-icon name="ios-arrow-forward-outline"></ion-icon>
         </button>
       </div>
     </ion-card>
-
-
-
+    <div text-center>
+      <button ion-button (click)="continue()" icon-left>Continue
+        <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+      </button>
+    </div>
   </ion-list>
 </ion-content>

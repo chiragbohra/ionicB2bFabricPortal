@@ -14,6 +14,7 @@
 
 
 <ion-content padding>
+
   <table border="1">
     <thead>
       <tr class="paddingTable">
@@ -24,9 +25,9 @@
       </tr>
     </thead>
 
-    <tr class="paddingTable">
+    <tr class="paddingTable" *ngFor="let results of ordersPlaced">
 
-      <td class="paddingTable">{{RollNo}}</td>
+      <td class="paddingTable">{{results.RollNo}}</td>
       <td class="paddingTable">{{Quantity}}</td>
       <td class="paddingTable"> {{Price}}</td>
       <td class="paddingTable"> {{total}}</td>

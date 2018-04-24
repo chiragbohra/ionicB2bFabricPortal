@@ -31,6 +31,7 @@ export class ConfirmOrderPage {
   conditionFormAddress;
   address;
   showButton: boolean = true;
+  ordersPlaced: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -41,13 +42,26 @@ export class ConfirmOrderPage {
     this.conditionForm = this.formBuilder.group({
       conditionFormAddress: ["", Validators.required]
     });
+    console.log(this.navParams.get("values"));
+    let values = this.navParams.get("values");
 
-    console.log(this.navParams.get("confirmOrder"));
-    let data = this.navParams.get("confirmOrder");
-    this.RollNo = data.RollNo;
-    this.Quantity = data.quantity;
-    this.Price = data.Price;
-    this.total = data.Price;
+    for (var i = 0; i < values.Quantity.length; i++) {
+      console.log("for looped" +values.Quantity[i]);
+      this.Quantity = values.Quantity[i];
+    }
+
+    this.Quantity = values.Quantity;
+    this.Price = values.Price;
+    console.log(values.Quantity);
+    console.log(values.Price);
+    this.ordersPlaced = JSON.parse(localStorage.getItem("productDetails"));
+
+    // console.log(this.navParams.get("confirmOrder"));
+    // let data = this.navParams.get("confirmOrder");
+    // this.RollNo = data.RollNo;
+    // this.Quantity = data.quantity;
+    // this.Price = data.Price;
+    // this.total = data.Price;
   }
 
   ionViewDidLoad() {
@@ -94,6 +108,11 @@ export class ConfirmOrderPage {
     };
 
     this.getRequest.updateCart(newValue);
+    let newValue1 = {
+      CutAllocMtrs: this.Quantity,
+      RollNo: this.RollNo
+    };
+    this.getRequest.updateStock(newValue1);
     this.navCtrl.pop();
   }
 

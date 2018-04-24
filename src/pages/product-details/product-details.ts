@@ -59,7 +59,7 @@ export class ProductDetailsPage {
       Status: "Open"
     };
     console.log(cartData);
-    this.getRequest.postOrder(cartData);
+    // this.getRequest.postOrder(cartData);
 
     this.navCtrl.push("ShoppingCartPage");
     this.nativeStorage

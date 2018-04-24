@@ -90,18 +90,18 @@ export class ProductListPage {
       Status: "Open"
     };
     console.log(cartData);
-    this.getRequest.postOrder(cartData);
+    // this.getRequest.postOrder(cartData);
 
-    this.nativeStorage
-      .setItem("productDetails", {
-        productDetails: this.productToCart
-      })
-      .then(
-        () => console.log("New value Stored!"),
-        error => console.error("Error storing item", error)
-      );
+    // this.nativeStorage
+    //   .setItem("productDetails", {
+    //     productDetails: this.productToCart
+    //   })
+    //   .then(
+    //     () => console.log("New value Stored!"),
+    //     error => console.error("Error storing item", error)
+    //   );
 
-    //  localStorage.setItem("productDetails", this.productToCart);
+    localStorage.setItem("productDetails", JSON.stringify(this.productToCart));
   }
 
   method(infiniteScroll) {

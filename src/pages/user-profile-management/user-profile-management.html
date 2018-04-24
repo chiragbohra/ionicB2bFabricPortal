@@ -11,46 +11,55 @@
 
 
 <ion-content padding>
-  <ion-item>
-    <ion-label floating>Name</ion-label>
-    <ion-input type="text" [(ngModel)]="name"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label floating>Email</ion-label>
-    <ion-input type="text" [(ngModel)]="email"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label floating>Phone</ion-label>
-    <ion-input type="password" [(ngModel)]="phone"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label floating>Address1</ion-label>
-    <ion-input type="password" [(ngModel)]="address1"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label floating>Address2</ion-label>
-    <ion-input type="text" [(ngModel)]="address2"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label floating>Address3</ion-label>
-    <ion-input type="password" [(ngModel)]="address3"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label floating>City</ion-label>
-    <ion-input type="text" [(ngModel)]="city"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label floating>Pincode</ion-label>
-    <ion-input type="password" [(ngModel)]="pincode"></ion-input>
-  </ion-item>
+  <ion-card>
+    <ion-item>
+      <ion-label floating>Name</ion-label>
+      <ion-input type="text" [(ngModel)]="name"></ion-input>
+    </ion-item>
+  </ion-card>
 
 
+  <ion-card>
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="text" [(ngModel)]="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Phone</ion-label>
+      <ion-input type="text" [(ngModel)]="phone"></ion-input>
+    </ion-item>
+  </ion-card>
+
+
+  <ion-card>
+    <ion-item>
+      <ion-label floating>Address1</ion-label>
+      <ion-input type="text" [(ngModel)]="address1"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Address2</ion-label>
+      <ion-input type="text" [(ngModel)]="address2"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Address3</ion-label>
+      <ion-input type="text" [(ngModel)]="address3"></ion-input>
+    </ion-item>
+
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <ion-label floating>City</ion-label>
+      <ion-input type="text" [(ngModel)]="city"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Pincode</ion-label>
+      <ion-input type="number" [(ngModel)]="pincode"></ion-input>
+    </ion-item>
+  </ion-card>
+  <button ion-button block (click)="update()">Update</button>
 
 </ion-content>
