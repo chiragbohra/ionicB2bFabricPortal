@@ -34,7 +34,7 @@
 
       <td class="paddingTable">{{results.RollNo}}</td>
       <td class="paddingTable">{{Quantity[i]}}</td>
-      <td class="paddingTable"> {{Price}}</td>
+      <td class="paddingTable">&#8377; {{Price}}</td>
       <td class="paddingTable"> {{Quantity[i] * Price}}</td>
     </tr>
 
@@ -42,12 +42,18 @@
       <td class="paddingTable2">Total</td>
       <td class="paddingTable"></td>
       <td class="paddingTable"></td>
-      <td class="paddingTable">{{afterDisc}}</td>
+      <td class="paddingTable">&#8377;{{afterDisc}}</td>
     </tr>
   </table>
 
   <ion-card>
-    <ion-label>Delivery Address</ion-label>{{address}}</ion-card>
+    <ion-row>
+      <ion-col>
+        <ion-label>Delivery Address</ion-label>{{address}}</ion-col>
+      <ion-col>{{text}}</ion-col>
+      <ion-col>Discount : &#8377;{{text2}}</ion-col>
+    </ion-row>
+  </ion-card>
 
   <button ion-button block (click)="confirmOrder()">Confirm Order</button>
 </ion-content>

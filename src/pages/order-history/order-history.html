@@ -25,18 +25,28 @@
     <table border="1">
       <thead>
         <tr class="tableHeader">
-          <th>Order ID</th>
-          <th>Order No</th>
-          <th>Approved Date</th>
-          <th>Final Destination</th>
+          <th>Order Number</th>
+          <th>Order Date</th>
+          <th>Customer Design</th>
+          <th>Customer Shade</th>
+          <!-- <th>Ordered Meters</th> -->
+          <!-- <th>Dispatched Meters</th> -->
+          <!-- <th>Status</th> -->
+          <th>Delivery Date</th>
+          <th></th>
         </tr>
       </thead>
 
       <tr *ngFor="let results of viewData">
-        <td>{{results.id}}</td>
-        <td>{{results.OrderNo }}</td>
-        <td>{{results.ApprovedDate | date }}</td>
-        <td>{{results.FinalDestination}}</td>
+        <td>{{results.OrderNo}}</td>
+        <td>{{results.OrderDate}}</td>
+        <td>Solace</td>
+        <td>True Navy</td>
+        <!-- <td></td> -->
+        <!-- <td></td> -->
+        <!-- <td></td> -->
+        <td>{{results.DeliveryDate}}</td>
+
       </tr>
     </table>
   </ion-list>

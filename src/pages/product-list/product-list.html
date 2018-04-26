@@ -8,17 +8,16 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-buttons start>
-      <button class="btn" ion-button icon-left (click)="ShoppingCartPage()">
+      <button ion-button icon-left (click)="ShoppingCartPage()">
         <ion-icon name="ios-cart-outline"></ion-icon>
         Cart
-
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-grid fixed>
+<ion-content padding class="paddingTable">
+  <ion-grid fixed  class="paddingTable">
     <ion-refresher (ionRefresh)="doRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
@@ -66,7 +65,7 @@
       <button ion-button (click)="addToCart(results)">ADD</button>
 
     </ion-label> -->
-    <ion-list>
+    <ion-list  class="paddingTable">
 
       <!-- <table border="1">
         <thead>

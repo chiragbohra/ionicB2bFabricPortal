@@ -29,6 +29,7 @@ export class UserProfileManagementPage {
   ) {
     console.log(localStorage.getItem("userId"));
     let userId = localStorage.getItem("userId");
+    
     this.sentRequest.getUserInfo(userId).then(userInfo => {
       console.log(userInfo);
       try {

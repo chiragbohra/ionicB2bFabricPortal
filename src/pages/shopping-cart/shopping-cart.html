@@ -41,14 +41,14 @@
         </ion-col>
         <ion-col class="inputStyle">
           <h4 class="fontStyle">Quantity</h4>
-          <div style="border:1px solid black ; height:40% ; width:80%">
-            <ion-input (ionChange)="textChange()" class="boxStyle" type="number" [(ngModel)]="quantity[i]"></ion-input>
+          <div style="border:1px solid rgb(114, 114, 114) ; height:30% ; width:60%">
+            <ion-input (ionChange)="textChange()" class="boxStyle" type="number" [(ngModel)]="quantity[i]">Mtrs</ion-input>
           </div>
         </ion-col>
         <ion-col>
           <h4 class="fontStyle">Total
           </h4>
-          <div>&#8377;{{price * quantity[i] || price}}</div>
+          <div>&#8377;{{price * quantity[i] || 0}}</div>
         </ion-col>
       </ion-row>
 
@@ -58,21 +58,109 @@
       <ion-list radio-group formControlName="conditionFormAddress" [(ngModel)]="radio" no-lines>
         <ion-card>
           <ion-card-header>Select Address</ion-card-header>
+          <ion-row>
+            <ion-slides>
+              <ion-slide>
+                <ion-col>
+                  <div class="slidesStyle">
+                    <ion-radio (click)="radioSelect()" value="GOVT COLLEGE ROAD"></ion-radio>
+                    <ion-item no-lines>
+                      <ion-label class="ion-label2">GOVT COLLEGE ROAD</ion-label>
+                    </ion-item>
+                  </div>
+                </ion-col>
+              </ion-slide>
 
-          <ion-item no-lines>
-            <ion-label class="ion-label2">GOVT COLLEGE ROAD</ion-label>
-            <ion-radio (click)="radioSelect()" value="GOVT COLLEGE ROAD"></ion-radio>
-          </ion-item>
+              <ion-slide>
+                <ion-col>
+                  <div class="slidesStyle">
+                    <ion-radio (click)="radioSelect()" value="CIVIL LINES"></ion-radio>
+                    <ion-item no-lines>
+                      <ion-label class="ion-label2">CIVIL LINES</ion-label>
+                    </ion-item>
+                  </div>
+                </ion-col>
+              </ion-slide>
 
-          <ion-item no-lines>
-            <ion-label class="ion-label2">CIVIL LINES</ion-label>
-            <ion-radio (click)="radioSelect()" value="CIVIL LINES"></ion-radio>
-          </ion-item>
+              <ion-slide>
+                <ion-col>
+                  <div class="slidesStyle">
+                    <ion-radio (click)="radioSelect()" value="ADJOINING IDBI BANK"></ion-radio>
+                    <ion-item no-lines>
+                      <ion-label>ADJOINING IDBI BANK</ion-label>
+                    </ion-item>
+                  </div>
+                </ion-col>
+              </ion-slide>
 
-          <ion-item no-lines>
-            <ion-label>ADJOINING IDBI BANK</ion-label>
-            <ion-radio (click)="radioSelect()" value="ADJOINING IDBI BANK"></ion-radio>
-          </ion-item>
+              <ion-slide>
+                <ion-col>
+                  <div class="slidesStyle">
+                    <ion-radio (click)="radioSelect()" value="GOVT COLLEGE ROAD"></ion-radio>
+                    <ion-item no-lines>
+                      <ion-label class="ion-label2">GOVT COLLEGE ROAD</ion-label>
+                    </ion-item>
+                  </div>
+                </ion-col>
+              </ion-slide>
+
+              <ion-slide>
+                <ion-col>
+                  <div class="slidesStyle">
+                    <ion-radio (click)="radioSelect()" value="CIVIL LINES"></ion-radio>
+                    <ion-item no-lines>
+                      <ion-label class="ion-label2">CIVIL LINES</ion-label>
+                    </ion-item>
+                  </div>
+                </ion-col>
+              </ion-slide>
+
+              <ion-slide>
+                <ion-col>
+                  <div class="slidesStyle">
+                    <ion-radio (click)="radioSelect()" value="ADJOINING IDBI BANK"></ion-radio>
+                    <ion-item no-lines>
+                      <ion-label>ADJOINING IDBI BANK</ion-label>
+                    </ion-item>
+                  </div>
+                </ion-col>
+              </ion-slide>
+
+              <ion-slide>
+                <ion-col>
+                  <div class="slidesStyle">
+                    <ion-radio (click)="radioSelect()" value="GOVT COLLEGE ROAD"></ion-radio>
+                    <ion-item no-lines>
+                      <ion-label class="ion-label2">GOVT COLLEGE ROAD</ion-label>
+                    </ion-item>
+                  </div>
+                </ion-col>
+              </ion-slide>
+
+              <ion-slide>
+                <ion-col>
+                  <div class="slidesStyle">
+                    <ion-radio (click)="radioSelect()" value="CIVIL LINES"></ion-radio>
+                    <ion-item no-lines>
+                      <ion-label class="ion-label2">CIVIL LINES</ion-label>
+                    </ion-item>
+                  </div>
+                </ion-col>
+              </ion-slide>
+
+              <ion-slide>
+                <ion-col>
+                  <div class="slidesStyle">
+                    <ion-radio (click)="radioSelect()" value="ADJOINING IDBI BANK"></ion-radio>
+                    <ion-item no-lines>
+                      <ion-label>ADJOINING IDBI BANK</ion-label>
+                    </ion-item>
+                  </div>
+                </ion-col>
+              </ion-slide>
+            </ion-slides>
+          </ion-row>
+
         </ion-card>
       </ion-list>
     </form>
@@ -88,16 +176,15 @@
       </ion-row>
       <ion-row *ngIf="!showButton">
         <ion-col>{{text}}</ion-col>
-        <ion-col>{{grandTotal}} - {{this.text2}}</ion-col>
-        <ion-col>{{afterDisc}}</ion-col>
+        <ion-col>&#8377;{{grandTotal}} - &#8377;{{this.text2}}</ion-col>
+        <ion-col>&#8377;{{afterDisc}}</ion-col>
       </ion-row>
     </ion-card>
 
     <button ion-button block (click)="continue()" icon-left>Place Order &nbsp;
       <ion-icon name="ios-arrow-forward-outline"></ion-icon>
     </button>
-
-    <!-- <button (click)="test()"> test</button> -->
+    <!-- <button (click)="testing()"> test</button> -->
 
   </ion-list>
 </ion-content>

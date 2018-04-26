@@ -68,10 +68,10 @@ export class ServicesProvider {
     });
   }
 
-  orderHistory() {
+  orderHistory(userId) {
     return new Promise(resolve => {
       this.http
-        .get("http://localhost:5000/orderHistory")
+        .get("http://localhost:5000/orderHistory?userId=" + userId)
         .map(res => res.json().recordset)
         .subscribe(data => {
           console.log(data);
@@ -82,10 +82,10 @@ export class ServicesProvider {
   }
 
   //for invoiceHistory page
-  invoiceHistory() {
+  invoiceHistory(userId) {
     return new Promise(resolve => {
       this.http
-        .get("http://localhost:5000/invoiceHistory")
+        .get("http://localhost:5000/userInfo?userId=" + userId)
         .map(res => res.json().recordsets[0])
         .subscribe(data => {
           console.log(data);
@@ -112,6 +112,20 @@ export class ServicesProvider {
     return new Promise(resolve => {
       this.http
         .get("http://localhost:5000/usernamePassword")
+        .map(res => res.json().recordsets[0])
+        .subscribe(data => {
+          console.log(data);
+          // this.data = data;
+          resolve(data); //to get data we changes (this.data to data)
+        });
+    });
+  }
+
+  //for ForgetPage using
+  toGetUsernameEmail() {
+    return new Promise(resolve => {
+      this.http
+        .get("http://localhost:5000/usernameEmail")
         .map(res => res.json().recordsets[0])
         .subscribe(data => {
           console.log(data);

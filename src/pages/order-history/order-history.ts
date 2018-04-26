@@ -10,16 +10,20 @@ import { ServicesProvider } from "../../providers/services/services";
 export class OrderHistoryPage {
   viewData: any;
 
+  userId;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public sentRequest: ServicesProvider
   ) {
-    //to get data from server
-    this.sentRequest.orderHistory().then(getorderdata => {
-      // getorderdata it is variable
-      this.viewData = getorderdata;
-      console.log(getorderdata);
+    //to get data from server to this page
+    console.log(localStorage.getItem("userId"));
+    let userId = localStorage.getItem("userId");
+
+    this.sentRequest.orderHistory(userId).then(userInfo => {
+      console.log(userInfo);
+      this.viewData = userInfo;
     });
   }
 

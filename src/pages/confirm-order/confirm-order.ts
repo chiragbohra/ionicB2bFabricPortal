@@ -33,6 +33,8 @@ export class ConfirmOrderPage {
   ordersPlaced: any;
   GrandTotal;
   afterDisc: any;
+  text;
+  text2;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -46,6 +48,8 @@ export class ConfirmOrderPage {
     this.Quantity = values.Quantity;
     this.Price = values.Price;
     this.afterDisc = values.Disc;
+    this.text = values.text;
+    this.text2 = values.text2;
     console.log(values.Quantity.length);
     console.log(values.Price.length);
 
@@ -85,7 +89,9 @@ export class ConfirmOrderPage {
       RollNo: this.RollNo
     };
     this.getRequest.updateStock(newValue1);
+    localStorage.removeItem("productDetails");
     this.navCtrl.pop();
+    location.reload();
   }
 
   presentToast(action: any) {

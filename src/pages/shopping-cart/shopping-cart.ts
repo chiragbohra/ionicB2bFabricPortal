@@ -42,6 +42,7 @@ export class ShoppingCartPage {
   text: any;
   text2: any;
   afterDisc: any;
+  test: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -116,7 +117,9 @@ export class ShoppingCartPage {
       Price: this.price,
       Address: this.address,
       GrandTotal: this.grandTotal,
-      Disc: this.afterDisc
+      Disc: this.afterDisc,
+      text: this.text,
+      text2: this.text2
     };
     this.navCtrl.push("ConfirmOrderPage", { values: orderValues });
 
@@ -145,11 +148,15 @@ export class ShoppingCartPage {
   }
 
   textChange() {
+    this.test = 0;
+    let x = 0;
     for (var i = 0; i < this.quantity.length; i++) {
-      let test = this.quantity[i] * this.price;
-      console.log(test);
-      test += test;
-      this.grandTotal = test;
+      this.test = this.quantity[i] * this.price;
+      //  console.log("line155" + this.test);
+
+      x += this.test + this.test;
+      //console.log("line158" + x / 2);
+      this.grandTotal = x / 2;
     }
   }
 
