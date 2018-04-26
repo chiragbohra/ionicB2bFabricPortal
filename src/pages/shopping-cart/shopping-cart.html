@@ -1,11 +1,19 @@
 <ion-header>
   <ion-navbar color="primary">
+    <ion-title>
+      SHOPPING CART
+    </ion-title>
+
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>
-      Shopping Cart
-    </ion-title>
+    <ion-buttons start>
+      <button class="btn" ion-button icon-left (click)="ShoppingCartPage()">
+        <ion-icon name="ios-cart-outline"></ion-icon>
+        Cart
+
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -22,7 +30,8 @@
           <img src="assets/imgs/fabric.jpg">
         </ion-col>
         <ion-col></ion-col>
-        <ion-col class="fontStyle2">
+        <ion-col class="fontStyle2
+        ">
           SKUNo : {{results.SKUNo}}
           <br/>
           <br/> Design : {{results.CustDesign}}

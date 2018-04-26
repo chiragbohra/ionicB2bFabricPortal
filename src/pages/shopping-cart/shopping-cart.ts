@@ -64,6 +64,10 @@ export class ShoppingCartPage {
     this.productInCart = JSON.parse(localStorage.getItem("productDetails"));
   }
 
+  ShoppingCartPage() {
+    this.navCtrl.push("ShoppingCartPage");
+  }
+
   ionViewDidLoad() {
     console.log("ionViewDidLoad ShoppingCartPage");
   }

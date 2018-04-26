@@ -32,9 +32,9 @@ export class InvoiceHistoryPage {
     console.log(localStorage.getItem("userId"));
     let userId = localStorage.getItem("userId");
 
-    this.sentRequest.invoiceHistory(userId).then(userInfo => {
-      console.log(userInfo);
-      this.viewData = userInfo;
+    this.sentRequest.invoiceHistory(userId).then(invoiceHistoryuserInfo => {
+      console.log(invoiceHistoryuserInfo);
+      this.viewData = invoiceHistoryuserInfo;
     });
   }
 

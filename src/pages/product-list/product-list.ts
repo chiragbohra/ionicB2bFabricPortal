@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { ServicesProvider } from "../../providers/services/services";
-import { NativeStorage } from "@ionic-native/native-storage";
+//import { NativeStorage } from "@ionic-native/native-storage";
 
 @IonicPage()
 @Component({
@@ -10,15 +10,19 @@ import { NativeStorage } from "@ionic-native/native-storage";
 })
 export class ProductListPage {
   productList;
+
   searchTerm: string = "";
+
   cart: any = [];
   productToCart: any = [];
+
   t = 20; // Maintains Count of Cards Displayed
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public getRequest: ServicesProvider,
-    private nativeStorage: NativeStorage
+    //private nativeStorage: NativeStorage
   ) {
     this.getProductList();
   }

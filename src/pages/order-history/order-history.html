@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>
-      Order History
+      ORDER HISTORY
     </ion-title>
 
     <button ion-button menuToggle>
@@ -19,37 +19,54 @@
 
 <ion-content padding class="orderHistory">
 
+  <ion-list *ngFor="let results of viewData">
 
+    <ion-card>
+      <ion-card-header color="primary">
+        <h1>Order Number: {{results.OrderNo}}</h1>
+      </ion-card-header>
+      <ion-card-content>
+        <h2>Ordered On: {{results.OrderDate | date}}</h2>
+        <h2>Design: {{results.CustDesign}}</h2>
+        <h2>Shade: {{results.CustShade}}</h2>
+        <h2>Ordered Meters: {{results.OrdMtrs}}</h2>
+        <h2>Dispatched Meters: {{results.DispatchMtrs}}</h2>
+        <h2>Delivered On: {{results.DeliveryDate | date}}</h2>
+      </ion-card-content>
+    </ion-card>
+
+  </ion-list>
+</ion-content>
+
+
+
+<!-- 
   <ion-list>
 
     <table border="1">
       <thead>
         <tr class="tableHeader">
           <th>Order Number</th>
-          <th>Order Date</th>
-          <th>Customer Design</th>
-          <th>Customer Shade</th>
+          <th>Ordered On</th>
+          <th>Design</th>
+          <th>Shade</th>
           <th>Ordered Meters</th>
           <th>Dispatched Meters</th>
           <th>Status</th>
-          <th>Delivery Date</th>
+          <th>Delivered On</th>
           <th></th>
         </tr>
       </thead>
 
       <tr *ngFor="let results of viewData">
         <td>{{results.OrderNo}}</td>
-        <td>{{results.OrderDate}}</td>
+        <td>{{results.OrderDate | date}}</td>
+        <td>{{results.CustDesign}}</td>
+        <td>{{results.CustShade}}</td>
+        <td>{{results.OrdMtrs}}</td>
+        <td>{{results.DispatchMtrs}}</td>
         <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>{{results.DeliveryDate}}</td>
-
+        <td>{{results.DeliveryDate | date}}</td>
       </tr>
     </table>
-  </ion-list>
-
-
-</ion-content>
+  </ion-list> -->

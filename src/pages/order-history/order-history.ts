@@ -21,9 +21,9 @@ export class OrderHistoryPage {
     console.log(localStorage.getItem("userId"));
     let userId = localStorage.getItem("userId");
 
-    this.sentRequest.orderHistory(userId).then(userInfo => {
-      console.log(userInfo);
-      this.viewData = userInfo;
+    this.sentRequest.orderHistory(userId).then(orderHistoryUserInfo => {
+      console.log(orderHistoryUserInfo);
+      this.viewData = orderHistoryUserInfo;
     });
   }
 

@@ -71,8 +71,8 @@ export class ServicesProvider {
   orderHistory(userId) {
     return new Promise(resolve => {
       this.http
-        .get("http://localhost:5000/userInfo?userId=" + userId)
-        .map(res => res.json().recordset)
+        .get("http://localhost:5000/orderHistoryUserInfo?userId=" + userId)
+        .map(res => res.json().recordsets[0])
         .subscribe(data => {
           console.log(data);
           // this.data = data;
@@ -85,7 +85,7 @@ export class ServicesProvider {
   invoiceHistory(userId) {
     return new Promise(resolve => {
       this.http
-        .get("http://localhost:5000/userInfo?userId=" + userId)
+        .get("http://localhost:5000/invoiceHistoryuserInfo?userId=" + userId)
         .map(res => res.json().recordsets[0])
         .subscribe(data => {
           console.log(data);

@@ -29,7 +29,7 @@ export class UserProfileManagementPage {
   ) {
     console.log(localStorage.getItem("userId"));
     let userId = localStorage.getItem("userId");
-    
+
     this.sentRequest.getUserInfo(userId).then(userInfo => {
       console.log(userInfo);
       this.name = userInfo[0].CustName;
@@ -41,6 +41,10 @@ export class UserProfileManagementPage {
       this.city = userInfo[0].CustCity;
       this.pincode = userInfo[0].CustPinCd;
     });
+  }
+
+  ShoppingCartPage() {
+    this.navCtrl.push("ShoppingCartPage");
   }
 
   ionViewDidLoad() {

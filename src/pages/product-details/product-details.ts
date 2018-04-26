@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { ServicesProvider } from "../../providers/services/services";
-import { NativeStorage } from "@ionic-native/native-storage";
+//import { NativeStorage } from "@ionic-native/native-storage";
 
 /**
  * Generated class for the ProductDetailsPage page.
@@ -22,11 +22,11 @@ export class ProductDetailsPage {
   Width;
   FreshMtrs;
   productToCart: any = [];
+  
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public getRequest: ServicesProvider,
-    private nativeStorage: NativeStorage
+    public getRequest: ServicesProvider //private nativeStorage: NativeStorage
   ) {
     let product = this.navParams.get("productSelected");
     console.log(product);
@@ -48,8 +48,10 @@ export class ProductDetailsPage {
 
   addToCart() {
     let results = this.navParams.get("productSelected");
+
     this.productToCart.push(results);
     console.log(this.productToCart);
+
     let cartData = {
       Id: results.Id,
       RollNo: results.RollNo,
@@ -66,13 +68,20 @@ export class ProductDetailsPage {
     // this.getRequest.postOrder(cartData);
 
     this.navCtrl.push("ShoppingCartPage");
-    this.nativeStorage
-      .setItem("productDetails", {
-        productDetails: this.productToCart
-      })
-      .then(
-        () => console.log("New value Stored!"),
-        error => console.error("Error storing item", error)
-      );
+
+    // this.nativeStorage
+    //   .setItem("productDetails", {
+    //     productDetails: this.productToCart
+    //   })
+    // this.nativeStorage
+    //   .setItem("productDetails", {
+    //     productDetails: this.productToCart
+    //   })
+    //   .then(
+    //     () => console.log("New value Stored!"),
+    //     error => console.error("Error storing item", error)
+    //   );
+
+    localStorage.setItem("productDetails", JSON.stringify(this.productToCart));
   }
 }

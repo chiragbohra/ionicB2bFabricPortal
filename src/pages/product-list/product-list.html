@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>
-      Product List
+      PRODUCT lIST
     </ion-title>
 
     <button ion-button menuToggle>
@@ -17,7 +17,7 @@
 </ion-header>
 
 <ion-content padding class="paddingTable">
-  <ion-grid fixed  class="paddingTable">
+  <ion-grid fixed class="paddingTable">
     <ion-refresher (ionRefresh)="doRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
@@ -65,7 +65,7 @@
       <button ion-button (click)="addToCart(results)">ADD</button>
 
     </ion-label> -->
-    <ion-list  class="paddingTable">
+    <ion-list class="paddingTable">
 
       <!-- <table border="1">
         <thead>
@@ -100,13 +100,13 @@
 
       </table> -->
 
-      <ion-card  class="paddingTable" *ngFor="let results of productList| slice:0: t;">
-        <ion-row  class="paddingTable"> 
-          <ion-col  (click)="productDetails(results)">
+      <ion-card class="paddingTable" *ngFor="let results of productList| slice:0: t;">
+        <ion-row class="paddingTable">
+          <ion-col (click)="productDetails(results)">
             <img class="reSize" src="assets/imgs/fabric.jpg">
           </ion-col>
           <ion-col class="paddingTable">
-            <td   class="paddingTable" (click)="productDetails(results)"> {{results.BookName}} </td>
+            <td class="paddingTable" (click)="productDetails(results)"> {{results.BookName}} </td>
           </ion-col>
           <ion-col>
             <td (click)="productDetails(results)"> {{results.SKUNo}} </td>

@@ -1,11 +1,19 @@
 <ion-header>
   <ion-navbar color="primary">
+    <ion-title>
+      USER PROFILE MANAGEMENT
+    </ion-title>
+
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>
-      User Profile Management
-    </ion-title>
+    <ion-buttons start>
+      <button class="btn" ion-button icon-left (click)="ShoppingCartPage()">
+        <ion-icon name="ios-cart-outline"></ion-icon>
+        Cart
+
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
