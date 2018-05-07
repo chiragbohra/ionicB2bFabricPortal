@@ -14,6 +14,8 @@ import { ServicesProvider } from "../../providers/services/services";
   templateUrl: "user-profile-management.html"
 })
 export class UserProfileManagementPage {
+  mycart;
+  badge;
   name;
   email;
   phone;
@@ -32,15 +34,26 @@ export class UserProfileManagementPage {
 
     this.sentRequest.getUserInfo(userId).then(userInfo => {
       console.log(userInfo);
-      this.name = userInfo[0].CustName;
-      this.email = userInfo[0].CustEmail;
-      this.phone = userInfo[0].CustPhone;
-      this.address1 = userInfo[0].CustAdd1;
-      this.address2 = userInfo[0].CustAdd2;
-      this.address3 = userInfo[0].CustAdd3;
-      this.city = userInfo[0].CustCity;
-      this.pincode = userInfo[0].CustPinCd;
+      try {
+        this.name = userInfo[0].CustName;
+        this.email = userInfo[0].CustEmail;
+        this.phone = userInfo[0].CustPhone;
+        this.address1 = userInfo[0].CustAdd1;
+        this.address2 = userInfo[0].CustAdd2;
+        this.address3 = userInfo[0].CustAdd3;
+        this.city = userInfo[0].CustCity;
+        this.pincode = userInfo[0].CustPinCd;
+      } catch (e) {}
     });
+
+
+    
+    //using for calculating products in cart 
+    
+    this.mycart = JSON.parse(localStorage.getItem("productDetails")); 
+    console.log(this.mycart.length);  
+    this.badge=this.mycart.length; // calculating products in cart to display over badges
+  
   }
 
   ShoppingCartPage() {

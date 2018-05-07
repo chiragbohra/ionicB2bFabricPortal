@@ -1,58 +1,67 @@
 <ion-header>
-    <ion-navbar color="primary">
-        <ion-title>
-            PRODUCT DETAILS
-        </ion-title>
+  <ion-navbar color="primary">
+    <ion-title>
+      PRODUCT DETAILS
+    </ion-title>
 
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
-        <ion-buttons start>
-            <button class="btn" ion-button icon-left (click)="ShoppingCartPage()">
-                <ion-icon name="ios-cart-outline"></ion-icon>
-                Cart
-
-            </button>
-        </ion-buttons>
-    </ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons start>
+      <button class="btn" ion-button icon-left (click)="ShoppingCartPage()">
+        <ion-icon name="ios-cart-outline" class="iconBadge"></ion-icon>
+        <ion-badge item-end class="badge">{{badge || "" }}
+        </ion-badge>
+        Cart
+      </button>
+    </ion-buttons>
+  </ion-navbar>
 </ion-header>
 
 
 <ion-content padding class="productBox">
-    <br/>
-    <br/>
-    <ion-card>
-        <ion-card-header color="primary">
-            <h1> SKU No:- {{SKUNo}}</h1>
-        </ion-card-header>
-        <ion-card-content>
-            <ion-row>
-                <img src="assets/imgs/fabric.jpg">
-            </ion-row>
-            <ion-row>
-                <ion-col>Design :- {{CustDesign}}</ion-col>
-                <ion-col>Color Name :- {{CustShade}}</ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>Width :- {{Width}}</ion-col>
-                <ion-col>Usage :- {{FreshMtrs}}</ion-col>
-            </ion-row>
-            <ion-row>
-                <button ion-button block (click)="addToCart()" icon-left>
-                    <ion-icon name="ios-cart-outline"></ion-icon>Add To Cart
-                </button>
-            </ion-row>
+  <br/>
+  <br/>
+  <ion-card>
+    <ion-card-header color="primary">
+      <h1> SKU No: {{SKUNo}}</h1>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row>
+        <img src="assets/imgs/fabric.jpg">
+      </ion-row>
+      <ion-row>
+        <ion-col class="detailsStyle">
+          <span class="titleStyle">Design: </span>
+          {{CustDesign}}
+        </ion-col>
+        <ion-col class="detailsStyle">
+          <span class="titleStyle">Color: </span>
+          {{CustShade}}
+        </ion-col>
+        <ion-col class="detailsStyle">
+          <span class="titleStyle">Width: </span>
+          {{Width}}</ion-col>
+        <ion-col class="detailsStyle">
+          <span class="titleStyle">Usage: </span>
+          {{FreshMtrs}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <button ion-button block (click)="addToCart()" icon-left>
+          <ion-icon name="ios-cart-outline"></ion-icon>Add To Cart
+        </button>
+      </ion-row>
 
 
 
 
 
-        </ion-card-content>
-    </ion-card>
+    </ion-card-content>
+  </ion-card>
 
 
 
-    <!-- <br/>
+  <!-- <br/>
   <ion-row>
     <ion-col></ion-col>
     <ion-col>

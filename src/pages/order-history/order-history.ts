@@ -8,6 +8,8 @@ import { ServicesProvider } from "../../providers/services/services";
   templateUrl: "order-history.html"
 })
 export class OrderHistoryPage {
+  mycart;
+  badge;
   viewData: any;
 
   userId;
@@ -17,6 +19,20 @@ export class OrderHistoryPage {
     public navParams: NavParams,
     public sentRequest: ServicesProvider
   ) {
+
+
+    this.initializeviewData(); //method call here to get data
+
+    //using for calculating products in cart 
+    try {
+      //try-catch used to handle length error in console    
+    this.mycart = JSON.parse(localStorage.getItem("productDetails")); 
+    console.log(this.mycart.length);  
+    this.badge=this.mycart.length; // calculating products in cart to display over badges
+    } catch (e) {}
+  }
+
+  initializeviewData() {
     //to get data from server to this page
     console.log(localStorage.getItem("userId"));
     let userId = localStorage.getItem("userId");
@@ -33,5 +49,36 @@ export class OrderHistoryPage {
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad OrderHistoryPage");
+  }
+
+
+  //for searchBar
+  getviewData(ev) {
+    // set val to the value of the ev target
+    var val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != "") {
+      this.viewData = this.viewData.filter(item => {
+        // search By OrderNo
+        if (
+          item.OrderNo.toString()
+            .toLowerCase()
+            .indexOf(val.toLowerCase()) > -1
+        ) {
+          return true;
+        }
+        //now toSearch by OrderDate using else if condition
+        else if (
+          item.OrderDate.toString()
+            .toLowerCase()
+            .indexOf(val.toLowerCase()) > -1
+        ) {
+          return true;
+        }
+      });
+    } else {
+      this.initializeviewData();
+    }
   }
 }

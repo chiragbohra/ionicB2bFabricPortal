@@ -1,29 +1,38 @@
 page-product-list {
-  .paddingTable {
+  .paddingTable {   
+    padding: 40px;
+    text-align: center;
+  }
+  .padding1 {        //for img
+    padding-top: 30px;
     text-align: center;
   }
 
-  //   .paddingTable {
-  //     padding: 10px;
-  //     margin: 5%;
-  //     font-size: 2rem;
-  //    // background:#e45b5b;
-  //    text-align :center;
+  .colStyle {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    min-height: 1px;
+    -webkit-flex-basis: 0;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+  }
 
-  //   }
-  //   .tableRow{
-  //     color: black;
-  //     padding: 50px ;
-  //     margin: 5% ;
-  //     background:rgb(211, 17, 17);
-  //     font-size: 2rem
-
-  //   }
-  // .stock{
-  //   padding: 50px ;
-  // }
-  //   .reSize {
-  //     height:300px;
-  //     width: 100%;
-  //   }
+  .iconBadge {
+    position: relative;
+    font-size: 2.5em;
+  }
+  .badge {
+    position: absolute;
+    background-color: rgb(138, 9, 9);
+    border-radius: 50%;
+    top: -5px;
+    left: 15px;
+    font-size: 15px !important;
+  }
 }

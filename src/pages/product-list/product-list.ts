@@ -1,5 +1,11 @@
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  ToastController,
+  Events
+} from "ionic-angular";
 import { ServicesProvider } from "../../providers/services/services";
 //import { NativeStorage } from "@ionic-native/native-storage";
 
@@ -9,6 +15,9 @@ import { ServicesProvider } from "../../providers/services/services";
   templateUrl: "product-list.html"
 })
 export class ProductListPage {
+  mycart;
+  badge;
+
   productList;
 
   searchTerm: string = "";
@@ -17,14 +26,23 @@ export class ProductListPage {
   productToCart: any = [];
 
   t = 20; // Maintains Count of Cards Displayed
+  addedTocart: boolean = false;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public getRequest: ServicesProvider,
-    //private nativeStorage: NativeStorage
+    private events: Events,
+    private toastCtrl: ToastController
   ) {
     this.getProductList();
+
+    try {
+      //try-catch used to handle length error
+      this.mycart = JSON.parse(localStorage.getItem("productDetails"));
+      console.log(this.mycart.length);
+      this.badge = this.mycart.length; // calculating products in cart to display over badges
+    } catch (e) {}
   }
 
   ShoppingCartPage() {
@@ -74,11 +92,6 @@ export class ProductListPage {
     this.productToCart.push(results);
     console.log(this.productToCart);
 
-    this.navCtrl.push("ShoppingCartPage", {
-      productSelected: this.productToCart
-    });
-    console.log(results.Id);
-
     let cartData = {
       Id: results.Id,
       RollNo: results.RollNo,
@@ -92,7 +105,24 @@ export class ProductListPage {
       Status: "Open"
     };
     console.log(cartData);
-    // this.getRequest.postOrder(cartData);
+    this.getRequest.postOrder(cartData);
+
+    localStorage.setItem("productDetails", JSON.stringify(this.productToCart));
+
+    this.presentToast("addedToCart");
+
+    this.addedTocart = true;
+
+    //using for calculating products in cart
+    try {
+      //try-catch used to handle length error in console
+      this.mycart = JSON.parse(localStorage.getItem("productDetails"));
+      console.log(this.mycart.length);
+      this.badge = this.mycart.length; // calculating products in cart to display over badges
+    } catch (e) {}
+    // this.navCtrl.push("ShoppingCartPage", {
+    //   productSelected: this.productToCart
+    // });
 
     // this.nativeStorage
     //   .setItem("productDetails", {
@@ -103,7 +133,10 @@ export class ProductListPage {
     //     error => console.error("Error storing item", error)
     //   );
 
-    localStorage.setItem("productDetails", JSON.stringify(this.productToCart));
+
+
+    //events used to get data on badge without refreshing the page
+    this.events.publish("user:badge", this.badge); //setting badges value for getting on menu
   }
 
   method(infiniteScroll) {
@@ -122,6 +155,26 @@ export class ProductListPage {
       console.log("Async operation has ended");
       infiniteScroll.complete();
     }, 500);
+  }
+
+  viewCart(results) {
+    this.navCtrl.push("ShoppingCartPage");
+  }
+
+  presentToast(action: any) {
+    if (action == "addedToCart") {
+      let toast = this.toastCtrl.create({
+        message: "Added To Cart",
+        duration: 3000,
+        position: "bottom"
+      });
+
+      toast.onDidDismiss(() => {
+        console.log("Dismissed toast");
+      });
+
+      toast.present();
+    }
   }
 
   doRefresh(refresher) {

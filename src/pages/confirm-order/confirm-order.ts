@@ -5,8 +5,7 @@ import {
   NavParams,
   ToastController
 } from "ionic-angular";
-import { Validators } from "@angular/forms";
-import { FormBuilder } from "@angular/forms";
+
 import { ServicesProvider } from "../../providers/services/services";
 /**
  * Generated class for the ConfirmOrderPage page.
@@ -21,9 +20,11 @@ import { ServicesProvider } from "../../providers/services/services";
   templateUrl: "confirm-order.html"
 })
 export class ConfirmOrderPage {
+  badge;
+  mycart;
   RollNo;
-  Quantity;
-  Price;
+  Quantity: any = [];
+  Price: any = [];
   status;
   code;
   total;
@@ -32,29 +33,41 @@ export class ConfirmOrderPage {
   address;
   showButton: boolean = true;
   ordersPlaced: any;
+  GrandTotal;
+  afterDisc: any;
+  text;
+  text2;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private formBuilder: FormBuilder,
     public getRequest: ServicesProvider,
     private toastCtrl: ToastController
   ) {
-    this.conditionForm = this.formBuilder.group({
-      conditionFormAddress: ["", Validators.required]
-    });
-    console.log(this.navParams.get("values"));
+    console.log(this.navParams.get("values"));  //
     let values = this.navParams.get("values");
-
-    for (var i = 0; i < values.Quantity.length; i++) {
-      console.log("for looped" +values.Quantity[i]);
-      this.Quantity = values.Quantity[i];
-    }
-
+    try{
+    this.GrandTotal = values.GrandTotal;
+    this.address = values.Address;
     this.Quantity = values.Quantity;
     this.Price = values.Price;
-    console.log(values.Quantity);
-    console.log(values.Price);
+    this.afterDisc = values.Disc;
+    this.text = values.text;
+    this.text2 = values.text2;
+    console.log(values.Quantity.length);
+    console.log(values.Price.length);
+    }
+    catch(e){
+
+    }
+    // this.total = values.Price * values.Quantity.length;
     this.ordersPlaced = JSON.parse(localStorage.getItem("productDetails"));
+
+    //using for calculating products in cart 
+    
+    this.mycart = JSON.parse(localStorage.getItem("productDetails")); 
+    console.log(this.mycart.length);  
+    this.badge=this.mycart.length; // calculating products in cart to display over badges
+    //  
 
     // console.log(this.navParams.get("confirmOrder"));
     // let data = this.navParams.get("confirmOrder");
@@ -74,35 +87,7 @@ export class ConfirmOrderPage {
 
   textChange() {}
 
-  discount() {
-    if (this.code == "DISC10") {
-      this.total = Math.round(this.total - this.total * 0.1);
-      this.showButton = false;
-    } else if (this.code == "DISC20") {
-      this.total = Math.round(this.total - this.total * 0.2);
-      this.showButton = false;
-    } else if (this.code == "DISC30") {
-      this.total = Math.round(this.total - this.total * 0.3);
-      this.showButton = false;
-    } else if (this.code == "DISC40") {
-      this.total = Math.round(this.total - this.total * 0.4);
-      this.showButton = false;
-    } else {
-      this.presentToast("failed");
-    }
-    console.log(this.total);
-  }
-
-  radioSelect() {
-    let conditionCheck = this.conditionForm.value;
-    this.address = conditionCheck["conditionFormAddress"];
-    console.log(this.address);
-  }
-
   confirmOrder() {
-    let conditionCheck = this.conditionForm.value;
-    this.address = conditionCheck["conditionFormAddress"];
-
     let newValue = {
       quantity: this.Quantity,
       RollNo: this.RollNo,
@@ -117,7 +102,9 @@ export class ConfirmOrderPage {
       RollNo: this.RollNo
     };
     this.getRequest.updateStock(newValue1);
+    localStorage.removeItem("productDetails");
     this.navCtrl.pop();
+    location.reload();
   }
 
   presentToast(action: any) {

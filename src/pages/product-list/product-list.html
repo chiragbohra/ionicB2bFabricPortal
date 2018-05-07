@@ -9,7 +9,10 @@
     </button>
     <ion-buttons start>
       <button ion-button icon-left (click)="ShoppingCartPage()">
-        <ion-icon name="ios-cart-outline"></ion-icon>
+
+        <ion-icon name="ios-cart-outline" class="iconBadge"></ion-icon>
+        <ion-badge item-end class="badge">{{badge || ""}}
+        </ion-badge>
         Cart
       </button>
     </ion-buttons>
@@ -100,34 +103,36 @@
 
       </table> -->
 
-      <ion-card class="paddingTable" *ngFor="let results of productList| slice:0: t;">
-        <ion-row class="paddingTable">
-          <ion-col (click)="productDetails(results)">
-            <img class="reSize" src="assets/imgs/fabric.jpg">
+      <ion-card *ngFor="let results of productList| slice:0: t;">
+        
+        <ion-row >
+          <ion-col col-3 align-self-center  (click)="productDetails(results)">
+            <img src="assets/imgs/fabric.jpg">
           </ion-col>
-          <ion-col class="paddingTable">
-            <td class="paddingTable" (click)="productDetails(results)"> {{results.BookName}} </td>
+          <ion-col col-2 align-self-center (click)="productDetails(results)">
+            <ion-row class="paddingTable"><h2> {{results.BookName}}</h2> </ion-row>
           </ion-col>
-          <ion-col>
-            <td (click)="productDetails(results)"> {{results.SKUNo}} </td>
+          <ion-col col-2 align-self-center (click)="productDetails(results)">
+            <ion-row class="paddingTable"> {{results.SKUNo}} </ion-row>
           </ion-col>
-          <ion-col>
-            <div *ngIf="results.stock == null; then zero else data"> </div>
+
+          <ion-col col-2 align-self-center (click)="productDetails(results)">
+            <div *ngIf="results.stock == null; then zero else data"> </div> 
             <ng-template #zero>
-              <td (click)="productDetails(results)">{{results.RollMtrs}}</td>
+              <ion-row class="paddingTable">{{results.RollMtrs}}</ion-row>
             </ng-template>
             <ng-template #data>
-              <td (click)="productDetails(results)">{{results.stock}}</td>
+              <td class="paddingTable">{{results.stock}}</td>
             </ng-template>
           </ion-col>
-          <ion-col>
-            <td>
 
-              <button ion-button icon-left (click)="addToCart(results)">
+          <ion-col col-3 align-self-center >
+              <button ion-button  (click)="addToCart(results)" id="btn1" icon-left>
                 <ion-icon name="ios-cart-outline"></ion-icon>Add To Cart
               </button>
-
-            </td>
+              <!-- <button *ngIf="addedTocart" ion-button (click)="viewCart(results)" icon-left>Added To Cart &nbsp;
+                <ion-icon name="ios-cart-outline"></ion-icon>
+              </button> -->
           </ion-col>
         </ion-row>
       </ion-card>

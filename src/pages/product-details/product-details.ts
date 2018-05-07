@@ -1,5 +1,10 @@
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  ToastController
+} from "ionic-angular";
 import { ServicesProvider } from "../../providers/services/services";
 //import { NativeStorage } from "@ionic-native/native-storage";
 
@@ -16,17 +21,21 @@ import { ServicesProvider } from "../../providers/services/services";
   templateUrl: "product-details.html"
 })
 export class ProductDetailsPage {
+  mycart;
+  badge;
   SKUNo;
   CustDesign;
   CustShade;
   Width;
   FreshMtrs;
   productToCart: any = [];
-  
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public getRequest: ServicesProvider //private nativeStorage: NativeStorage
+    public getRequest: ServicesProvider,
+    // private nativeStorage: NativeStorage,
+    private toastCtrl: ToastController
   ) {
     let product = this.navParams.get("productSelected");
     console.log(product);
@@ -65,14 +74,10 @@ export class ProductDetailsPage {
       Status: "Open"
     };
     console.log(cartData);
-    // this.getRequest.postOrder(cartData);
-
-    this.navCtrl.push("ShoppingCartPage");
-
-    // this.nativeStorage
-    //   .setItem("productDetails", {
-    //     productDetails: this.productToCart
-    //   })
+    this.getRequest.postOrder(cartData);
+    this.presentToast("addedToCart");
+    // this.navCtrl.push("ShoppingCartPage");
+    localStorage.setItem("productDetails", JSON.stringify(this.productToCart));
     // this.nativeStorage
     //   .setItem("productDetails", {
     //     productDetails: this.productToCart
@@ -82,6 +87,28 @@ export class ProductDetailsPage {
     //     error => console.error("Error storing item", error)
     //   );
 
-    localStorage.setItem("productDetails", JSON.stringify(this.productToCart));
+    //using for calculating products in cart
+try{
+    this.mycart = JSON.parse(localStorage.getItem("productDetails"));
+    console.log(this.mycart.length);
+    this.badge = this.mycart.length; // calculating products in cart to display over badges
+}catch(e){}
+
+  }
+
+  presentToast(action: any) {
+    if (action == "addedToCart") {
+      let toast = this.toastCtrl.create({
+        message: "Added To Cart",
+        duration: 3000,
+        position: "bottom"
+      });
+
+      toast.onDidDismiss(() => {
+        console.log("Dismissed toast");
+      });
+
+      toast.present();
+    }
   }
 }

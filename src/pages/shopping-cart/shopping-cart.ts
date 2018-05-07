@@ -1,7 +1,14 @@
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  ToastController
+} from "ionic-angular";
 import { ServicesProvider } from "../../providers/services/services";
-import { NativeStorage } from "@ionic-native/native-storage";
+//import { NativeStorage } from "@ionic-native/native-storage";
+import { Validators } from "@angular/forms";
+import { FormBuilder } from "@angular/forms";
 //import { ModalController } from "ionic-angular";
 /**
  * Generated class for the ShoppingCartPage page.
@@ -16,6 +23,8 @@ import { NativeStorage } from "@ionic-native/native-storage";
   templateUrl: "shopping-cart.html"
 })
 export class ShoppingCartPage {
+  mycart;
+  badge;
   SKUNo;
   CustDesign;
   CustShade;
@@ -23,15 +32,32 @@ export class ShoppingCartPage {
   FreshMtrs;
   cartDetails;
   quantity: any = [];
-
+  conditionForm;
+  conditionFormAddress;
   productInCart: any;
   price = 100;
+  address;
+  code;
+  total;
+  grandTotal: any;
+  showButton: boolean = true;
+  text: any;
+  text2: any;
+  afterDisc: any;
+  test: any;
+  
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public getRequest: ServicesProvider,
-    private nativeStorage: NativeStorage // public modalCtrl: ModalController
+  //  private nativeStorage: NativeStorage,
+    private formBuilder: FormBuilder,
+    private toastCtrl: ToastController // public modalCtrl: ModalController
   ) {
+    this.conditionForm = this.formBuilder.group({
+      conditionFormAddress: ["", Validators.required]
+    });
+
     console.log(this.navParams.get("productSelected"));
     // this.productInCart = this.navParams.get("productSelected");
 
@@ -60,8 +86,16 @@ export class ShoppingCartPage {
     //   error => console.log(error)
     // );
 
-    console.log(localStorage.getItem("productDetails"));
-    this.productInCart = JSON.parse(localStorage.getItem("productDetails"));
+    console.log(localStorage.getItem("productDetails"));     //to get products
+    this.productInCart = JSON.parse(localStorage.getItem("productDetails"));    // console.log(this.productInCart.length)
+  
+
+    //using for calculating products in cart 
+    
+    this.mycart = JSON.parse(localStorage.getItem("productDetails")); 
+    console.log(this.mycart.length);  
+    this.badge=this.mycart.length; // calculating products in cart to display over badges
+  
   }
 
   ShoppingCartPage() {
@@ -87,16 +121,19 @@ export class ShoppingCartPage {
     location.reload();
   }
 
-  trackByIndex(index: number, value: number) {
-    console.log(index);
-    console.log(value);
-    return index;
-  }
-
   continue() {
-    let orderValues = {
+    let conditionCheck = this.conditionForm.value;
+    this.address = conditionCheck["conditionFormAddress"];
+    console.log(this.address);
+
+    let orderValues = {          //array made to push data to Confirm Order Page
       Quantity: this.quantity,
-      Price: this.price
+      Price: this.price,
+      Address: this.address,
+      GrandTotal: this.grandTotal,
+      Disc: this.afterDisc,
+      text: this.text,
+      text2: this.text2
     };
     this.navCtrl.push("ConfirmOrderPage", { values: orderValues });
 
@@ -116,6 +153,62 @@ export class ShoppingCartPage {
     //   location.reload();
     // });
     // modal.present();
+  }
+
+  radioSelect() {
+    let conditionCheck = this.conditionForm.value;
+    this.address = conditionCheck["conditionFormAddress"];
+    console.log(this.address);
+  }
+
+  textChange() {
+    this.test = 0;
+    let x = 0;
+    for (var i = 0; i < this.quantity.length; i++) {
+      this.test = this.quantity[i] * this.price;
+      //  console.log("line155" + this.test);
+
+      x += this.test + this.test;
+      //console.log("line158" + x / 2);
+      this.grandTotal = x / 2;
+    }
+  }
+
+  discount() {
+    if (this.code == "DISC10") {
+      this.afterDisc = Math.round(this.grandTotal - this.grandTotal * 0.1);
+      this.showButton = false;
+      this.text = "10% Discount with code DISC10";
+      this.text2 = this.grandTotal * 0.1;
+    } else if (this.code == "DISC20") {
+      this.total = Math.round(this.total - this.total * 0.2);
+      this.showButton = false;
+    } else if (this.code == "DISC30") {
+      this.total = Math.round(this.total - this.total * 0.3);
+      this.showButton = false;
+    } else if (this.code == "DISC40") {
+      this.total = Math.round(this.total - this.total * 0.4);
+      this.showButton = false;
+    } else {
+      this.presentToast("failed");
+    }
+    console.log(this.total);
+  }
+
+  presentToast(action: any) {
+    if (action == "failed") {
+      let toast = this.toastCtrl.create({
+        message: "Inavlid Code",
+        duration: 3000,
+        position: "bottom"
+      });
+
+      toast.onDidDismiss(() => {
+        console.log("Dismissed toast");
+      });
+
+      toast.present();
+    }
   }
 
   doRefresh(refresher) {

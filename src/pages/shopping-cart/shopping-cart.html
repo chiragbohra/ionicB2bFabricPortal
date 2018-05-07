@@ -9,9 +9,12 @@
     </button>
     <ion-buttons start>
       <button class="btn" ion-button icon-left (click)="ShoppingCartPage()">
-        <ion-icon name="ios-cart-outline"></ion-icon>
-        Cart
 
+        <ion-icon name="ios-cart-outline" class="iconBadge"></ion-icon>
+        <ion-badge item-end class="badge">{{badge || ""}}
+        </ion-badge>
+
+        Cart
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -20,48 +23,225 @@
 
 <ion-content padding>
   <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
+    <!-- <ion-refresher-content></ion-refresher-content> -->
   </ion-refresher>
-  <ion-list>
-    <ion-card *ngFor="let results of productInCart ;  let i = index">
-      <ion-card-header>Order Details</ion-card-header>
+
+  <ion-card *ngFor="let results of productInCart ;  let i = index">
+    <ion-list>
+      <ion-item>
+        <span float-start class="sku" class="titleStyle">SKU No: {{results.SKUNo}}</span>
+        <button clear ion-button item-end icon-right (click)="remove(results)">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-list>
+
+
+    <ion-grid>
       <ion-row>
-        <ion-col>
+        <ion-col col-4>
           <img src="assets/imgs/fabric.jpg">
         </ion-col>
-        <ion-col></ion-col>
-        <ion-col class="fontStyle2
-        ">
-          SKUNo : {{results.SKUNo}}
-          <br/>
-          <br/> Design : {{results.CustDesign}}
-          <br/>
-          <br/> Shade : {{results.CustShade}}
-          <br/>
-          <br/>Width :{{results.Width}}
-          <br/>
-          <br/>Fresh Meters : {{results.FreshMtrs}}
+
+        <ion-col class="fontStyle" col-3 align-self-center>
+
+          <ion-col no-padding align-self-center>
+            <ion-row>
+              <ion-col class="titleStyle" col-8 text-right>Design:</ion-col>
+              <ion-col col-4>{{results.CustDesign}}</ion-col>
+            </ion-row>
+          </ion-col>
+
+          <ion-col no-padding align-self-center>
+            <ion-row>
+              <ion-col class="titleStyle" col-8 text-right>Shade:</ion-col>
+              <ion-col col-4>{{results.CustShade}}</ion-col>
+            </ion-row>
+          </ion-col>
+
+          <ion-col no-padding align-self-center>
+            <ion-row>
+              <ion-col class="titleStyle" col-8 text-right>Width:</ion-col>
+              <ion-col col-4>{{results.Width}}</ion-col>
+            </ion-row>
+          </ion-col>
+
+
+          <ion-col no-padding>
+            <ion-row>
+              <ion-col class="titleStyle" col-8 text-right>Fresh Meters:</ion-col>
+              <ion-col col-4>{{results.FreshMtrs}}</ion-col>
+            </ion-row>
+          </ion-col>
+
         </ion-col>
-        <ion-col></ion-col>
-        <ion-col>
-          <h4 class="fontStyle">&#8377;{{price}}</h4>
-          <br/>
-          <ion-label>Quantity Required</ion-label>
-          <input type="number" placeholder="quantity" [(ngModel)]="quantity[i]" required>
+
+        <ion-col col-2 text-center align-self-center>
+
+          <ion-grid>
+            <h4 class="titleStyle1">
+              Rate
+            </h4>
+            <h4 class="fontStyle">&#8377;{{price}}
+            </h4>
+
+          </ion-grid>
+        </ion-col>
+
+        <ion-col col-2 class="inputStyle" align-self-center>
+          <ion-grid margin-left="">
+            <h4 class="titleStyle1">Quantity</h4>
+            <div style="border:1px solid rgb(114, 114, 114) ; height:3em ; width:5em">
+              <ion-input (ionChange)="textChange()" class="boxStyle" type="number" [(ngModel)]="quantity[i]">Mtrs</ion-input>
+            </div>
+          </ion-grid>
+        </ion-col>
+
+        <ion-col col-1 align-self-center>
+          <ion-grid>
+            <h4 class="titleStyle1">Total
+              <div>&#8377;{{price * quantity[i] || 0}}</div>
+            </h4>
+          </ion-grid>
         </ion-col>
       </ion-row>
-      <div text-right>
-        <button ion-button icon-left (click)="remove(results)">
-          <ion-icon name="close"></ion-icon>Remove
-        </button>
-      </div>
-    </ion-card>
-    <div text-center>
-      <ion-buttons start>
-        <button ion-button icon-left (click)="continue()">
-          <ion-icon name="ios-arrow-forward-outline"></ion-icon>Continue
-        </button>
-      </ion-buttons>
-    </div>
-  </ion-list>
+    </ion-grid>
+
+  </ion-card>
+
+  <form class="nl-form" [formGroup]="conditionForm">
+    <ion-list radio-group formControlName="conditionFormAddress" [(ngModel)]="radio" no-lines>
+      <ion-card>
+        <ion-card-header class="titleStyle1">Select Address</ion-card-header>
+
+      <ion-slides class="slides" paginationType="fraction"   loop="true" slidesPerView="2" pager>
+        <ion-slide>
+          <div class="slidesStyle">
+            <ion-radio (click)="radioSelect()" value="GOVT COLLEGE ROAD"></ion-radio>
+            <ion-item no-lines>
+              <ion-label class="fontStyle">GOVT COLLEGE ROAD</ion-label>
+            </ion-item>
+          </div>
+        </ion-slide>
+
+        <ion-slide>
+          <div class="slidesStyle">
+            <ion-radio (click)="radioSelect()" value="MANISH VIJAY COMPLEX,VASHI,CIVIL LINES,NAVI MUMBAI"></ion-radio>
+            <ion-item no-lines>
+              <ion-label class="fontStyle">MANISH VIJAY COMPLEX,VASHI,CIVIL LINES,NAVI MUMBAI</ion-label>
+            </ion-item>
+          </div>
+        </ion-slide>
+
+        <ion-slide>
+          <div class="slidesStyle">
+            <ion-radio (click)="radioSelect()" value="ADJOINING IDBI BANK"></ion-radio>
+            <ion-item no-lines>
+              <ion-label class="fontStyle">ADJOINING IDBI BANK</ion-label>
+            </ion-item>
+          </div>
+        </ion-slide>
+
+        <ion-slide>
+          <div class="slidesStyle">
+            <ion-radio (click)="radioSelect()" value="GOVT COLLEGE ROAD"></ion-radio>
+            <ion-item no-lines>
+              <ion-label class="ion-label2">GOVT COLLEGE ROAD</ion-label>
+            </ion-item>
+          </div>
+        </ion-slide>
+
+        <ion-slide>
+          <div class="slidesStyle">
+            <ion-radio (click)="radioSelect()" value="CIVIL LINES"></ion-radio>
+            <ion-item no-lines>
+              <ion-label class="ion-label2">CIVIL LINES</ion-label>
+            </ion-item>
+          </div>
+        </ion-slide>
+
+        <ion-slide>
+          <div class="slidesStyle">
+            <ion-radio (click)="radioSelect()" value="ADJOINING IDBI BANK"></ion-radio>
+            <ion-item no-lines>
+              <ion-label>ADJOINING IDBI BANK</ion-label>
+            </ion-item>
+          </div>
+        </ion-slide>
+
+        <ion-slide>
+          <div class="slidesStyle">
+            <ion-radio (click)="radioSelect()" value="GOVT COLLEGE ROAD"></ion-radio>
+            <ion-item no-lines>
+              <ion-label class="ion-label2">GOVT COLLEGE ROAD</ion-label>
+            </ion-item>
+          </div>
+        </ion-slide>
+
+        <ion-slide>
+          <div class="slidesStyle">
+            <ion-radio (click)="radioSelect()" value="CIVIL LINES"></ion-radio>
+            <ion-item no-lines>
+              <ion-label class="ion-label2">CIVIL LINES</ion-label>
+            </ion-item>
+          </div>
+        </ion-slide>
+
+        <ion-slide>
+          <div class="slidesStyle">
+            <ion-radio (click)="radioSelect()" value="ADJOINING IDBI BANK"></ion-radio>
+            <ion-item no-lines>
+              <ion-label>ADJOINING IDBI BANK</ion-label>
+            </ion-item>
+          </div>
+        </ion-slide>
+      </ion-slides>
+      </ion-card>
+    </ion-list>
+  </form>
+
+  <ion-card>
+    <ion-grid>
+      <ion-row *ngIf="showButton">
+
+        <ion-col col-3 text-center align-self-center>
+
+          <input class="boxStyle2" (ionChange)="textChange()" placeholder="Discount Code" [(ngModel)]="code" required>
+        </ion-col>
+        <ion-col col-1 align-self-center>
+          <button ion-button (click)="discount()">Apply</button>
+
+        </ion-col>
+
+        <ion-col col-7></ion-col>
+
+        <ion-col align-self-center col-1>
+          <ion-grid>
+            <h4 class="titleStyle1">Total
+              <div>&#8377; {{grandTotal || 0}}</div>
+            </h4>
+          </ion-grid>
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row *ngIf="!showButton" class="fontStyle">
+
+        <ion-col text-center>{{text}}</ion-col>
+        <ion-col text-center>&#8377;{{grandTotal}} - &#8377;{{this.text2}}</ion-col>
+        <ion-col text-center>
+
+          TOTAL &#8377;{{afterDisc}}
+
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <button ion-button block (click)="continue()" icon-left>Place Order &nbsp;
+    <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+  </button>
+  <!-- <button (click)="testing()"> test</button> -->
+
 </ion-content>

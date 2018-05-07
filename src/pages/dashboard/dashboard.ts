@@ -16,10 +16,20 @@ import { IonicPage, NavController, NavParams } from "ionic-angular";
   templateUrl: "dashboard.html"
 })
 export class DashboardPage {
+  mycart;
+  badge;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
   ) {
+
+        //using for calculating products in cart 
+    
+        this.mycart = JSON.parse(localStorage.getItem("productDetails")); 
+        console.log(this.mycart.length);  
+        this.badge=this.mycart.length; // calculating products in cart to display over badges
+      
   }
 
   ShoppingCartPage(){

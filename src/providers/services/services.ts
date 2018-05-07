@@ -55,7 +55,7 @@ export class ServicesProvider {
     });
   }
 
-  getCartDetails() {
+  getCartDetails() {                   //for shopping cart page
     return new Promise(resolve => {
       this.http
         .get("http://localhost:5000/getCartDetails")
@@ -68,7 +68,7 @@ export class ServicesProvider {
     });
   }
 
-  orderHistory(userId) {
+  orderHistory(userId) {             // for order history oage
     return new Promise(resolve => {
       this.http
         .get("http://localhost:5000/orderHistoryUserInfo?userId=" + userId)
@@ -95,7 +95,7 @@ export class ServicesProvider {
     });
   }
 
-  postOrder(cartData) {
+  postOrder(cartData) {             //for Product details page
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
     this.http
@@ -121,8 +121,8 @@ export class ServicesProvider {
     });
   }
 
-   //for ForgetPage using
-   toGetUsernameEmail() {
+  //for ForgetPage using
+  toGetUsernameEmail() {
     return new Promise(resolve => {
       this.http
         .get("http://localhost:5000/usernameEmail")
@@ -163,7 +163,7 @@ export class ServicesProvider {
       });
   }
 
-  getUserInfo(userId) {
+  getUserInfo(userId) {              //for user profile management
     return new Promise(resolve => {
       this.http
         .get("http://localhost:5000/userInfo?userId=" + userId)
