@@ -17,7 +17,7 @@
 </ion-header>
 
 <ion-content padding class="paddingTable">
-  <ion-grid fixed  class="paddingTable">
+  <ion-grid fixed class="paddingTable">
     <ion-refresher (ionRefresh)="doRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
@@ -65,7 +65,7 @@
       <button ion-button (click)="addToCart(results)">ADD</button>
 
     </ion-label> -->
-    <ion-list  class="paddingTable">
+    <ion-list class="paddingTable">
 
       <!-- <table border="1">
         <thead>
@@ -100,7 +100,7 @@
 
       </table> -->
 
-      <ion-card *ngFor="let results of productList| slice:0: t;">
+      <ion-card *ngFor="let results of productList| slice:0: t; let i = index">
         <ion-row>
           <ion-col (click)="productDetails(results)">
             <img class="padding1" src="assets/imgs/FabricPage-600x330.png">
@@ -112,22 +112,28 @@
             <td class="paddingTable"> {{results.SKUNo}} </td>
           </ion-col>
           <ion-col (click)="productDetails(results)">
-            <div *ngIf="results.stock == null; then zero else data"> </div>
+            <div *ngIf="results.CutAllocMtrs == null; then zero else data"> </div>
             <ng-template #zero>
               <td class="paddingTable">{{results.RollMtrs}}</td>
             </ng-template>
             <ng-template #data>
-              <td class="paddingTable">{{results.stock}}</td>
+              <td class="paddingTable">{{results.RollMtrs - results.CutAllocMtrs}}</td>
             </ng-template>
           </ion-col>
           <ion-col>
             <td class="paddingTable">
-              <button ion-button (click)="addToCart(results)" icon-left>Add To Cart &nbsp;
-                <ion-icon name="ios-cart-outline"></ion-icon>
+              <!-- <div *ngIf="i == activeIndex; then added else add" setActiveIndex(i)>
+              </div> -->
+              <!-- <ng-template #add> -->
+              <button ion-button (click)="addToCart(results)" icon-left>
+                <ion-icon name="ios-cart-outline"></ion-icon>Add To Cart
               </button>
-              <!-- <button *ngIf="addedTocart" ion-button (click)="viewCart(results)" icon-left>Added To Cart &nbsp;
-                <ion-icon name="ios-cart-outline"></ion-icon>
-              </button> -->
+              <!-- </ng-template> -->
+              <!-- <ng-template #added>
+                <button ion-button (click)="viewCart(results)" icon-left>Added To Cart &nbsp;
+                  <ion-icon name="ios-cart-outline"></ion-icon>
+                </button>
+              </ng-template> -->
             </td>
           </ion-col>
         </ion-row>

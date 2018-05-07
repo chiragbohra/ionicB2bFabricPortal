@@ -6,7 +6,6 @@ import {
   ToastController
 } from "ionic-angular";
 import { ServicesProvider } from "../../providers/services/services";
-import { NativeStorage } from "@ionic-native/native-storage";
 
 @IonicPage()
 @Component({
@@ -16,15 +15,12 @@ import { NativeStorage } from "@ionic-native/native-storage";
 export class ProductListPage {
   productList;
   searchTerm: string = "";
-  cart: any = [];
-  productToCart: any = [];
   t = 20; // Maintains Count of Cards Displayed
   addedTocart: boolean = false;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public getRequest: ServicesProvider,
-    private nativeStorage: NativeStorage,
     private toastCtrl: ToastController
   ) {
     this.getProductList();
@@ -74,8 +70,15 @@ export class ProductListPage {
   }
 
   addToCart(results) {
-    this.productToCart.push(results);
-    console.log(this.productToCart);
+    // results.active = true;
+    if (localStorage.getItem("productDetails") == null) {
+      var productToCart = [];
+    } else {
+      productToCart = JSON.parse(localStorage.getItem("productDetails"));
+    }
+
+    productToCart.push(results);
+    console.log(productToCart);
 
     let cartData = {
       Id: results.Id,
@@ -90,24 +93,15 @@ export class ProductListPage {
       Status: "Open"
     };
     console.log(cartData);
-    this.getRequest.postOrder(cartData);
+    // this.getRequest.postOrder(cartData);
 
-    localStorage.setItem("productDetails", JSON.stringify(this.productToCart));
+    localStorage.setItem("productDetails", JSON.stringify(productToCart));
     this.presentToast("addedToCart");
 
     this.addedTocart = true;
     // this.navCtrl.push("ShoppingCartPage", {
     //   productSelected: this.productToCart
     // });
-
-    // this.nativeStorage
-    //   .setItem("productDetails", {
-    //     productDetails: this.productToCart
-    //   })
-    //   .then(
-    //     () => console.log("New value Stored!"),
-    //     error => console.error("Error storing item", error)
-    //   );
   }
 
   method(infiniteScroll) {

@@ -32,7 +32,7 @@
           Design : {{results.CustDesign}}
           <br/> Shade : {{results.CustShade}}
           <br/> Width :{{results.Width}}
-          <br/> Fresh Meters : {{results.FreshMtrs}}
+          <br/> Roll Meters : {{results.RollMtrs}}
         </ion-col>
         <ion-col>
           <h4 class="fontStyle">
@@ -41,8 +41,8 @@
         </ion-col>
         <ion-col class="inputStyle">
           <h4 class="fontStyle">Quantity</h4>
-          <div style="border:1px solid rgb(114, 114, 114) ; height:30% ; width:60%">
-            <ion-input (ionChange)="textChange()" class="boxStyle" type="number" [(ngModel)]="quantity[i]">Mtrs</ion-input>
+          <div style="border:1px solid rgb(114, 114, 114) ; height:40% ; width:60%">
+            <ion-input (ionChange)="textChange()" value="1" class="boxStyle" type="number" [(ngModel)]="quantity[i]">Mtrs</ion-input>
           </div>
         </ion-col>
         <ion-col>
@@ -171,7 +171,7 @@
           <button ion-button (click)="discount()">Apply</button>
         </ion-col>
         <ion-col>
-          &#8377;{{grandTotal}}
+          &#8377;{{grandTotal || 0}}
         </ion-col>
       </ion-row>
       <ion-row *ngIf="!showButton">

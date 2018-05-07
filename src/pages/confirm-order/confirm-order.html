@@ -23,7 +23,7 @@
   <table border="1">
     <thead>
       <tr class="paddingTable">
-        <th class="paddingTable">RollNo</th>
+        <th class="paddingTable">SKUNo</th>
         <th class="paddingTable">Quantity</th>
         <th class="paddingTable">Rate</th>
         <th class="paddingTable">Total</th>
@@ -32,7 +32,7 @@
 
     <tr class="paddingTable" *ngFor="let results of ordersPlaced , let i = index">
 
-      <td class="paddingTable">{{results.RollNo}}</td>
+      <td class="paddingTable">{{results.SKUNo}}</td>
       <td class="paddingTable">{{Quantity[i]}}</td>
       <td class="paddingTable">&#8377; {{Price}}</td>
       <td class="paddingTable"> {{Quantity[i] * Price}}</td>
@@ -42,7 +42,7 @@
       <td class="paddingTable2">Total</td>
       <td class="paddingTable"></td>
       <td class="paddingTable"></td>
-      <td class="paddingTable">&#8377;{{afterDisc}}</td>
+      <td class="paddingTable">&#8377;{{afterDisc || GrandTotal}}</td>
     </tr>
   </table>
 
@@ -51,7 +51,7 @@
       <ion-col>
         <ion-label>Delivery Address</ion-label>{{address}}</ion-col>
       <ion-col>{{text}}</ion-col>
-      <ion-col>Discount : &#8377;{{text2}}</ion-col>
+      <ion-col>Discount : &#8377;{{text2 || 0}}</ion-col>
     </ion-row>
   </ion-card>
 

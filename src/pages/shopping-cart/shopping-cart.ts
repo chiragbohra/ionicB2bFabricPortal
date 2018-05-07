@@ -6,7 +6,6 @@ import {
   ToastController
 } from "ionic-angular";
 import { ServicesProvider } from "../../providers/services/services";
-import { NativeStorage } from "@ionic-native/native-storage";
 import { Validators } from "@angular/forms";
 import { FormBuilder } from "@angular/forms";
 //import { ModalController } from "ionic-angular";
@@ -47,7 +46,6 @@ export class ShoppingCartPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public getRequest: ServicesProvider,
-    private nativeStorage: NativeStorage,
     private formBuilder: FormBuilder,
     private toastCtrl: ToastController // public modalCtrl: ModalController
   ) {
@@ -55,6 +53,7 @@ export class ShoppingCartPage {
       conditionFormAddress: ["", Validators.required]
     });
 
+    console.log("quantity", this.quantity);
     console.log(this.navParams.get("productSelected"));
     // this.productInCart = this.navParams.get("productSelected");
 
@@ -62,26 +61,6 @@ export class ShoppingCartPage {
       console.log(cartDetails);
       this.cartDetails = cartDetails;
     });
-
-    // this.nativeStorage.getItem("productDetails").then(
-    //   data => {
-    //     let productSelected = data;
-    //     console.log(data);
-    //     this.productInCart = data.productDetails;
-    //     this.SKUNo = JSON.stringify(productSelected["productDetails"].SKUNo);
-    //     this.CustDesign = JSON.stringify(
-    //       productSelected["productDetails"].CustDesign
-    //     );
-    //     this.CustShade = JSON.stringify(
-    //       productSelected["productDetails"].CustShade
-    //     );
-    //     this.Width = JSON.stringify(productSelected["productDetails"].Width);
-    //     this.FreshMtrs = JSON.stringify(
-    //       productSelected["productDetails"].FreshMtrs
-    //     );
-    //   },
-    //   error => console.log(error)
-    // );
 
     console.log(localStorage.getItem("productDetails"));
     this.productInCart = JSON.parse(localStorage.getItem("productDetails"));
@@ -95,8 +74,9 @@ export class ShoppingCartPage {
 
   remove(results) {
     var json = JSON.parse(localStorage.getItem("productDetails"));
+    console.log(json);
     for (var i = 0; i < json.length; i++) {
-      if (json[i].RollNo == results.RollNo) {
+      if (json[i].SKUNo == results.SKUNo) {
         json.splice(i, 1);
         console.log(json);
 
@@ -112,6 +92,11 @@ export class ShoppingCartPage {
     let conditionCheck = this.conditionForm.value;
     this.address = conditionCheck["conditionFormAddress"];
     console.log(this.address);
+    let RollNoToOrder: any = [];
+    for (var i = 0; i < this.productInCart.length; i++) {
+      console.log(this.productInCart[i].RollNo);
+      RollNoToOrder = this.productInCart[i].RollNo;
+    }
     let orderValues = {
       Quantity: this.quantity,
       Price: this.price,
@@ -119,26 +104,10 @@ export class ShoppingCartPage {
       GrandTotal: this.grandTotal,
       Disc: this.afterDisc,
       text: this.text,
-      text2: this.text2
+      text2: this.text2,
+      RollNo: RollNoToOrder
     };
     this.navCtrl.push("ConfirmOrderPage", { values: orderValues });
-
-    // let modal = this.modalCtrl.create("ConfirmOrderPage", {
-    //   confirmOrder: newValue
-    // });
-    // modal.onDidDismiss(() => {
-    //   var json = JSON.parse(localStorage.getItem("productDetails"));
-    //   for (var i = 0; i < json.length; i++) {
-    //     if (json[i].RollNo == results.RollNo) {
-    //       json.splice(i, 1);
-    //       console.log(json);
-
-    //       localStorage.setItem("productDetails", JSON.stringify(json));
-    //     }
-    //   }
-    //   location.reload();
-    // });
-    // modal.present();
   }
 
   radioSelect() {
@@ -153,7 +122,6 @@ export class ShoppingCartPage {
     for (var i = 0; i < this.quantity.length; i++) {
       this.test = this.quantity[i] * this.price;
       //  console.log("line155" + this.test);
-
       x += this.test + this.test;
       //console.log("line158" + x / 2);
       this.grandTotal = x / 2;

@@ -6,7 +6,6 @@ import {
   ToastController
 } from "ionic-angular";
 import { ServicesProvider } from "../../providers/services/services";
-import { NativeStorage } from "@ionic-native/native-storage";
 
 /**
  * Generated class for the ProductDetailsPage page.
@@ -25,13 +24,12 @@ export class ProductDetailsPage {
   CustDesign;
   CustShade;
   Width;
-  FreshMtrs;
-  productToCart: any = [];
+  RollMtrs;
+  // productToCart: any = [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public getRequest: ServicesProvider,
-    private nativeStorage: NativeStorage,
     private toastCtrl: ToastController
   ) {
     let product = this.navParams.get("productSelected");
@@ -41,7 +39,7 @@ export class ProductDetailsPage {
     this.CustDesign = product.CustDesign;
     this.CustShade = product.CustShade;
     this.Width = product.Width;
-    this.FreshMtrs = product.FreshMtrs;
+    this.RollMtrs = product.RollMtrs;
   }
 
   ShoppingCartPage() {
@@ -53,9 +51,15 @@ export class ProductDetailsPage {
   }
 
   addToCart() {
+    if (localStorage.getItem("productDetails") == null) {
+      var productToCart = [];
+    } else {
+      productToCart = JSON.parse(localStorage.getItem("productDetails"));
+    }
+
     let results = this.navParams.get("productSelected");
-    this.productToCart.push(results);
-    console.log(this.productToCart);
+    productToCart.push(results);
+    console.log(productToCart);
     let cartData = {
       Id: results.Id,
       RollNo: results.RollNo,
@@ -69,18 +73,10 @@ export class ProductDetailsPage {
       Status: "Open"
     };
     console.log(cartData);
-    this.getRequest.postOrder(cartData);
+    // this.getRequest.postOrder(cartData);
     this.presentToast("addedToCart");
     // this.navCtrl.push("ShoppingCartPage");
-    localStorage.setItem("productDetails", JSON.stringify(this.productToCart));
-    // this.nativeStorage
-    //   .setItem("productDetails", {
-    //     productDetails: this.productToCart
-    //   })
-    //   .then(
-    //     () => console.log("New value Stored!"),
-    //     error => console.error("Error storing item", error)
-    //   );
+    localStorage.setItem("productDetails", JSON.stringify(productToCart));
   }
 
   presentToast(action: any) {
