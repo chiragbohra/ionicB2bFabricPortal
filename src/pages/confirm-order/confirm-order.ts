@@ -22,7 +22,7 @@ import { ServicesProvider } from "../../providers/services/services";
 export class ConfirmOrderPage {
   badge;
   mycart;
-  RollNo;
+  RollNo: any = [];
   Quantity: any = [];
   Price: any = [];
   status;
@@ -53,6 +53,7 @@ export class ConfirmOrderPage {
     this.afterDisc = values.Disc;
     this.text = values.text;
     this.text2 = values.text2;
+    this.RollNo = values.RollNo;
     console.log(values.Quantity.length);
     console.log(values.Price.length);
     }
@@ -91,11 +92,11 @@ export class ConfirmOrderPage {
     let newValue = {
       quantity: this.Quantity,
       RollNo: this.RollNo,
-      Price: this.total,
+      Price: this.afterDisc,
       Address: this.address,
       Status: "closed"
     };
-
+    console.log(newValue);
     this.getRequest.updateCart(newValue);
     let newValue1 = {
       CutAllocMtrs: this.Quantity,
@@ -103,8 +104,7 @@ export class ConfirmOrderPage {
     };
     this.getRequest.updateStock(newValue1);
     localStorage.removeItem("productDetails");
-    this.navCtrl.pop();
-    location.reload();
+    this.navCtrl.setRoot("ProductListPage");
   }
 
   presentToast(action: any) {

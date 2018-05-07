@@ -10,7 +10,7 @@
     <ion-buttons start>
       <button class="btn" ion-button icon-left (click)="ShoppingCartPage()">
         <ion-icon name="ios-cart-outline" class="iconBadge"></ion-icon>
-        <ion-badge item-end class="badge">{{badge}}
+        <ion-badge item-end class="badge">{{badge || ""}}
         </ion-badge>
         Cart
 
@@ -75,7 +75,7 @@
 
     <ion-list>
       <ion-item>
-        <span float-start class="sku" class="titleStyle">SKU No: {{results.SKUNo}}</span>
+        <div text-center class="titleStyle">SKU No: {{results.SKUNo}}</div>
       </ion-item>
     </ion-list>
 
@@ -112,7 +112,7 @@
         <ion-col no-padding>
           <ion-row>
             <ion-col class="titleStyle" col-8 text-right>Fresh Meters:</ion-col>
-            <ion-col col-4>{{results.FreshMtrs}}</ion-col>
+            <ion-col col-4>{{results.RollMtrs}}</ion-col>
           </ion-row>
         </ion-col>
 

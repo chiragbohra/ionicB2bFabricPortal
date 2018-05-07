@@ -17,17 +17,11 @@ import { ServicesProvider } from "../../providers/services/services";
 export class ProductListPage {
   mycart;
   badge;
-
+  addedToCart:any= [];
   productList;
-
   searchTerm: string = "";
-
-  cart: any = [];
-  productToCart: any = [];
-
   t = 20; // Maintains Count of Cards Displayed
-  addedTocart: boolean = false;
-
+  
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -82,15 +76,25 @@ export class ProductListPage {
     this.getRequest.getuserDetails().then(productsList => {
       console.log(productsList);
       this.productList = productsList;
+      this.addedToCart = new Array (this.productList.length)
     });
   }
   productDetails(results) {
     this.navCtrl.push("ProductDetailsPage", { productSelected: results });
   }
 
-  addToCart(results) {
-    this.productToCart.push(results);
-    console.log(this.productToCart);
+  addToCart(results , index) {
+    this.addedToCart[index] = true;
+
+    if (localStorage.getItem("productDetails") == null) {
+      var productToCart = [];
+    } else {
+      productToCart = JSON.parse(localStorage.getItem("productDetails"));
+    }
+
+    productToCart.push(results);
+    console.log(productToCart);
+
 
     let cartData = {
       Id: results.Id,
@@ -107,11 +111,9 @@ export class ProductListPage {
     console.log(cartData);
     this.getRequest.postOrder(cartData);
 
-    localStorage.setItem("productDetails", JSON.stringify(this.productToCart));
+    localStorage.setItem("productDetails", JSON.stringify(productToCart));
 
     this.presentToast("addedToCart");
-
-    this.addedTocart = true;
 
     //using for calculating products in cart
     try {

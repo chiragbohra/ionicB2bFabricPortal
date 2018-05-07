@@ -10,7 +10,7 @@
     <ion-buttons start>
       <button class="btn" ion-button icon-left (click)="ShoppingCartPage()">
         <ion-icon name="ios-cart-outline" class="iconBadge"></ion-icon>
-        <ion-badge item-end class="badge">{{badge || "" }}
+        <ion-badge item-end class="badge">{{badge || ""}}
         </ion-badge>
         Cart
       </button>
@@ -43,13 +43,16 @@
           <span class="titleStyle">Width: </span>
           {{Width}}</ion-col>
         <ion-col class="detailsStyle">
-          <span class="titleStyle">Usage: </span>
-          {{FreshMtrs}}</ion-col>
+          <span class="titleStyle">Usage : </span>
+          {{RollMtrs}}</ion-col>
       </ion-row>
       <ion-row>
-        <button ion-button block (click)="addToCart()" icon-left>
+        <button *ngIf="!addedToCart" ion-button block (click)="addToCart()" icon-left>
           <ion-icon name="ios-cart-outline"></ion-icon>Add To Cart
         </button>
+        <button *ngIf="addedToCart" ion-button block (click)="viewCart()" icon-left>
+            <ion-icon name="ios-cart-outline"></ion-icon>InCart
+          </button>
       </ion-row>
 
 

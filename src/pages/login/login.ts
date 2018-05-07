@@ -102,3 +102,7 @@ export class LoginPage {
     }
   }
 }
+
+export var global = {
+  productToCart: []
+};

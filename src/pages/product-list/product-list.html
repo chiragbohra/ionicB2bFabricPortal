@@ -103,37 +103,47 @@
 
       </table> -->
 
-      <ion-card *ngFor="let results of productList| slice:0: t;">
-        
-        <ion-row >
-          <ion-col col-3 align-self-center  (click)="productDetails(results)">
+      <ion-card *ngFor="let results of productList| slice:0: t; let i = index">
+          <ion-card-header color="primary">
+              <span >SKU No: {{results.SKUNo}}</span>
+          </ion-card-header>
+
+        <ion-row>
+          <ion-col col-3 align-self-center (click)="productDetails(results)">
             <img src="assets/imgs/fabric.jpg">
           </ion-col>
-          <ion-col col-2 align-self-center (click)="productDetails(results)">
-            <ion-row class="paddingTable"><h2> {{results.BookName}}</h2> </ion-row>
+          <ion-col col-3 align-self-center (click)="productDetails(results)">
+            <ion-row class="paddingTable">
+              <h2> {{results.BookName}}</h2>
+            </ion-row>
           </ion-col>
-          <ion-col col-2 align-self-center (click)="productDetails(results)">
+          <!-- <ion-col col-2 align-self-center (click)="productDetails(results)">
             <ion-row class="paddingTable"> {{results.SKUNo}} </ion-row>
-          </ion-col>
+          </ion-col> -->
 
-          <ion-col col-2 align-self-center (click)="productDetails(results)">
-            <div *ngIf="results.stock == null; then zero else data"> </div> 
+          <ion-col col-3 align-self-center (click)="productDetails(results)">
+
+            <div *ngIf="results.CutAllocMtrs == null; then zero else data"> </div>
             <ng-template #zero>
               <ion-row class="paddingTable">{{results.RollMtrs}}</ion-row>
             </ng-template>
             <ng-template #data>
-              <td class="paddingTable">{{results.stock}}</td>
+              <td class="paddingTable">{{results.RollMtrs - results.CutAllocMtrs}}</td>
             </ng-template>
           </ion-col>
 
-          <ion-col col-3 align-self-center >
-              <button ion-button  (click)="addToCart(results)" id="btn1" icon-left>
-                <ion-icon name="ios-cart-outline"></ion-icon>Add To Cart
-              </button>
-              <!-- <button *ngIf="addedTocart" ion-button (click)="viewCart(results)" icon-left>Added To Cart &nbsp;
-                <ion-icon name="ios-cart-outline"></ion-icon>
-              </button> -->
+          <ion-col col-3 align-self-center>
+            <button ion-button *ngIf="!addedToCart[i]" (click)="addToCart(results , i)" icon-left>
+              <ion-icon name="ios-cart-outline"></ion-icon>Add To Cart
+            </button>
+            <button *ngIf="addedToCart[i]" ion-button (click)="viewCart()" icon-left>InCart &nbsp;
+              <ion-icon name="ios-cart-outline"></ion-icon>
+            </button>
+
+
           </ion-col>
+
+
         </ion-row>
       </ion-card>
     </ion-list>
