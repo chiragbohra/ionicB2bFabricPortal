@@ -125,15 +125,15 @@
               <!-- <div *ngIf="i == activeIndex; then added else add" setActiveIndex(i)>
               </div> -->
               <!-- <ng-template #add> -->
-              <button ion-button (click)="addToCart(results)" icon-left>
+              <button ion-button *ngIf="!addedToCart[i]" (click)="addToCart(results , i)" icon-left>
                 <ion-icon name="ios-cart-outline"></ion-icon>Add To Cart
               </button>
               <!-- </ng-template> -->
-              <!-- <ng-template #added>
-                <button ion-button (click)="viewCart(results)" icon-left>Added To Cart &nbsp;
-                  <ion-icon name="ios-cart-outline"></ion-icon>
-                </button>
-              </ng-template> -->
+              <!-- <ng-template #added> -->
+              <button *ngIf="addedToCart[i]" ion-button (click)="viewCart()" icon-left>InCart &nbsp;
+                <ion-icon name="ios-cart-outline"></ion-icon>
+              </button>
+              <!-- </ng-template> -->
             </td>
           </ion-col>
         </ion-row>

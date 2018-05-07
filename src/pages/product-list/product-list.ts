@@ -16,7 +16,8 @@ export class ProductListPage {
   productList;
   searchTerm: string = "";
   t = 20; // Maintains Count of Cards Displayed
-  addedTocart: boolean = false;
+  //addedTocart: boolean = false;
+  addedToCart: any = [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -63,13 +64,15 @@ export class ProductListPage {
     this.getRequest.getuserDetails().then(productsList => {
       console.log(productsList);
       this.productList = productsList;
+      this.addedToCart = new Array(this.productList.length);
     });
   }
   productDetails(results) {
     this.navCtrl.push("ProductDetailsPage", { productSelected: results });
   }
 
-  addToCart(results) {
+  addToCart(results, index) {
+    this.addedToCart[index] = true;
     // results.active = true;
     if (localStorage.getItem("productDetails") == null) {
       var productToCart = [];
@@ -98,7 +101,7 @@ export class ProductListPage {
     localStorage.setItem("productDetails", JSON.stringify(productToCart));
     this.presentToast("addedToCart");
 
-    this.addedTocart = true;
+    // this.addedTocart = true;
     // this.navCtrl.push("ShoppingCartPage", {
     //   productSelected: this.productToCart
     // });

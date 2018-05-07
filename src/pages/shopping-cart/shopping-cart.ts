@@ -70,6 +70,15 @@ export class ShoppingCartPage {
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad ShoppingCartPage");
+    this.test = 0;
+    let x = 0;
+    for (var i = 0; i < this.quantity.length; i++) {
+      this.test = this.quantity[i] * this.price;
+      console.log("line155" + this.test);
+      x += this.test + this.test;
+      //console.log("line158" + x / 2);
+      this.grandTotal = x / 2;
+    }
   }
 
   remove(results) {
@@ -121,7 +130,7 @@ export class ShoppingCartPage {
     let x = 0;
     for (var i = 0; i < this.quantity.length; i++) {
       this.test = this.quantity[i] * this.price;
-      //  console.log("line155" + this.test);
+      console.log("line155" + this.test);
       x += this.test + this.test;
       //console.log("line158" + x / 2);
       this.grandTotal = x / 2;

@@ -25,6 +25,7 @@ export class ProductDetailsPage {
   CustShade;
   Width;
   RollMtrs;
+  addedToCart: boolean = false;
   // productToCart: any = [];
   constructor(
     public navCtrl: NavController,
@@ -74,9 +75,14 @@ export class ProductDetailsPage {
     };
     console.log(cartData);
     // this.getRequest.postOrder(cartData);
+    this.addedToCart = true;
     this.presentToast("addedToCart");
     // this.navCtrl.push("ShoppingCartPage");
     localStorage.setItem("productDetails", JSON.stringify(productToCart));
+  }
+
+  viewCart() {
+    this.navCtrl.push("ShoppingCartPage");
   }
 
   presentToast(action: any) {
