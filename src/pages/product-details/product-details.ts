@@ -3,7 +3,8 @@ import {
   IonicPage,
   NavController,
   NavParams,
-  ToastController
+  ToastController,
+  Events
 } from "ionic-angular";
 import { ServicesProvider } from "../../providers/services/services";
 
@@ -20,6 +21,8 @@ import { ServicesProvider } from "../../providers/services/services";
   templateUrl: "product-details.html"
 })
 export class ProductDetailsPage {
+  mycart;
+  badge;
   SKUNo;
   CustDesign;
   CustShade;
@@ -31,6 +34,7 @@ export class ProductDetailsPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public getRequest: ServicesProvider,
+    private events: Events,
     private toastCtrl: ToastController
   ) {
     let product = this.navParams.get("productSelected");
@@ -77,12 +81,25 @@ export class ProductDetailsPage {
     // this.getRequest.postOrder(cartData);
     this.addedToCart = true;
     this.presentToast("addedToCart");
+    this.addedToCart = true;
     // this.navCtrl.push("ShoppingCartPage");
     localStorage.setItem("productDetails", JSON.stringify(productToCart));
+
+    //using for calculating products in cart
+    try {
+      this.mycart = JSON.parse(localStorage.getItem("productDetails"));
+      console.log(this.mycart.length);
+      this.badge = this.mycart.length; // calculating products in cart to display over badges
+    } catch (e) {}
+
+    localStorage.setItem("productDetails", JSON.stringify(productToCart));
+
+    //events used to get data on badge without refreshing the page
+    this.events.publish("user:badge", this.badge); //setting badges value for getting on menu
   }
 
-  viewCart() {
-    this.navCtrl.push("ShoppingCartPage");
+  viewCart(results) {
+    this.navCtrl.setRoot("ShoppingCartPage");
   }
 
   presentToast(action: any) {

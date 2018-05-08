@@ -19,7 +19,6 @@ export class LoginPage {
   formSubmit: any;
   viewData: any;
   loginFailed: boolean = false;
-
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,

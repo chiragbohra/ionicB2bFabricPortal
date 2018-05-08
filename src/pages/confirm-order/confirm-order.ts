@@ -20,7 +20,9 @@ import { ServicesProvider } from "../../providers/services/services";
   templateUrl: "confirm-order.html"
 })
 export class ConfirmOrderPage {
-  RollNo: any = [];
+  badge;
+  mycart;
+  SKUNo: any = [];
   Quantity: any = [];
   Price: any = [];
   status;
@@ -41,21 +43,29 @@ export class ConfirmOrderPage {
     public getRequest: ServicesProvider,
     private toastCtrl: ToastController
   ) {
-    console.log(this.navParams.get("values"));
+    console.log(this.navParams.get("values")); //
     let values = this.navParams.get("values");
-    this.GrandTotal = values.GrandTotal;
-    this.address = values.Address;
-    this.Quantity = values.Quantity;
-    this.Price = values.Price;
-    this.afterDisc = values.Disc;
-    this.text = values.text;
-    this.text2 = values.text2;
-    this.RollNo = values.RollNo;
-    console.log(values.Quantity.length);
-    console.log(values.Price.length);
-
+    try {
+      this.GrandTotal = values.GrandTotal;
+      this.address = values.Address;
+      this.Quantity = values.Quantity;
+      this.Price = values.Price;
+      this.afterDisc = values.Disc;
+      this.text = values.text;
+      this.text2 = values.text2;
+      this.SKUNo = values.SKUNo;
+      console.log(values.Quantity.length);
+      console.log(values.Price.length);
+    } catch (e) {}
     // this.total = values.Price * values.Quantity.length;
     this.ordersPlaced = JSON.parse(localStorage.getItem("productDetails"));
+
+    //using for calculating products in cart
+    try {
+      this.mycart = JSON.parse(localStorage.getItem("productDetails"));
+      console.log(this.mycart.length);
+      this.badge = this.mycart.length; // calculating products in cart to display over badges
+    } catch (e) {}
 
     // console.log(this.navParams.get("confirmOrder"));
     // let data = this.navParams.get("confirmOrder");
@@ -77,19 +87,19 @@ export class ConfirmOrderPage {
 
   confirmOrder() {
     let newValue = {
-      quantity: this.Quantity,
-      RollNo: this.RollNo,
-      Price: this.afterDisc,
+     // quantity: this.Quantity,
+      SKUNo: this.SKUNo,
+      Price: this.afterDisc || this.GrandTotal,
       Address: this.address,
       Status: "closed"
     };
     console.log(newValue);
     this.getRequest.updateCart(newValue);
-    let newValue1 = {
+    /*  let newValue1 = {
       CutAllocMtrs: this.Quantity,
       RollNo: this.RollNo
     };
-    this.getRequest.updateStock(newValue1);
+    this.getRequest.updateStock(newValue1);*/
     localStorage.removeItem("productDetails");
     this.navCtrl.setRoot("ProductListPage");
   }

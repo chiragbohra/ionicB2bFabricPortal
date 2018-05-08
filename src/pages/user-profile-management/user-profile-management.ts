@@ -14,6 +14,8 @@ import { ServicesProvider } from "../../providers/services/services";
   templateUrl: "user-profile-management.html"
 })
 export class UserProfileManagementPage {
+  mycart;
+  badge;
   name;
   email;
   phone;
@@ -29,7 +31,7 @@ export class UserProfileManagementPage {
   ) {
     console.log(localStorage.getItem("userId"));
     let userId = localStorage.getItem("userId");
-    
+
     this.sentRequest.getUserInfo(userId).then(userInfo => {
       console.log(userInfo);
       try {
@@ -43,6 +45,17 @@ export class UserProfileManagementPage {
         this.pincode = userInfo[0].CustPinCd;
       } catch (e) {}
     });
+
+    //using for calculating products in cart
+    try {
+      this.mycart = JSON.parse(localStorage.getItem("productDetails"));
+      console.log(this.mycart.length);
+      this.badge = this.mycart.length; // calculating products in cart to display over badges
+    } catch (e) {}
+  }
+
+  ShoppingCartPage() {
+    this.navCtrl.push("ShoppingCartPage");
   }
 
   ionViewDidLoad() {

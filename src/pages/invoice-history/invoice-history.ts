@@ -8,6 +8,8 @@ import { ServicesProvider } from "../../providers/services/services";
   templateUrl: "invoice-history.html"
 })
 export class InvoiceHistoryPage {
+  mycart;
+  badge;
   viewData: any;
 
   searchQuery: string = "";
@@ -19,6 +21,14 @@ export class InvoiceHistoryPage {
     public sentRequest: ServicesProvider
   ) {
     this.initializeviewData(); //method call here to get data
+
+    //using for calculating products in cart
+    try {
+      //try-catch used to handle length error in console
+    this.mycart = JSON.parse(localStorage.getItem("productDetails"));
+    console.log(this.mycart.length);
+    this.badge = this.mycart.length; // calculating products in cart to display over badges
+    } catch (e) {}
   }
 
   initializeviewData() {
@@ -32,9 +42,9 @@ export class InvoiceHistoryPage {
     console.log(localStorage.getItem("userId"));
     let userId = localStorage.getItem("userId");
 
-    this.sentRequest.invoiceHistory(userId).then(userInfo => {
-      console.log(userInfo);
-      this.viewData = userInfo;
+    this.sentRequest.invoiceHistory(userId).then(invoiceHistoryuserInfo => {
+      console.log(invoiceHistoryuserInfo);
+      this.viewData = invoiceHistoryuserInfo;
     });
   }
 
@@ -46,17 +56,17 @@ export class InvoiceHistoryPage {
     // if the value is an empty string don't filter the items
     if (val && val.trim() != "") {
       this.viewData = this.viewData.filter(item => {
-        // search By SKUNo
+        // search By InvoiceNo
         if (
-          item.SKUNo.toString()
+          item.InvoiceNo.toString()
             .toLowerCase()
             .indexOf(val.toLowerCase()) > -1
         ) {
           return true;
         }
-        //now toSearch by OrdItemId using else if condition
+        //now toSearch by InvoiceDate using else if condition
         else if (
-          item.OrdItemId.toString()
+          item.InvoiceDate.toString()
             .toLowerCase()
             .indexOf(val.toLowerCase()) > -1
         ) {
@@ -75,4 +85,5 @@ export class InvoiceHistoryPage {
   ionViewDidLoad() {
     console.log("ionViewDidLoad InvoiceHistoryPage");
   }
+  
 }

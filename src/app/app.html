@@ -11,10 +11,19 @@
 
         <!-- code for menu -->
 
-        <button menuClose ion-item *ngFor="let p of pages; let i=index" (click)="openPage(p)">
+        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
             <ion-icon [name]="p.icon" item-left></ion-icon>
 
             {{p.title}}
+
+        </button>
+
+        <button menuClose ion-item (click)="ShoppingCartPage()">
+            <ion-icon name="ios-cart-outline"  item-left ></ion-icon>
+            <ion-badge item-end>{{badge || ""}}
+            </ion-badge>
+            Shopping Cart
+
 
         </button>
 

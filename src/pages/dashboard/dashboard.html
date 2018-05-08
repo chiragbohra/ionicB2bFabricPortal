@@ -2,7 +2,7 @@
   <ion-header>
     <ion-navbar color="primary">
       <ion-title>
-        Dashboard
+        DASHBOARD
       </ion-title>
 
       <button ion-button menuToggle>
@@ -11,8 +11,10 @@
       <ion-buttons start>
 
 
-        <button class="btn" ion-button icon-left (click)="ShoppingCartPage()">
-          <ion-icon name="ios-cart-outline"></ion-icon>
+        <button  ion-button icon-left (click)="ShoppingCartPage()">
+          <ion-icon name="ios-cart-outline" class="iconBadge"></ion-icon>
+          <ion-badge item-end class="badge">{{badge || ""}}
+          </ion-badge>
           Cart
 
         </button>

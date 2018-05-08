@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>
-      Confirm Order
+      CONFIRM ORDER
     </ion-title>
 
     <button ion-button menuToggle>
@@ -9,7 +9,9 @@
     </button>
     <ion-buttons start>
       <button class="btn" ion-button icon-left (click)="ShoppingCartPage()">
-        <ion-icon name="ios-cart-outline"></ion-icon>
+        <ion-icon name="ios-cart-outline" class="iconBadge"></ion-icon>
+        <ion-badge item-end class="badge">{{badge || ""}}
+        </ion-badge>
         Cart
 
       </button>
@@ -18,42 +20,186 @@
 </ion-header>
 
 
-<ion-content padding>
-
-  <table border="1">
-    <thead>
-      <tr class="paddingTable">
-        <th class="paddingTable">SKUNo</th>
-        <th class="paddingTable">Quantity</th>
-        <th class="paddingTable">Rate</th>
-        <th class="paddingTable">Total</th>
-      </tr>
-    </thead>
-
-    <tr class="paddingTable" *ngFor="let results of ordersPlaced , let i = index">
-
-      <td class="paddingTable">{{results.SKUNo}}</td>
-      <td class="paddingTable">{{Quantity[i]}}</td>
-      <td class="paddingTable">&#8377; {{Price}}</td>
-      <td class="paddingTable"> {{Quantity[i] * Price}}</td>
-    </tr>
-
-    <tr class="paddingTable">
-      <td class="paddingTable2">Total</td>
-      <td class="paddingTable"></td>
-      <td class="paddingTable"></td>
-      <td class="paddingTable">&#8377;{{afterDisc || GrandTotal}}</td>
-    </tr>
-  </table>
-
-  <ion-card>
+<ion-content padding class="confirm">
+  <!--   
+  <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-label>Delivery Address</ion-label>{{address}}</ion-col>
-      <ion-col>{{text}}</ion-col>
-      <ion-col>Discount : &#8377;{{text2 || 0}}</ion-col>
+
+        <table border="1">
+          <thead>
+            <tr class="paddingTable">
+              <th class="paddingTable">RollNo</th>
+              <th class="paddingTable">Quantity</th>
+              <th class="paddingTable">Rate</th>
+              <th class="paddingTable">Total</th>
+            </tr>
+          </thead>
+
+          <tr class="paddingTable" *ngFor="let results of ordersPlaced , let i = index">
+
+            <td class="paddingTable">{{results.RollNo}}</td>
+            <td class="paddingTable">{{Quantity[i]}}</td>
+            <td class="paddingTable">&#8377; {{Price}}</td>
+            <td class="paddingTable"> {{Quantity[i] * Price}}</td>
+          </tr>
+
+          <tr class="paddingTable">
+            <td class="paddingTable2">Total</td>
+            <td class="paddingTable"></td>
+            <td class="paddingTable"></td>
+            <td class="paddingTable">&#8377;{{afterDisc || GrandTotal }}</td>
+          </tr>
+        </table>
+
+      </ion-col>
+
     </ion-row>
+
+
+    <ion-row>
+      <ion-col col-2>
+        <ion-label>Delivery Address</ion-label>{{address}}</ion-col>
+      <ion-col col-3>{{text}}</ion-col>
+      <ion-col col-2>Discount : &#8377;{{text2 || 0}}</ion-col>
+    </ion-row>
+
+    <ion-col col-8>
+
+      <button ion-button block (click)="confirmOrder()">Confirm Order</button>
+    </ion-col>
+  </ion-grid> -->
+
+
+  <ion-card *ngFor="let results of ordersPlaced , let i = index">
+
+    <ion-list>
+      <ion-item>
+        <div text-center class="titleStyle">SKU No: {{results.SKUNo}}</div>
+      </ion-item>
+    </ion-list>
+
+    <ion-row>
+
+      <ion-col col-4>
+        <img src="assets/imgs/FabricPage-600x330.png">
+      </ion-col>
+
+      <ion-col class="fontStyle" col-3 align-self-center>
+
+        <ion-col no-padding align-self-center>
+          <ion-row>
+            <ion-col class="titleStyle" col-8 text-right>Design:</ion-col>
+            <ion-col col-4>{{results.CustDesign}}</ion-col>
+          </ion-row>
+        </ion-col>
+
+        <ion-col no-padding align-self-center>
+          <ion-row>
+            <ion-col class="titleStyle" col-8 text-right>Shade:</ion-col>
+            <ion-col col-4>{{results.CustShade}}</ion-col>
+          </ion-row>
+        </ion-col>
+
+        <ion-col no-padding align-self-center>
+          <ion-row>
+            <ion-col class="titleStyle" col-8 text-right>Width:</ion-col>
+            <ion-col col-4>{{results.Width}}</ion-col>
+          </ion-row>
+        </ion-col>
+
+
+        <ion-col no-padding>
+          <ion-row>
+            <ion-col class="titleStyle" col-8 text-right>Fresh Meters:</ion-col>
+            <ion-col col-4>{{results.RollMtrs}}</ion-col>
+          </ion-row>
+        </ion-col>
+
+      </ion-col>
+
+
+
+
+
+      <ion-col col-2 text-center align-self-center>
+
+        <h4 class="titleStyle">
+          Quantity
+        </h4>
+        <h4 class="fontStyle">{{Quantity[i]}}
+        </h4>
+      </ion-col>
+
+
+      <ion-col col-2 text-center align-self-center>
+
+        <h4 class="titleStyle">
+          Rate
+        </h4>
+        <h4 class="fontStyle">&#8377; {{Price}}
+        </h4>
+      </ion-col>
+
+      <ion-col col-1 text-center align-self-center>
+
+        <h4 class="titleStyle">
+          Total
+        </h4>
+        <h4 class="fontStyle">&#8377;{{Quantity[i] * Price}}
+        </h4>
+      </ion-col>
+
+
+    </ion-row>
+
   </ion-card>
 
-  <button ion-button block (click)="confirmOrder()">Confirm Order</button>
+  <ion-card>
+
+    <ion-row>
+      <ion-col col-3 text-center align-self-center>
+        Delivery Address
+      </ion-col>
+
+      <ion-col col-4 class="fontStyle" text-center align-self-center>
+        {{address}}
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+  <ion-card>
+
+    <ion-row>
+      <ion-col col-4 text-center align-self-center>
+
+        {{text}}
+
+      </ion-col>
+
+      <ion-col col- align-self-center>Discount : &#8377;{{text2 || 0}}</ion-col>
+
+      <ion-col col- text-center align-self-center class="titleStyle1">
+        <h4>
+          Total
+        </h4>
+
+
+        <h4 text-center align-self-center class="fontStyle">
+          &#8377;{{afterDisc || GrandTotal }}
+        </h4>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row>
+
+      <button ion-button block (click)="confirmOrder()">Confirm Order</button>
+    </ion-row>
+
+
+  </ion-card>
+
+
 </ion-content>

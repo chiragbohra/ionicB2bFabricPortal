@@ -3,9 +3,11 @@ import {
   IonicPage,
   NavController,
   NavParams,
-  ToastController
+  ToastController,
+  Events
 } from "ionic-angular";
 import { ServicesProvider } from "../../providers/services/services";
+//import { NativeStorage } from "@ionic-native/native-storage";
 
 @IonicPage()
 @Component({
@@ -13,18 +15,28 @@ import { ServicesProvider } from "../../providers/services/services";
   templateUrl: "product-list.html"
 })
 export class ProductListPage {
+  mycart;
+  badge;
+  addedToCart: any = [];
   productList;
   searchTerm: string = "";
   t = 20; // Maintains Count of Cards Displayed
-  //addedTocart: boolean = false;
-  addedToCart: any = [];
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public getRequest: ServicesProvider,
+    private events: Events,
     private toastCtrl: ToastController
   ) {
     this.getProductList();
+
+    try {
+      //try-catch used to handle length error
+      this.mycart = JSON.parse(localStorage.getItem("productDetails"));
+      console.log(this.mycart.length);
+      this.badge = this.mycart.length; // calculating products in cart to display over badges
+    } catch (e) {}
   }
 
   ShoppingCartPage() {
@@ -82,10 +94,11 @@ export class ProductListPage {
 
     productToCart.push(results);
     console.log(productToCart);
-
+    var userId = localStorage.getItem("userId");
     let cartData = {
-      Id: results.Id,
-      RollNo: results.RollNo,
+      // Id: results.Id,
+      // RollNo: results.RollNo,
+      UserId: userId,
       RollMtrs: results.RollMtrs,
       Width: results.Width,
       CustDesign: results.CustDesign,
@@ -96,15 +109,34 @@ export class ProductListPage {
       Status: "Open"
     };
     console.log(cartData);
-    // this.getRequest.postOrder(cartData);
+    this.getRequest.postOrder(cartData);
 
     localStorage.setItem("productDetails", JSON.stringify(productToCart));
+
     this.presentToast("addedToCart");
 
-    // this.addedTocart = true;
+    //using for calculating products in cart
+    try {
+      //try-catch used to handle length error in console
+      this.mycart = JSON.parse(localStorage.getItem("productDetails"));
+      console.log(this.mycart.length);
+      this.badge = this.mycart.length; // calculating products in cart to display over badges
+    } catch (e) {}
     // this.navCtrl.push("ShoppingCartPage", {
     //   productSelected: this.productToCart
     // });
+
+    // this.nativeStorage
+    //   .setItem("productDetails", {
+    //     productDetails: this.productToCart
+    //   })
+    //   .then(
+    //     () => console.log("New value Stored!"),
+    //     error => console.error("Error storing item", error)
+    //   );
+
+    //events used to get data on badge without refreshing the page
+    this.events.publish("user:badge", this.badge); //setting badges value for getting on menu
   }
 
   method(infiniteScroll) {
@@ -126,7 +158,7 @@ export class ProductListPage {
   }
 
   viewCart(results) {
-    this.navCtrl.push("ShoppingCartPage");
+    this.navCtrl.setRoot("ShoppingCartPage");
   }
 
   presentToast(action: any) {

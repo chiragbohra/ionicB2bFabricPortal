@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>
-      Product List
+      PRODUCT LIST
     </ion-title>
 
     <button ion-button menuToggle>
@@ -9,7 +9,10 @@
     </button>
     <ion-buttons start>
       <button ion-button icon-left (click)="ShoppingCartPage()">
-        <ion-icon name="ios-cart-outline"></ion-icon>
+
+        <ion-icon name="ios-cart-outline" class="iconBadge"></ion-icon>
+        <ion-badge item-end class="badge">{{badge || ""}}
+        </ion-badge>
         Cart
       </button>
     </ion-buttons>
@@ -101,41 +104,46 @@
       </table> -->
 
       <ion-card *ngFor="let results of productList| slice:0: t; let i = index">
+        <ion-card-header color="primary">
+          <span>SKU No: {{results.SKUNo}}</span>
+        </ion-card-header>
+
         <ion-row>
-          <ion-col (click)="productDetails(results)">
-            <img class="padding1" src="assets/imgs/FabricPage-600x330.png">
+          <ion-col col-3 align-self-center (click)="productDetails(results)">
+            <img src="assets/imgs/FabricPage-600x330.png">
           </ion-col>
-          <ion-col (click)="productDetails(results)">
-            <td class="paddingTable"> {{results.BookName}} </td>
+          <ion-col col-3 align-self-center (click)="productDetails(results)">
+            <ion-row class="paddingTable">
+              <h2> {{results.BookName}}</h2>
+            </ion-row>
           </ion-col>
-          <ion-col (click)="productDetails(results)">
-            <td class="paddingTable"> {{results.SKUNo}} </td>
-          </ion-col>
-          <ion-col (click)="productDetails(results)">
+          <!-- <ion-col col-2 align-self-center (click)="productDetails(results)">
+            <ion-row class="paddingTable"> {{results.SKUNo}} </ion-row>
+          </ion-col> -->
+
+          <ion-col col-3 align-self-center (click)="productDetails(results)">
+
             <div *ngIf="results.CutAllocMtrs == null; then zero else data"> </div>
             <ng-template #zero>
-              <td class="paddingTable">{{results.RollMtrs}}</td>
+              <ion-row class="paddingTable">{{results.RollMtrs}}</ion-row>
             </ng-template>
             <ng-template #data>
               <td class="paddingTable">{{results.RollMtrs - results.CutAllocMtrs}}</td>
             </ng-template>
           </ion-col>
-          <ion-col>
-            <td class="paddingTable">
-              <!-- <div *ngIf="i == activeIndex; then added else add" setActiveIndex(i)>
-              </div> -->
-              <!-- <ng-template #add> -->
-              <button ion-button *ngIf="!addedToCart[i]" (click)="addToCart(results , i)" icon-left>
-                <ion-icon name="ios-cart-outline"></ion-icon>Add To Cart
-              </button>
-              <!-- </ng-template> -->
-              <!-- <ng-template #added> -->
-              <button *ngIf="addedToCart[i]" ion-button (click)="viewCart()" icon-left>InCart &nbsp;
-                <ion-icon name="ios-cart-outline"></ion-icon>
-              </button>
-              <!-- </ng-template> -->
-            </td>
+
+          <ion-col col-3 align-self-center>
+            <button ion-button *ngIf="!addedToCart[i]" (click)="addToCart(results , i)" icon-left>
+              <ion-icon name="ios-cart-outline"></ion-icon>Add To Cart
+            </button>
+            <button *ngIf="addedToCart[i]" ion-button (click)="viewCart()" icon-left>InCart &nbsp;
+              <ion-icon name="ios-cart-outline"></ion-icon>
+            </button>
+
+
           </ion-col>
+
+
         </ion-row>
       </ion-card>
     </ion-list>

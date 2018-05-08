@@ -20,11 +20,11 @@ import { ServicesProvider } from "../../providers/services/services";
   templateUrl: "forget.html"
 })
 export class ForgetPage {
-  username: any;
+  userid: any;
   email: any;
   formSubmit: any;
   viewData: any;
-  loginFailed: boolean = false;
+  emailFailed: boolean = false; //initially set to false //using if user enters wrong data or correct data
 
   constructor(
     public navCtrl: NavController,
@@ -44,23 +44,28 @@ export class ForgetPage {
   }
 
   Request() {
-    {
-      for (var i = 0; i < this.viewData.length; i++) {
-        if (
-          this.viewData[i].UserName == this.username &&
-          this.viewData[i].EMailAdd == this.email
-        ) {
-          console.log("email sent");
-          this.presentToast("success");
-
-        }
+    for (var i = 0; i < this.viewData.length; i++) {
+      if (
+        this.viewData[i].UserId == this.userid &&
+        this.viewData[i].EMailAdd == this.email
+      ) {
+        console.log("email sent");
+        this.presentToast("success");
+        this.emailFailed = false;
+        return; //return used to break condition
+      } else {
+        this.emailFailed = true;
       }
+    }
+    if ((this.emailFailed = true)) {
+      this.presentToast("invalid");
+      console.log("email not sent");
     }
   }
   presentToast(action: any) {
     if (action == "invalid") {
       let toast = this.toastCtrl.create({
-        message: " Incorrect Username",
+        message: "Sorry the requested record doesn't exists",
         duration: 3000,
         position: "bottom"
       });

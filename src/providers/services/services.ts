@@ -55,7 +55,7 @@ export class ServicesProvider {
     });
   }
 
-  getCartDetails() {
+  getCartDetails() {                   //for shopping cart page
     return new Promise(resolve => {
       this.http
         .get("http://localhost:5000/getCartDetails")
@@ -68,11 +68,11 @@ export class ServicesProvider {
     });
   }
 
-  orderHistory(userId) {
+  orderHistory(userId) {             // for order history oage
     return new Promise(resolve => {
       this.http
-        .get("http://localhost:5000/orderHistory?userId=" + userId)
-        .map(res => res.json().recordset)
+        .get("http://localhost:5000/orderHistoryUserInfo?userId=" + userId)
+        .map(res => res.json().recordsets[0])
         .subscribe(data => {
           console.log(data);
           // this.data = data;
@@ -85,7 +85,7 @@ export class ServicesProvider {
   invoiceHistory(userId) {
     return new Promise(resolve => {
       this.http
-        .get("http://localhost:5000/userInfo?userId=" + userId)
+        .get("http://localhost:5000/invoiceHistoryuserInfo?userId=" + userId)
         .map(res => res.json().recordsets[0])
         .subscribe(data => {
           console.log(data);
@@ -95,7 +95,7 @@ export class ServicesProvider {
     });
   }
 
-  postOrder(cartData) {
+  postOrder(cartData) {             //for Product details page
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
     this.http
@@ -163,7 +163,7 @@ export class ServicesProvider {
       });
   }
 
-  getUserInfo(userId) {
+  getUserInfo(userId) {              //for user profile management
     return new Promise(resolve => {
       this.http
         .get("http://localhost:5000/userInfo?userId=" + userId)

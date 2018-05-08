@@ -22,6 +22,8 @@ import { FormBuilder } from "@angular/forms";
   templateUrl: "shopping-cart.html"
 })
 export class ShoppingCartPage {
+  mycart;
+  badge;
   SKUNo;
   CustDesign;
   CustShade;
@@ -42,6 +44,7 @@ export class ShoppingCartPage {
   text2: any;
   afterDisc: any;
   test: any;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -49,6 +52,17 @@ export class ShoppingCartPage {
     private formBuilder: FormBuilder,
     private toastCtrl: ToastController // public modalCtrl: ModalController
   ) {
+    this.test = 0;
+    let x = 0;
+    for (var i = 0; i < this.quantity.length; i++) {
+      console.log(this.quantity[i]);
+      this.test = this.quantity[i] * this.price;
+      console.log("line155" + this.test);
+      x += this.test + this.test;
+      console.log("line158" + x / 2);
+      this.grandTotal = x / 2;
+    }
+
     this.conditionForm = this.formBuilder.group({
       conditionFormAddress: ["", Validators.required]
     });
@@ -62,10 +76,19 @@ export class ShoppingCartPage {
       this.cartDetails = cartDetails;
     });
 
-    console.log(localStorage.getItem("productDetails"));
-    this.productInCart = JSON.parse(localStorage.getItem("productDetails"));
+    console.log(localStorage.getItem("productDetails")); //to get products
+    this.productInCart = JSON.parse(localStorage.getItem("productDetails")); // console.log(this.productInCart.length)
 
-    // console.log(this.productInCart.length)
+    //using for calculating products in cart
+    try {
+      this.mycart = JSON.parse(localStorage.getItem("productDetails"));
+      console.log(this.mycart.length);
+      this.badge = this.mycart.length; // calculating products in cart to display over badges
+    } catch (e) {}
+  }
+
+  ShoppingCartPage() {
+    this.navCtrl.push("ShoppingCartPage");
   }
 
   ionViewDidLoad() {
@@ -101,10 +124,10 @@ export class ShoppingCartPage {
     let conditionCheck = this.conditionForm.value;
     this.address = conditionCheck["conditionFormAddress"];
     console.log(this.address);
-    let RollNoToOrder: any = [];
+    let SKUNoToOrder: any = [];
     for (var i = 0; i < this.productInCart.length; i++) {
-      console.log(this.productInCart[i].RollNo);
-      RollNoToOrder = this.productInCart[i].RollNo;
+      console.log(this.productInCart[i].SKUNo);
+      SKUNoToOrder = this.productInCart[i].SKUNo;
     }
     let orderValues = {
       Quantity: this.quantity,
@@ -114,7 +137,7 @@ export class ShoppingCartPage {
       Disc: this.afterDisc,
       text: this.text,
       text2: this.text2,
-      RollNo: RollNoToOrder
+      SKUNo: SKUNoToOrder
     };
     this.navCtrl.push("ConfirmOrderPage", { values: orderValues });
   }
