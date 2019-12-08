@@ -8,7 +8,7 @@ page-shopping-cart {
   }
 
   .boxStyle {
-    height:100%;
+    height: 100%;
     width: 100%;
   }
 
@@ -17,37 +17,35 @@ page-shopping-cart {
   }
 
   .slidesStyle {
-    border: 1px solid black;
+    border-left: 1px solid rgb(184, 173, 173);
+    border-right: 1px solid rgb(184, 173, 173);
   }
   .iconBadge {
     position: relative;
     font-size: 2.5em;
-
   }
   .badge {
     position: absolute;
     background-color: rgb(138, 9, 9);
-   // border-radius: 100%;
+    // border-radius: 100%;
     top: -5px;
     left: 15px;
     font-size: 15px !important;
-    
   }
-
 
   .titleStyle {
     text-transform: uppercase;
     color: rgb(92, 92, 92);
-     font-size: 1em;
+    font-size: 1em;
   }
   .titleStyle1 {
     text-transform: uppercase;
     color: rgb(92, 92, 92);
     font-size: 1em;
   }
-  
- .swiper-container{
-    padding-bottom:50px;
+
+  .swiper-container {
+    padding-bottom: 50px;
     position: relative;
   }
 }

@@ -40,7 +40,7 @@
     <ion-grid>
       <ion-row>
         <ion-col col-4>
-          <img src="assets/imgs/FabricPage-600x330.png">
+          <img src="assets/imgs/fabric.jpg">
         </ion-col>
 
         <ion-col class="fontStyle" col-3 align-self-center>
@@ -92,7 +92,7 @@
           <ion-grid margin-left="">
             <h4 class="titleStyle1">Quantity</h4>
             <div style="border:1px solid rgb(114, 114, 114) ; height:3em ; width:5em">
-              <ion-input (ionChange)="textChange()" value="1" class="boxStyle" type="number" [(ngModel)]="quantity[i]">Mtrs</ion-input>
+              <ion-input (ionChange)="textChange()" value="1" min="1" class="boxStyle" type="number" [(ngModel)]="quantity[i]">Mtrs</ion-input>
             </div>
           </ion-grid>
         </ion-col>

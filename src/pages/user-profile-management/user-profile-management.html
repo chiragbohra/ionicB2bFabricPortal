@@ -20,6 +20,9 @@
 
 
 <ion-content padding>
+
+
+  <!--   
   <ion-card>
     <ion-item>
       <ion-label floating>Name</ion-label>
@@ -27,7 +30,7 @@
     </ion-item>
   </ion-card>
 
-
+ 
   <ion-card>
     <ion-item>
       <ion-label floating>Email</ion-label>
@@ -69,6 +72,208 @@
       <ion-input type="number" [(ngModel)]="pincode"></ion-input>
     </ion-item>
   </ion-card>
-  <button ion-button block (click)="update()">Update</button>
+  <button ion-button block (click)="update()">Update</button> -->
+
+
+  <ion-list>
+
+    <ion-card>
+      <ion-item>
+        <ion-label floating color="primary">Name</ion-label>
+        <ion-input type="text" value="" [(ngModel)]="name"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+
+      <!-- 
+      <form [formGroup]="form" (ngSubmit)="manage(form.value)"> -->
+
+
+      <ion-item>
+        <ion-label floating color="primary">Email 1</ion-label>
+        <ion-input type="email" [(ngModel)]="email1"></ion-input>
+
+        <button ion-button icon-left item-end clear color="secondary" (click)="AddEmail()">
+          <ion-icon name="add"></ion-icon>add
+        </button>
+      </ion-item>
+
+      <!-- <div formArrayName="technologies" margin-bottom>
+          <section [formGroupName]="i" *ngFor="let tech of form.controls.technologies.controls; let i = index">
+
+            <ion-item-group> -->
+      <ion-item *ngFor="let att of emailArray; let idx = index">
+        <!-- <ion-item > -->
+        <ion-label floating color="primary">Email {{ idx + 2 }}</ion-label>
+        <ion-input type="email" [(ngModel)]="newEmail[idx]"></ion-input>
+
+        <button ion-button icon-left *ngIf="buttonClicked" item-end clear color="secondary" (click)="AddEmail()">
+          <ion-icon name="add"></ion-icon>add
+        </button>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label floating color="primary">Phone 1</ion-label>
+        <ion-input type="text" [(ngModel)]="phone"></ion-input>
+
+        <button ion-button icon-left item-end clear color="secondary" (click)="AddPhone()">
+          <ion-icon name="add"></ion-icon>add
+        </button>
+      </ion-item>
+
+      <ion-item *ngFor="let att of phoneArray; let idx = index">
+        <ion-label floating color="primary">Phone {{ idx + 2 }} </ion-label>
+        <ion-input type="number" [(ngModel)]="newPhone[idx]"></ion-input>
+
+        <button ion-button icon-left *ngIf="buttonClicked" item-end clear color="secondary" (click)="AddPhone()">
+          <ion-icon name="add"></ion-icon>add
+        </button>
+      </ion-item>
+
+
+    </ion-card>
+
+
+    <ion-card>
+
+      <ion-item>
+        <!-- <button ion-button disabled clear color="primary">
+          <h2>Address 1</h2>
+        </button> -->
+
+        <ion-label floating color="primary"> Address</ion-label>
+        <ion-input type="text" [(ngModel)]="address1"></ion-input>
+        <button ion-button icon-left item-end clear color="secondary" (click)="AddAddress()">
+          <ion-icon name="add"></ion-icon>add
+        </button>
+
+        <!-- <button ion-button *ngIf="!setDefault[i]" clear color="secondary" (click)="default(i)">
+          set default</button>
+
+        <button ion-button *ngIf="setDefault[i]" clear color="secondary" (click)="default()">
+          default</button> -->
+
+
+
+      </ion-item>
+      <!-- <ion-item>
+          <ion-label floating> Address</ion-label>
+        <ion-input type="text" [(ngModel)]="address1"></ion-input>
+      </ion-item> -->
+
+      <ion-item>
+
+        <ion-label floating color="primary"> Address 2</ion-label>
+        <ion-input type="text" [(ngModel)]="address2"> </ion-input>
+
+        <!-- <button ion-button disabled clear>
+          <h2>Address 2</h2>
+        </button> -->
+      </ion-item>
+      <!-- <ion-item>
+        <ion-input type="text" [(ngModel)]="address2"> </ion-input>
+      </ion-item> -->
+      <ion-item>
+
+        <ion-label floating color="primary"> Address 3</ion-label>
+        <ion-input type="text" [(ngModel)]="address3"></ion-input>
+
+        <!-- <button ion-button disabled clear>
+          <h2>Address 3</h2>
+        </button> -->
+      </ion-item>
+      <!-- <ion-item>
+        <ion-input type="text" [(ngModel)]="address3"></ion-input>
+      </ion-item> -->
+
+      <ion-item>
+        <ion-label floating color="primary">City</ion-label>
+        <ion-input type="text" [(ngModel)]="city"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating color="primary">Pincode</ion-label>
+        <ion-input type="number" [(ngModel)]="pincode"></ion-input>
+      </ion-item>
+
+      <!-- <ion-row>
+        <button ion-button clear color="secondary" (click)="default()">
+          set default</button>
+       </ion-row> -->
+    </ion-card>
+
+
+    <ion-card *ngFor="let att of addressArray; let i = index">
+
+      <ion-item>
+
+        <ion-label floating color="primary"> Address 1</ion-label>
+        <ion-input type="text" [(ngModel)]="newaddress1[i]"></ion-input>
+
+        <!-- <button ion-button disabled clear color="primary">
+          <h2>Address 1</h2>
+        </button> -->
+        <button ion-button icon-left item-end *ngIf="buttonClicked" clear color="secondary" (click)="AddAddress()">
+          <ion-icon name="add"></ion-icon>add
+        </button>
+
+        <!-- <button ion-button *ngIf="!setDefault1[j]" clear color="secondary" (click)="default1(j)">
+          set default</button>
+
+        <button ion-button *ngIf="setDefault1[j]" clear color="secondary" (click)="default()">
+          default</button> -->
+
+      </ion-item>
+      <!-- <ion-item>
+        <ion-input type="text" [(ngModel)]="newaddress1[i]"></ion-input>
+      </ion-item> -->
+
+      <ion-item>
+
+        <ion-label floating color="primary"> Address 2</ion-label>
+        <ion-input type="text" [(ngModel)]="newaddress2[i]"> </ion-input>
+
+        <!-- <button ion-button disabled clear color="primary">
+          <h2>Address 2</h2>
+        </button> -->
+      </ion-item>
+      <!-- <ion-item>
+        <ion-input type="text" [(ngModel)]="newaddress2[i]"> </ion-input>
+      </ion-item> -->
+      <ion-item>
+
+        <ion-label floating color="primary"> Address 3</ion-label>
+        <ion-input type="text" [(ngModel)]="newaddress3[i]"></ion-input>
+
+        <!-- <button ion-button disabled clear color="primary">
+          <h2>Address 3</h2>
+        </button> -->
+      </ion-item>
+      <!-- <ion-item>
+        <ion-input type="text" [(ngModel)]="newaddress3[i]"></ion-input>
+      </ion-item> -->
+
+      <ion-item>
+        <ion-label floating color="primary">City</ion-label>
+        <ion-input type="text" [(ngModel)]="newCity[i]"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating color="primary">Pincode</ion-label>
+        <ion-input type="number" [(ngModel)]="newPincode[i]"></ion-input>
+      </ion-item>
+
+      <!-- <ion-row>
+        <button ion-button clear color="secondary">set default</button>
+       </ion-row> -->
+    </ion-card>
+
+
+
+    <button ion-button type="submit" (click)="saveToDatabase()" block>Save</button>
+
+  </ion-list>
 
 </ion-content>

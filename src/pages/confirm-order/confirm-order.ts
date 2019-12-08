@@ -87,14 +87,14 @@ export class ConfirmOrderPage {
 
   confirmOrder() {
     let newValue = {
-     // quantity: this.Quantity,
+      // quantity: this.Quantity,
       SKUNo: this.SKUNo,
       Price: this.afterDisc || this.GrandTotal,
       Address: this.address,
       Status: "closed"
     };
     console.log(newValue);
-    this.getRequest.updateCart(newValue);
+    this.getRequest.updateCart(newValue); //
     /*  let newValue1 = {
       CutAllocMtrs: this.Quantity,
       RollNo: this.RollNo
@@ -102,6 +102,13 @@ export class ConfirmOrderPage {
     this.getRequest.updateStock(newValue1);*/
     localStorage.removeItem("productDetails");
     this.navCtrl.setRoot("ProductListPage");
+
+    //
+    let toast = this.toastCtrl.create({
+      message: "Your Order is Confirmed",
+      duration: 3000
+    });
+    toast.present();
   }
 
   presentToast(action: any) {

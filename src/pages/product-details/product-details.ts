@@ -65,9 +65,11 @@ export class ProductDetailsPage {
     let results = this.navParams.get("productSelected");
     productToCart.push(results);
     console.log(productToCart);
+    var userId = localStorage.getItem("userId");
     let cartData = {
-      Id: results.Id,
-      RollNo: results.RollNo,
+     // Id: results.Id,
+     // RollNo: results.RollNo,
+     UserId: userId,
       RollMtrs: results.RollMtrs,
       Width: results.Width,
       CustDesign: results.CustDesign,
@@ -78,7 +80,7 @@ export class ProductDetailsPage {
       Status: "Open"
     };
     console.log(cartData);
-    // this.getRequest.postOrder(cartData);
+    this.getRequest.postOrder(cartData);    //Used for POST API
     this.addedToCart = true;
     this.presentToast("addedToCart");
     this.addedToCart = true;

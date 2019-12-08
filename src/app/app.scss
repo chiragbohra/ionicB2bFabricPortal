@@ -25,11 +25,9 @@ ion-app.md [padding] .scroll-content {
   top: -3px;
   left: 30px;
   font-size: 15px !important;
-  // position: relative;
+
   border-radius: 50%;
   font-size: 2em;
-  //vertical-align: baseline;
-  // padding: 2px 6px;
 }
 ion-badge {
   //font-weight: bold;
@@ -41,7 +39,7 @@ ion-badge {
   font-size: 1.5rem;
   font-weight: bold;
   //vertical-align: baseline;
-  padding: 0%;
+  padding: 0%; //to remove small backgroung dot//important
   //padding: 2px 6px;
 }
 // .badge-md {
@@ -49,3 +47,27 @@ ion-badge {
 //   background-color: rgb(138, 9, 9);
 //   color: #fff;
 // }
+
+//for modal_buttons page
+modal-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+@media not all and (min-height: 600px) and (min-width: 768px) {
+  ion-modal ion-backdrop {
+    visibility: hidden;
+  }
+}
+
+@media only screen and (min-height: 0px) and (min-width: 0px) {
+  .modal-wrapper {
+    position: absolute;
+    top: 23%;
+    left: 78%;
+    width: 10%;
+    height: 23%;
+  }
+}
+//

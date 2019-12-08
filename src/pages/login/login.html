@@ -6,17 +6,18 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="login">
+<ion-content padding>
+
   <ion-label class="fontStyle">FABRIC COMPANY</ion-label>
   <br/>
   <br/>
   <br/>
-  <ion-item>
+  <ion-item class="inputField">
     <ion-label floating>ID</ion-label>
     <ion-input type="text" [(ngModel)]="userId"></ion-input>
   </ion-item>
   <br/>
-  <ion-item>
+  <ion-item class="inputField">
     <ion-label floating>Password</ion-label>
     <ion-input type="password" [(ngModel)]="password"></ion-input>
   </ion-item>
@@ -26,8 +27,7 @@
   <br/>
   <br/>
   <br/>
-  <button ion-button block (click)="login()">Login</button>
-
+  <button ion-button block class="inputField" (click)="login()">Login</button>
 
 
 </ion-content>

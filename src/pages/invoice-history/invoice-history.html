@@ -1,3 +1,6 @@
+<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
+
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>
@@ -19,27 +22,33 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="invoice" padding>
+<ion-content padding>
+
+  <ion-row>
+
+    <ion-col col-3>
+      <input [(ngModel)]="Owing" disabled class="amountBox">
+      <div class="amountBoxContent"> Owing
+      </div>
+    </ion-col>
+
+    <ion-col col-6>
+      <div class="amountBoxContentCenter">
+        <input [(ngModel)]="OverDue" disabled class="amountBox2">
+      </div>
+      <div class="amountBoxContent">Overdue
+      </div>
+    </ion-col>
+
+    <ion-col col-3>
+      <input [(ngModel)]="OrderGenerated" disabled class="amountBox3">
+      <div class="amountBoxContent">Credit
+      </div>
+    </ion-col>
+
+  </ion-row>
 
   <br/>
-  <ion-grid fixed>
-    <ion-row class="ionRow">
-      <ion-col>
-        <ion-row>{{50000}}</ion-row>
-        <ion-row>{{"Amount owing"}}</ion-row>
-      </ion-col>
-      <ion-col>
-        <ion-row>{{20000}}</ion-row>
-        {{"OverDue"}}
-      </ion-col>
-      <ion-col>
-        <ion-row>{{10000}}</ion-row>
-        {{"Order Generated"}}
-      </ion-col>
-    </ion-row>
-
-  </ion-grid>
-  <br>
   <ion-searchbar (ionInput)="getviewData($event)"></ion-searchbar>
   <ion-list>
     <ion-item *ngFor="let item of items">
@@ -57,39 +66,57 @@
         <ion-row>
 
           <ion-col align-self-center>
-            <h1>INVOICE NO: {{results.InvoiceNo}}</h1>
+            <h1> {{results.InvoiceNo}}</h1>
           </ion-col>
 
-          <ion-col>
+          <!-- <ion-col>
             <ion-buttons end>
-              <button ion-button color="light" round>Email</button>
-              <button ion-button round>Share</button>
-              <button ion-button color="secondary" round>Print</button>
+              <button ion-button color="light" round (click)="sendEmailInvoice(results)" icon-left>
+                <ion-icon name="mail"></ion-icon> Email
+              </button>
+              <button ion-button icon-left round>
+                <ion-icon name="share"></ion-icon>Share
+              </button>
+              <button ion-button icon-left color="secondary" round (click)="print()">
+                <ion-icon name="print"></ion-icon>Print
+              </button>
+              <button ion-button icon-left round id="cmd" (click)="generatePdf()">
+                <ion-icon name="download"></ion-icon>Download
+              </button>
             </ion-buttons>
+          </ion-col> -->
+
+          <ion-col>
+
+            <ion-buttons end>
+              <button ion-button color="light" (click)="showModal(results)">
+                <ion-icon name="md-more"></ion-icon>
+              </button>
+            </ion-buttons>
+
           </ion-col>
 
         </ion-row>
       </ion-card-header>
 
-      <ion-card-content>
+      <ion-card-content id="editor">
+        <div id="content">
 
-        
-      
           <ion-col no-padding align-self-center>
-              <ion-row>
-                <ion-col class="titleStyle" col-2 >INVOICE DATE</ion-col>
-                <ion-col col-4>{{results.InvoiceDate | date}}</ion-col>
-              </ion-row>
-            </ion-col>
+            <ion-row>
+              <ion-col class="titleStyle" col-2>INVOICE DATE</ion-col>
+              <ion-col col-4>{{results.InvoiceDate | date}}</ion-col>
+            </ion-row>
+          </ion-col>
 
-            <ion-col no-padding align-self-center>
-              <ion-row>
-                <ion-col class="titleStyle" col-2 >AMOUNT</ion-col>
-                <ion-col col-4>{{results.InvoiceAmt}}</ion-col>
-              </ion-row>
-            </ion-col>
+          <ion-col no-padding align-self-center>
+            <ion-row>
+              <ion-col class="titleStyle" col-2>AMOUNT</ion-col>
+              <ion-col col-4>{{results.InvoiceAmt}}</ion-col>
+            </ion-row>
+          </ion-col>
 
-         
+        </div>
       </ion-card-content>
     </ion-card>
 

@@ -16,6 +16,7 @@ export class ServicesProvider {
   }
 
   getuserDetails() {
+    //For List Page
     return new Promise(resolve => {
       this.http
         .get("http://localhost:5000/showProductList")
@@ -55,7 +56,8 @@ export class ServicesProvider {
     });
   }
 
-  getCartDetails() {                   //for shopping cart page
+  getCartDetails() {
+    //for shopping cart page //for GET API
     return new Promise(resolve => {
       this.http
         .get("http://localhost:5000/getCartDetails")
@@ -68,10 +70,58 @@ export class ServicesProvider {
     });
   }
 
-  orderHistory(userId) {             // for order history oage
+  orderHistory(userId) {
+    // for order history Page
     return new Promise(resolve => {
       this.http
         .get("http://localhost:5000/orderHistoryUserInfo?userId=" + userId)
+        .map(res => res.json().recordsets[0])
+        .subscribe(data => {
+          console.log(data);
+          // this.data = data;
+          resolve(data);
+        });
+    });
+  }
+
+  //AmountOwing
+  invoiceHistoryAmountOwing(userId) {
+    // for order history oage
+    return new Promise(resolve => {
+      this.http
+        .get("http://localhost:5000/invoiceHistoryAmountOwing?userId=" + userId)
+        .map(res => res.json().recordsets[0])
+        .subscribe(data => {
+          console.log(data);
+          // this.data = data;
+          resolve(data);
+        });
+    });
+  }
+
+  //OverDue
+  invoiceHistoryOverDue(userId) {
+    // for order history oage
+    return new Promise(resolve => {
+      this.http
+        .get("http://localhost:5000/invoiceHistoryOverDue?userId=" + userId)
+        .map(res => res.json().recordsets[0])
+        .subscribe(data => {
+          console.log(data);
+          // this.data = data;
+          resolve(data);
+        });
+    });
+  }
+
+  //Order Generated
+  invoiceHistoryOrderGenerated(userId) {
+    // for order history oage
+    return new Promise(resolve => {
+      this.http
+        .get(
+          "http://localhost:5000/invoiceHistoryOrderGenerated?userId=" + userId
+        )
         .map(res => res.json().recordsets[0])
         .subscribe(data => {
           console.log(data);
@@ -95,7 +145,8 @@ export class ServicesProvider {
     });
   }
 
-  postOrder(cartData) {             //for Product details page
+  //for Product List page
+  postOrder(cartData) {
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
     this.http
@@ -107,7 +158,68 @@ export class ServicesProvider {
       });
   }
 
-  //for loginPage using
+  //for UserProfile page //saving address data
+  PostSaveToDatabase(addressData) {
+    console.log(addressData);
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    this.http
+      .post(
+        "http://localhost:5000/customersDetails",
+        JSON.stringify(addressData),
+        {
+          headers: headers
+        }
+      )
+      .subscribe(URL => {
+        console.log(URL);
+      });
+  }
+
+  //for invoice History page // for POST API
+  sendEmailInvoice(results) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    this.http
+      .post("http://localhost:5000/sendEmailInvoice", JSON.stringify(results), {
+        headers: headers
+      })
+      .subscribe(URL => {
+        console.log(URL);
+      });
+  }
+
+  //for order History page // for POST API
+  sendEmailOrder(sendEmail) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    this.http
+      .post("http://localhost:5000/sendEmailOrder", JSON.stringify(sendEmail), {
+        headers: headers
+      })
+      .subscribe(URL => {
+        console.log(URL);
+      });
+  }
+
+  //for ForgetPage to send password  //for POST API
+  RequestNewPassword(NewPassword) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    this.http
+      .post(
+        "http://localhost:5000/sendNewPassword",
+        JSON.stringify(NewPassword),
+        {
+          headers: headers
+        }
+      )
+      .subscribe(URL => {
+        console.log(URL);
+      });
+  }
+
+  //for loginPage
   toGetUsernamePassword() {
     return new Promise(resolve => {
       this.http
@@ -121,7 +233,7 @@ export class ServicesProvider {
     });
   }
 
-  //for ForgetPage using
+  //for ForgetPage  //for GET API
   toGetUsernameEmail() {
     return new Promise(resolve => {
       this.http
@@ -135,6 +247,7 @@ export class ServicesProvider {
     });
   }
 
+  //for PUT api for confirm order page
   updateCart(newValue) {
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -163,7 +276,8 @@ export class ServicesProvider {
       });
   }
 
-  getUserInfo(userId) {              //for user profile management
+  //for user profile management
+  getUserInfo(userId) {
     return new Promise(resolve => {
       this.http
         .get("http://localhost:5000/userInfo?userId=" + userId)

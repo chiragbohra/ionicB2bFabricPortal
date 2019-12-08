@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { ServicesProvider } from "../../providers/services/services";
+import { ModalController } from "ionic-angular";
 
 @IonicPage()
 @Component({
@@ -11,25 +12,24 @@ export class OrderHistoryPage {
   mycart;
   badge;
   viewData: any;
-
+  OrderNo;
   userId;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public sentRequest: ServicesProvider
+    public sentRequest: ServicesProvider,
+    public modalCtrl: ModalController
   ) {
-
-
     this.initializeviewData(); //method call here to get data
 
-    //using for calculating products in cart 
+    //using for calculating products in cart
     try {
-      //try-catch used to handle length error in console    
-    this.mycart = JSON.parse(localStorage.getItem("productDetails")); 
-    console.log(this.mycart.length);  
-    this.badge=this.mycart.length; // calculating products in cart to display over badges
-    } catch (e) {}
+      //try-catch used to handle length error in console
+      this.mycart = JSON.parse(localStorage.getItem("productDetails"));
+      console.log(this.mycart.length);
+      this.badge = this.mycart.length; // calculating products in cart to display over badges
+    } catch (e) {} //
   }
 
   initializeviewData() {
@@ -50,7 +50,6 @@ export class OrderHistoryPage {
   ionViewDidLoad() {
     console.log("ionViewDidLoad OrderHistoryPage");
   }
-
 
   //for searchBar
   getviewData(ev) {
@@ -80,5 +79,33 @@ export class OrderHistoryPage {
     } else {
       this.initializeviewData();
     }
+  }
+
+  // //modal created and send OrderData to modal page
+  // showModal(results) {
+  //  var modal = this.modalCtrl.create("ModalButtonsPage", { OrderNo: results.OrderNo });
+  //  modal.present();
+  //  console.log(results.OrderNo);
+
+  // }
+
+  //modal created and send order page Data to modal page
+  showModal(results) {
+    var orderHistoryData = {
+      //storing data in array to push data
+      OrderNo: results.OrderNo,
+      OrderDate: results.OrderDate,
+      CustDesign: results.CustDesign,
+      CustShade: results.CustShade,
+      OrdMtrs: results.OrdMtrs,
+      DispatchMtrs: results.DispatchMtrs,
+      DeliveryDate: results.DeliveryDate
+    };
+    var modal = this.modalCtrl.create("ModalButtonsPage", {
+      orderHistoryData: orderHistoryData
+    });
+    modal.present();
+    console.log(orderHistoryData);
+    console.log(results.InvoiceNo);
   }
 }

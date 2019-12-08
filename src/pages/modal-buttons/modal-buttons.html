@@ -1,0 +1,17 @@
+<ion-buttons end>
+  <button ion-button icon-left color="light" block (click)="sendEmailOrder()">
+    <ion-icon name="mail"></ion-icon> Email
+  </button>
+  <button ion-button icon-left color="light" block>
+    <ion-icon name="share"></ion-icon>Share
+  </button>
+
+
+  <button ion-button icon-left block color="light" (click)="print()">
+    <ion-icon name="print"></ion-icon>Print
+  </button>
+  <div id="editor"></div>
+  <button ion-button icon-left color="light" block id="cmd" (click)="generatePdf()">
+    <ion-icon name="download"></ion-icon>pdf
+  </button>
+</ion-buttons>

@@ -72,6 +72,8 @@ export class ProductListPage {
     this.getProductList();
   }
 
+
+  //FOR GET API
   getProductList() {
     this.getRequest.getuserDetails().then(productsList => {
       console.log(productsList);
@@ -84,7 +86,7 @@ export class ProductListPage {
   }
 
   addToCart(results, index) {
-    this.addedToCart[index] = true;
+    this.addedToCart[index] = true; //to change addTocart btn to inCart
     // results.active = true;
     if (localStorage.getItem("productDetails") == null) {
       var productToCart = [];
@@ -95,6 +97,8 @@ export class ProductListPage {
     productToCart.push(results);
     console.log(productToCart);
     var userId = localStorage.getItem("userId");
+
+    ///
     let cartData = {
       // Id: results.Id,
       // RollNo: results.RollNo,
@@ -109,7 +113,7 @@ export class ProductListPage {
       Status: "Open"
     };
     console.log(cartData);
-    this.getRequest.postOrder(cartData);
+    this.getRequest.postOrder(cartData);  //For POST API
 
     localStorage.setItem("productDetails", JSON.stringify(productToCart));
 

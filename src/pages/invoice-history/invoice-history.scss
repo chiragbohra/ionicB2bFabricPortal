@@ -46,4 +46,45 @@ page-invoice-history {
     color: rgb(92, 92, 92);
     font-size: 1em;
   }
+
+  .amountBox {
+    //position: absolute;
+    width: 220px;
+    height: 100px;
+    background-color: white;
+    border-color: rgb(184, 189, 184);
+    text-align: center;
+    color: red;
+    font-size: 2.25em;
+  }
+  
+  .amountBox3 {
+    //position: absolute;
+    width: 220px;
+    height: 100px;
+    background-color: white;
+    border-color: rgb(184, 189, 184);
+    text-align: center;
+    color: green;
+    font-size: 2.25em;
+  }
+
+  .amountBox2 {
+    //position: absolute;
+    width: 220px;
+    height: 100px;
+    background-color: white;
+    border-color:rgb(184, 189, 184);;
+    text-align: center;
+    color: red;
+    font-size: 2.25em;
+  }
+  .amountBoxContentCenter {
+    text-align: center;
+  }
+
+  .amountBoxContent {
+    font-size: 3rem;
+    text-align: center;
+  }
 }

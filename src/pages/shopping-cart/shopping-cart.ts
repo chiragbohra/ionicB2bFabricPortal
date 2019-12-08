@@ -8,6 +8,7 @@ import {
 import { ServicesProvider } from "../../providers/services/services";
 import { Validators } from "@angular/forms";
 import { FormBuilder } from "@angular/forms";
+
 //import { ModalController } from "ionic-angular";
 /**
  * Generated class for the ShoppingCartPage page.
@@ -52,17 +53,6 @@ export class ShoppingCartPage {
     private formBuilder: FormBuilder,
     private toastCtrl: ToastController // public modalCtrl: ModalController
   ) {
-    this.test = 0;
-    let x = 0;
-    for (var i = 0; i < this.quantity.length; i++) {
-      console.log(this.quantity[i]);
-      this.test = this.quantity[i] * this.price;
-      console.log("line155" + this.test);
-      x += this.test + this.test;
-      console.log("line158" + x / 2);
-      this.grandTotal = x / 2;
-    }
-
     this.conditionForm = this.formBuilder.group({
       conditionFormAddress: ["", Validators.required]
     });
@@ -124,11 +114,13 @@ export class ShoppingCartPage {
     let conditionCheck = this.conditionForm.value;
     this.address = conditionCheck["conditionFormAddress"];
     console.log(this.address);
+
     let SKUNoToOrder: any = [];
     for (var i = 0; i < this.productInCart.length; i++) {
       console.log(this.productInCart[i].SKUNo);
       SKUNoToOrder = this.productInCart[i].SKUNo;
     }
+    ///
     let orderValues = {
       Quantity: this.quantity,
       Price: this.price,
@@ -140,6 +132,14 @@ export class ShoppingCartPage {
       SKUNo: SKUNoToOrder
     };
     this.navCtrl.push("ConfirmOrderPage", { values: orderValues });
+
+    ///
+    let toast = this.toastCtrl.create({
+      message: "Your Order is placed successfully",
+      duration: 3000
+    });
+    toast.present();
+    ///
   }
 
   radioSelect() {
@@ -179,6 +179,14 @@ export class ShoppingCartPage {
       this.presentToast("failed");
     }
     console.log(this.total);
+
+    //
+    let toast = this.toastCtrl.create({
+      message: "Coupan Code Applied",
+      duration: 3000
+    });
+    toast.present();
+    //
   }
 
   presentToast(action: any) {

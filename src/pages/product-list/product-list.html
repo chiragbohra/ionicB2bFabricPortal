@@ -110,7 +110,7 @@
 
         <ion-row>
           <ion-col col-3 align-self-center (click)="productDetails(results)">
-            <img src="assets/imgs/FabricPage-600x330.png">
+            <img src="assets/imgs/fabric.jpg">
           </ion-col>
           <ion-col col-3 align-self-center (click)="productDetails(results)">
             <ion-row class="paddingTable">
@@ -136,8 +136,8 @@
             <button ion-button *ngIf="!addedToCart[i]" (click)="addToCart(results , i)" icon-left>
               <ion-icon name="ios-cart-outline"></ion-icon>Add To Cart
             </button>
-            <button *ngIf="addedToCart[i]" ion-button (click)="viewCart()" icon-left>InCart &nbsp;
-              <ion-icon name="ios-cart-outline"></ion-icon>
+            <button *ngIf="addedToCart[i]" ion-button (click)="viewCart()" icon-left>
+              <ion-icon name="ios-cart-outline"></ion-icon>InCart
             </button>
 
 

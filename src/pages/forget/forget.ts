@@ -26,6 +26,10 @@ export class ForgetPage {
   viewData: any;
   emailFailed: boolean = false; //initially set to false //using if user enters wrong data or correct data
 
+  randomstring: any;
+  NewPassword: any;
+  //sendEmail: any;
+
   constructor(
     public navCtrl: NavController,
     public sentRequest: ServicesProvider,
@@ -36,6 +40,8 @@ export class ForgetPage {
       // getorderdata it is variable
       this.viewData = getorderdata;
       //  console.log(JSON.stringify(getorderdata));
+
+     
     });
   }
 
@@ -43,13 +49,26 @@ export class ForgetPage {
     console.log("ionViewDidLoad ForgetPage");
   }
 
-  Request() {
+  Request(sendEmail) {
     for (var i = 0; i < this.viewData.length; i++) {
       if (
         this.viewData[i].UserId == this.userid &&
         this.viewData[i].EMailAdd == this.email
       ) {
         console.log("email sent");
+
+        //for random password generator
+        var randomstring = Math.random()
+          .toString(36)
+          .slice(-8);
+        
+        var sendEmail:any = {
+          NewPassword:randomstring
+        };
+        console.log(sendEmail);
+        this.sentRequest.RequestNewPassword(sendEmail); //For POST API to send email
+
+        //
         this.presentToast("success");
         this.emailFailed = false;
         return; //return used to break condition

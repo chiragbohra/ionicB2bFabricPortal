@@ -7,6 +7,7 @@ import { StatusBar } from "@ionic-native/status-bar";
 import { MyApp } from "./app.component";
 import { ServicesProvider } from "../providers/services/services";
 import { NativeStorage } from "@ionic-native/native-storage";
+//import { FormBuilder, FormArray, FormGroup } from "@angular/forms";
 
 //import { LoginPage } from "../pages/login/login";
 //import { ForgetPage } from "../pages/forget/forget";
@@ -63,7 +64,8 @@ import { AnalyticsPage } from "../pages/analytics/analytics";
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     ServicesProvider,
     HttpModule,
-    NativeStorage
+    NativeStorage,
+  //  FormGroup
   ]
 })
 export class AppModule {}
